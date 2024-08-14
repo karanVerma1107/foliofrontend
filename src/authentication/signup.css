@@ -1,0 +1,308 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton+SC&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Lexend:wght@100..900&family=Lilita+One&family=Outfit:wght@100..900&display=swap');
+
+
+@import url('https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&family=Bebas+Neue&family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Lexend:wght@100..900&family=Lilita+One&family=Outfit:wght@100..900&display=swap');
+
+
+
+@import url('https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&family=Bebas+Neue&family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Lexend:wght@100..900&family=Lilita+One&family=Outfit:wght@100..900&family=Prosto+One&display=swap');
+
+.work{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    margin: 1vmax 8vmax;
+    flex-direction: row;
+    width: 90%;
+    min-height: 44vmax;
+}
+.design{
+    width: 47vmax;
+    height: 36vmax;
+    display: flex;
+    padding: 1vmax 0;
+    
+    align-items: center;
+    overflow: hidden;
+    flex-direction: column;
+    margin: 2vmax 1.2vmax;
+    
+}
+
+.design h2{
+
+    font-family: "Prosto One", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-weight: 1.8vmax;
+}
+
+
+
+
+@media(max-width:1000px){
+    .work{
+        width: 81%;
+        padding: 2vmax 0;
+        justify-content: space-around;
+        flex-direction: column;
+    }
+    .loginform h1{
+        padding-top: 0;
+    }
+
+    .design{
+        height: 38vmax;
+        width: 69vmax;
+        
+    }
+
+    
+}
+
+@media(max-width:640px){
+    .work{
+        width: 79%;
+        padding: 2vmax 0vmax;
+        justify-content: space-around;
+        flex-direction: column;
+    }
+    .loginform h1{
+        padding-top: 0;
+    }
+
+    .design{
+        height: 37vmax;
+        width: 36vmax;
+        background-color: white ;
+    }
+
+    .design img{
+        width: 42vmax;
+    }
+}
+
+
+
+
+.loginform{
+    
+    width: 33vmax;
+    min-height: 24vmax;
+    display: flex;
+    flex-direction: column;
+    
+    align-items: center;
+    
+    padding: 2vmax 1.8vmax;
+border: 1.8px solid orangered;
+border-radius: 12px;
+}
+
+.loginform h1{
+    font-size: 2vmax;
+}
+
+
+.loginotp{
+    
+    width: 96%;
+    display: flex;
+    flex-direction: column;
+    
+    align-items: center;
+    
+    min-height: 15vmax;
+}
+
+.loginotp div{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    align-items: center;
+    
+    justify-content: space-evenly;
+    padding: 2.3vmax 1.6vmax;
+}
+
+.loginotp div h2{
+font-family: "Outfit";
+margin-right: 1vmax;
+font-size: 1.7vmax;
+}
+
+.loginotp div input{
+    width: 100%;
+    border-radius: 13px;
+    font-family:  "Arvo";
+    border: 1.8px solid black;
+  font-weight: 400;
+    padding: 1vmax 1.3vmax;
+    height: 1vmax;
+}
+
+.loginotp button{
+    width: 83%;
+    background-color:  rgb(247, 88, 39);
+    border: 1.5px solid orange;
+    margin-left: 5.6vmax;
+    border-radius: 13vmax;
+    height: 3.1vmax;
+    font-weight: 500;
+}
+
+.loginform p{
+    color: orangered;
+    text-decoration: underline;
+    font-family: monospace;
+    font-size: 1.1vmax;
+    cursor: pointer;
+    font-weight: 500;
+    text-align: center;
+}
+
+.lood{
+    width: 89%;
+    margin-bottom: 1.3vmax;
+    height: 1vmax;
+    display: flex;
+    align-items:center ;
+    justify-content: center;
+}
+
+
+.ader {
+    width: 2vmax;
+    height: 2vmax;
+    border-radius: 50%;
+    display: block;
+    margin:15px auto;
+    position: relative;
+    background: #0c0c0c;
+    box-shadow: -24px 0 #040404, 24px 0 #181818;
+    box-sizing: border-box;
+    animation: shadowPulse 2s linear infinite;
+  }
+  
+  @keyframes shadowPulse {
+    33% {
+      background: #171717;
+      box-shadow: -24px 0 #FF3D00, 24px 0 #131313;
+    }
+    66% {
+      background: #FF3D00;
+      box-shadow: -24px 0 #141414, 24px 0 #181818;
+    }
+    100% {
+      background: #121212;
+      box-shadow: -24px 0 #101010, 24px 0 #FF3D00;
+    }
+  }
+
+
+  .loginotpf{
+    
+    width: 96%;
+    display: flex;
+    flex-direction: column;
+    
+    align-items: center;
+    
+    min-height: 15vmax;
+}
+
+.loginotpf div{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    align-items: center;
+    
+    justify-content: space-evenly;
+    padding: 1vmax 1.6vmax;
+}
+
+.loginotpf div h2{
+font-family: "Outfit";
+margin-right: 1vmax;
+font-size: 1.7vmax;
+}
+
+.loginotpf div input{
+    width: 100%;
+    border-radius: 13px;
+    font-family:  "Arvo";
+    border: 1.8px solid black;
+  font-weight: 400;
+    padding: 1vmax 1.3vmax;
+    height: 1vmax;
+}
+
+.loginotpf button{
+    width: 83%;
+  font-weight: 500;
+  font-size: 1.1vmax;
+    background-color:  rgb(247, 88, 39);
+    border: 1.5px solid orange;
+    margin-left: 5.6vmax;
+    border-radius: 13vmax;
+    height: 3.1vmax;
+}
+
+
+.logoback{
+    background-color: orangered;
+    width: 2vmax;
+    height: 2vmax;
+    cursor: pointer;
+    border-radius: 50%;
+    font-size: 2vmax;
+    display: flex;
+    margin-right: 1vmax;
+    
+}
+
+.logoback .svg{
+    font-size: 1.2vmax;
+}
+
+.less{
+    width: 100%;
+    height: 3.2vmax;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+}
+
+.signupform{
+    width: 33vmax;
+    min-height: 24vmax;
+    display: flex;
+    flex-direction: column;
+    
+    align-items: center;
+    
+    padding: 2vmax 1.8vmax;
+border: 1.8px solid orangered;
+border-radius: 12px;
+}
+
+.signupform h1{
+    font-size: 2vmax;
+}
+
+.signupform p{
+    color: orangered;
+    text-decoration: underline;
+    font-family: monospace;
+    font-size: 1.1vmax;
+    cursor: pointer;
+    font-weight: 500;
+    text-align: center;
+}
+
+.loginotpf  button{
+    cursor: pointer;
+}
