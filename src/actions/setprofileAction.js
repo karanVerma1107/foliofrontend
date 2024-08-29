@@ -49,7 +49,7 @@ export const setusername = (username)=>async(dispatch)=>{
 
         dispatch({type: IS_USERNAME_DONE_SUCCESS,
             payload:{
-                entry: respone.data.message
+                message: respone.data.message
             }
         });
     } catch (error) {

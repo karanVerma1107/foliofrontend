@@ -74,7 +74,7 @@ switch (action.type) {
                 ...state,
                 Loading: false,
                 Success: true,
-                Message: action.payload.entry,
+                Message: action.payload.message,
                 error: null
             }
 
@@ -84,7 +84,7 @@ switch (action.type) {
                     Loading: false,
                     Success: false,
                     Message: null,
-                    error: action.paylaod
+                    error: action.payload
                 }
         
     
