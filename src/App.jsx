@@ -2,7 +2,7 @@ import React from 'react'
 import {BrowserRouter as Router,Route,Routes} from 'react-router-dom'
 import './App.css'
 import Homesidebar from './home.jsx'
-
+import UserProfie from '../../profile/UserProfie.jsx'
 import Store from './store.js'
 import Signup from './authentication/signup.jsx'
 import Header from './header.jsx'
@@ -31,6 +31,7 @@ function App() {
 
       <Route exact path='/signup' element={<Signup/>}/> 
       <Route exact path='/username' element={<TakeUserName/>}/> 
+      <Route exact path='/profile' element={<UserProfie/>}/> 
 
 
         

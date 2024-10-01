@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import './take.css'
+import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { isusernamedoit, setusername } from '../actions/setprofileAction';
 import { useAlert } from 'react-alert';
@@ -12,6 +13,7 @@ const {message, success, loading, error} = useSelector((state)=>state.isUsername
 const {Message, Error, Loading, Success} = useSelector((state)=>state.setusername);
 const[inputname , setinputname ] = useState('');
 const dispatch = useDispatch();
+const navigate = useNavigate();
 
 const checkIsAvia = async(e)=>{
   e.preventDefault();
@@ -31,6 +33,7 @@ const setNamehandler = (e)=>{
   if(valid){
 console.log('set name is ', inputname);
 dispatch(setusername(inputname));
+navigate('/profile')
   }else{
     alert.error(error);
   }
