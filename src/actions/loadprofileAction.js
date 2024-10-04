@@ -8,13 +8,13 @@ import { LOAD_USER_PROFILE_REQUEST,
     try {
         dispatch({type: LOAD_USER_PROFILE_REQUEST});
 
-        const response = await axios.get('/me');
-        const data =  response.data.User;
+        const response = await axios.get('api/v1/me');
+        
 
-        console.log(`data for profile is:`, data);
+        console.log('response is: ', response);
 
         dispatch({type: LOAD_USER_PROFILE_SUCCESS,
-            payload: data
+            payload: response
         })
     } catch (error) {
         let errormess

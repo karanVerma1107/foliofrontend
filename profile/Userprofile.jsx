@@ -17,7 +17,7 @@ dispatch(profileloader());
     <div className='mainco'>
  <h1>i am karan vermsa</h1>
  <h3>
-   something is: {output}
+   jsjsjs
  </h3>
     </div>
     
