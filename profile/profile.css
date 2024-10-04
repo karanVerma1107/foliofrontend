@@ -1,0 +1,7 @@
+.mainco{
+    width: 90%;
+    min-height: 40vmax;
+     display: flex;
+     flex-direction: row;
+     margin-left: 10vmax;
+}

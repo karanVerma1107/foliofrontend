@@ -33,7 +33,11 @@ const setNamehandler = (e)=>{
   if(valid){
 console.log('set name is ', inputname);
 dispatch(setusername(inputname));
-navigate('/profile')
+if(Loading){
+  console.log('waiting')
+}else{
+  navigate('/profile')
+}
   }else{
     alert.error(error);
   }
