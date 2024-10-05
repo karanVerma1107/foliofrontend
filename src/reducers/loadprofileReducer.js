@@ -7,8 +7,11 @@ import { LOAD_USER_PROFILE_REQUEST,
 
 
 const initialState = {
-    Loading: false,
-    output: null,
+    loading: false,
+    User: null,
+    followersCount: 0,
+    followingCount:0,
+    Isauth: false,
     error: null,
     success: false
 }
@@ -17,25 +20,31 @@ export const loadselfReducer = (state = initialState, action) => {
 switch (action.type) {
     case LOAD_USER_PROFILE_REQUEST:
         return{
-            Loading: true,
+            loading: true,
             error: null,
-            output: null,
+            Isauth: false,
+            User:null,
             success: false
         }
 
     case LOAD_USER_PROFILE_SUCCESS:
         return{
-            Loading: false,
+            loading: false,
             error: null,
-            output: action.payload,
+            
+            followersCount: action.payload.followerscount,
+            followingCount: action.payload.followingCount,
+            User: action.payload.User,
+            Isauth: true,
             success: true
         }    
 
     case LOAD_USER_PROFILE_FAILURE:
         return{
-            Loading: false,
+            loading: false,
+            Isauth: false,
             error: action.payload,
-            output: null,
+            User:null,
             success: false
         }    
         

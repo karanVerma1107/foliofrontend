@@ -14,7 +14,7 @@ import { LOAD_USER_PROFILE_REQUEST,
         console.log('response is: ', response);
 
         dispatch({type: LOAD_USER_PROFILE_SUCCESS,
-            payload: response
+            payload: response.data
         })
     } catch (error) {
         let errormess

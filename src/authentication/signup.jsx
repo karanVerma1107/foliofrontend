@@ -6,13 +6,14 @@ import { useAlert } from 'react-alert';
 import    kklt from '../picsinuse/kjjk.png'
 import { IoMdArrowRoundBack } from "react-icons/io";
 import {useNavigate} from 'react-router-dom';
+import { profileloader } from '../actions/loadprofileAction';
 
 
 const Signup = () => {
     const dispatch = useDispatch();
   
     const navigate = useNavigate();
-
+    const {Isauth} = useSelector((state)=> state.displayprofile);
     const [login, setlogin] = useState(false);
     const[lotptog, setlotptog] = useState(false);
     
@@ -49,6 +50,7 @@ const [Name, setName] = useState('');
     const handleloginprocess = (e)=>{
 e.preventDefault();
 dispatch(logined(email, loginotp));
+navigate("/profile")
 
     }
 
@@ -78,6 +80,9 @@ formData.append('email', email)
     }
 
     useEffect(()=>{
+
+dispatch(profileloader());
+
       if(success){
         alert.success(message);
         setlotptog(!lotptog);
@@ -117,6 +122,10 @@ formData.append('email', email)
       Success,
       Error])
    
+
+      if(Isauth){
+        navigate('/profile')
+      }
 
   
 

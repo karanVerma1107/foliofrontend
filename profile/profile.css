@@ -1,7 +1,134 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton+SC&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Lexend:wght@100..900&family=Lilita+One&family=Outfit:wght@100..900&display=swap');
+
+
+@import url('https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&family=Bebas+Neue&family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Lexend:wght@100..900&family=Lilita+One&family=Outfit:wght@100..900&display=swap');
+
+
+
+@import url('https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&family=Bebas+Neue&family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Lexend:wght@100..900&family=Lilita+One&family=Outfit:wght@100..900&family=Prosto+One&display=swap');
+
+
 .mainco{
     width: 90%;
     min-height: 40vmax;
      display: flex;
-     flex-direction: row;
+     flex-direction: column;
      margin-left: 10vmax;
+}
+
+.loadingc{
+    width: 90%;
+    min-height: 40vmax;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     flex-direction: column;
+     margin-left: 10vmax;
+}
+
+.upper-stuff{
+    width:90%;
+    min-height: 16vmax;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    border-bottom: 1.2px solid black;
+
+}
+
+.followers{
+    width: 21vmax;
+    height: 16vmax;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 1vmax 1.8vmax;
+    
+    
+}
+
+.followers h2{
+    font-family: 'Outfit';
+}
+
+.profilepic{
+    width: 28vmax;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    height: 16vmax;
+    
+    justify-content: center;
+    margin: 1.6vmax 0vmax;
+    
+}
+
+.profilepic h3{
+    font-family: 'Outfit';
+    font-size: 1.2vmax;
+}
+
+.following{
+    width: 21vmax;
+    height: 16vmax;
+    
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin: 1vmax 1.8vmax;
+    justify-content: center;
+
+}
+
+.following h2{
+    font-family: 'Outfit';
+}
+
+.profilepic img{
+    width: 13vmax;
+    height: 12vmax;
+    border-radius: 11px;
+    border: 1.3 px solid orangered;
+}
+
+
+.editbloc{
+    height: 4.5vmax;
+    width: 95%;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    
+
+}
+
+.editbloc h3{
+    font-size: 1.5vmax;
+    margin: 1vmax 2.5vmax;
+    font-family:Arial, Helvetica, sans-serif;
+    
+}
+
+.editbloc h3 a{
+    text-decoration: none;
+    color: black;
+}
+
+
+
+@media(max-width: 1000px){
+    .followers h2{
+        font-size: 1.6vmax;
+    }
+
+    .following h2{
+        font-size: 1.6vmax;
+    }
+    .profilepic img{
+        width: 11vmax;
+        height: 10vmax;
+    }
 }
