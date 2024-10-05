@@ -1,6 +1,8 @@
 import { LOAD_USER_PROFILE_REQUEST,
     LOAD_USER_PROFILE_SUCCESS,
-    LOAD_USER_PROFILE_FAILURE
+    LOAD_USER_PROFILE_FAILURE,
+    EDIT_DP_REQUEST,EDIT_DP_SUCCESS,
+    EDIT_DP_FAILURE
  } from "../constants/userprofile";
 
 
@@ -53,4 +55,43 @@ switch (action.type) {
     default:
         return state
 }
+}
+
+const initialstate1 = {
+    Loaading: false,
+    message: null,
+    error: null,
+    success: false
+}
+
+export const changeDPreducer = ( state = initialstate1, action)=>{
+    switch (action.type) {
+        case EDIT_DP_REQUEST:
+            return{
+                Loaading: true,
+                message: null,
+                error: null,
+                success: false
+            }
+            
+        case EDIT_DP_SUCCESS:
+            return{
+               Loaading: false,
+               message: action.payload,
+               error: null,
+               success: true
+            }
+            
+        case EDIT_DP_FAILURE:
+            return{
+                Loaading: false,
+                messsage: null,
+                error: action.payload,
+                success: false
+            }    
+            
+    
+        default:
+            return state
+    }
 }

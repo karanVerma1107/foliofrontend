@@ -9,6 +9,7 @@ import Header from './header.jsx'
 import Posts from './postsshow/posts.jsx'
 import { useSelector } from 'react-redux'
 import TakeUserName from './authentication/takeUserName.jsx'
+import Editprofile from '../profile/Editprofile.jsx'
 
 function App() {
   
@@ -32,6 +33,7 @@ function App() {
       <Route exact path='/signup' element={<Signup/>}/> 
       <Route exact path='/username' element={<TakeUserName/>}/> 
       <Route exact path='/profile' element={<Userprofile/>}/> 
+      <Route exact path='/edit-profile' element={<Editprofile/>}/> 
 
 
         

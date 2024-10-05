@@ -31,7 +31,8 @@ useEffect(() => {
 
 
 if(!User || loading){
-  return <div className=' loadingc'><Loading/></div>
+  return <div className=' loadingc'><Loading/>
+  <h1>Refresh once</h1></div>
 }
 
 
@@ -58,7 +59,7 @@ if(!User || loading){
 
 
  <div className='editbloc'>
-<h3> <a href='###'>Edit profile</a></h3>
+<h3> <a href='/edit-profile'>Edit profile</a></h3>
 <h3> <a href='###'>Posts</a></h3>
 
 
