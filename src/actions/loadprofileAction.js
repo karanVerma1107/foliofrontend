@@ -5,12 +5,16 @@ import { LOAD_USER_PROFILE_REQUEST,
     EDIT_DP_REQUEST,
     EDIT_DP_SUCCESS,
 
-    EDIT_DP_FAILURE
+    EDIT_DP_FAILURE,
+    
  } from "../constants/userprofile";
 
 import { OBJECT_EDIT_REQUEST,
     OBJECT_EDIT_SUCCESS,
-    OBJECT_EDIT_FAILURE
+    OBJECT_EDIT_FAILURE,
+    STACK_EDIT_REQUEST,
+    STACK_EDIT_SUCCESS,
+    STACK_EDIT_FAILURE
  } from "../constants/editprofile";
 
 
@@ -76,18 +80,18 @@ import { OBJECT_EDIT_REQUEST,
 
 
 //edit objects 
-export  const editObjaction =  (profileData)=> async(dispatch)=>{
+export  const editstkaction =  (profileData)=> async(dispatch)=>{
 
     try {
 
-        dispatch({type: OBJECT_EDIT_REQUEST})
+        dispatch({type: STACK_EDIT_REQUEST})
         const config =  { headers:{ 'Content-Type' : 'application/json'}}
 
-        const response = await axios.patch('api/v1/editbj', profileData, config);
+        const response = await axios.patch('api/v1/updateProfile', profileData, config);
 
         const message = response.data.message;
 
-        dispatch({type: OBJECT_EDIT_SUCCESS , payload: message})
+        dispatch({type: STACK_EDIT_SUCCESS , payload: message})
 
         
     } catch (error) {
@@ -98,7 +102,7 @@ export  const editObjaction =  (profileData)=> async(dispatch)=>{
             errormess = error.message
         }
         
-                dispatch({type: OBJECT_EDIT_FAILURE,
+                dispatch({type: STACK_EDIT_FAILURE,
                     payload: errormess
                 })
     
@@ -106,3 +110,36 @@ export  const editObjaction =  (profileData)=> async(dispatch)=>{
        }
     }
    
+
+
+    //edit stacks
+    export  const editObjaction =  (profileData)=> async(dispatch)=>{
+
+        try {
+    
+            dispatch({type: OBJECT_EDIT_REQUEST})
+            const config =  { headers:{ 'Content-Type' : 'application/json'}}
+    
+            const response = await axios.patch('api/v1/editbj', profileData, config);
+    
+            const message = response.data.message;
+    
+            dispatch({type: OBJECT_EDIT_SUCCESS , payload: message})
+    
+            
+        } catch (error) {
+            let errormess
+            if(error.response && error.response.data){
+                errormess = error.response.data.message || 'something went wrong'
+            }else{
+                errormess = error.message
+            }
+            
+                    dispatch({type: OBJECT_EDIT_FAILURE,
+                        payload: errormess
+                    })
+        
+            
+           }
+        }
+       
