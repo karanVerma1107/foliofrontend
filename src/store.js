@@ -5,6 +5,7 @@ import { getallpostsreducer, likeReducer } from './reducers/postsReducer.js';
 import { getuserdetails, loginotp, signup, signupotp, surflogin } from './reducers/authReducer.js';
 import { isAvialablereducer, setuserreducer } from './reducers/setProfilereducer.js';
 import { changeDPreducer, loadselfReducer } from './reducers/loadprofileReducer.js';
+import { editobjReducer } from './reducers/editProfileReducers.js';
 
 
 
@@ -19,7 +20,8 @@ signupp: signup,
 isUsernameAvialable: isAvialablereducer,
 setusername: setuserreducer,
 displayprofile: loadselfReducer,
-changedp: changeDPreducer
+changedp: changeDPreducer,
+editOBJ: editobjReducer
 });
 
 

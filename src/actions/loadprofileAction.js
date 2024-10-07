@@ -8,6 +8,13 @@ import { LOAD_USER_PROFILE_REQUEST,
     EDIT_DP_FAILURE
  } from "../constants/userprofile";
 
+import { OBJECT_EDIT_REQUEST,
+    OBJECT_EDIT_SUCCESS,
+    OBJECT_EDIT_FAILURE
+ } from "../constants/editprofile";
+
+
+ //load the user 
  export const profileloader = ()=>async(dispatch)=>{
     try {
         dispatch({type: LOAD_USER_PROFILE_REQUEST});
@@ -36,6 +43,7 @@ import { LOAD_USER_PROFILE_REQUEST,
     }
  
 
+    //edit profile picture
     export const editDp = (file)=>async(dispatch)=>{
          console.log('your file is: ', file);
        try {
@@ -65,3 +73,36 @@ import { LOAD_USER_PROFILE_REQUEST,
         
        }
     }
+
+
+//edit objects 
+export  const editObjaction =  (profileData)=> async(dispatch)=>{
+
+    try {
+
+        dispatch({type: OBJECT_EDIT_REQUEST})
+        const config =  { headers:{ 'Content-Type' : 'application/json'}}
+
+        const response = await axios.patch('api/v1/editbj', profileData, config);
+
+        const message = response.data.message;
+
+        dispatch({type: OBJECT_EDIT_SUCCESS , payload: message})
+
+        
+    } catch (error) {
+        let errormess
+        if(error.response && error.response.data){
+            errormess = error.response.data.message || 'something went wrong'
+        }else{
+            errormess = error.message
+        }
+        
+                dispatch({type: OBJECT_EDIT_FAILURE,
+                    payload: errormess
+                })
+    
+        
+       }
+    }
+   

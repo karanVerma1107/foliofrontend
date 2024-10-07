@@ -73,3 +73,73 @@
     box-shadow: 0 0 5px rgba(255, 87, 34, 0.5); /* Glow effect on focus */
   }
   
+
+.edit-obj{
+
+    width: 95%;
+    min-height: 7vmax;
+     border-bottom: 1px solid black;
+ 
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     
+}  
+
+
+.edit-obj {
+    width: 90%; /* Slightly narrower width */
+    max-width: 65%px; /* Max width for larger screens */
+    min-height: 5vmax; /* Set min height to make it more compact */
+    border-bottom: 1px solid black;
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    padding: 1vmax; /* Reduced padding for height constraint */
+    background-color: #fcfcfb; /* Softer background color */
+}
+
+.bj-form {
+    width: 70%; /* Use full width of the container */
+    margin-bottom: 1vmax; /* Spacing below the form */
+    display: flex;
+    flex-direction: column;
+    padding: 1.5vmax; /* Padding for form content */
+    border: 2px solid #ff5722; /* Orange-red border */
+    border-radius: 8px; /* Rounded corners */
+    background-color: #fffdfb; /* Light orange background */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+}
+
+.bj-form input {
+    margin-bottom: 1vmax; /* Space between inputs */
+    padding: 0.8vmax; /* Reduced padding inside input */
+    border: 2px solid #ff5722; /* Orange-red border color */
+    border-radius: 5px; /* Rounded corners */
+    font-size: 1.2vmax; /* Responsive font size */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
+}
+
+.bj-form input:focus {
+    outline: none; /* Remove default outline */
+    border-color: #d45d00; /* Darker border on focus */
+    box-shadow: 0 0 5px rgba(212, 93, 0, 0.5); /* Glow effect on focus */
+}
+
+.editimgButton {
+    padding: 0.8vmax; /* Padding for button */
+    background-color: #ff5722; /* Main orange-red color */
+    color: white; /* Text color */
+    border: none; /* No border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    font-size: 1.2vmax; /* Font size */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transitions */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Shadow for button */
+}
+
+.editimgButton:hover {
+    background-color: #d45d00; /* Darker shade on hover */
+    transform: scale(1.05); /* Slightly enlarge on hover */
+}

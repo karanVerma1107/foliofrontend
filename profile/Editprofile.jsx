@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from 'react-redux'
 import './editprofile.css'
 
 import { useAlert } from 'react-alert';
-import { editDp, profileloader } from '../src/actions/loadprofileAction';
+import { editDp, editObjaction, profileloader } from '../src/actions/loadprofileAction';
 
 const Editprofile = () => {
 
@@ -14,14 +14,40 @@ const Editprofile = () => {
 dispatch(profileloader());
   },[dispatch])
 
-  const {Loaading, error, message, success} = useSelector((state)=> state.changedp);
+  const {Isauth} = useSelector((state)=> state.displayprofile);
 
+ 
+
+  const {Loaading, error, message, success} = useSelector((state)=> state.changedp);
+  const {loading , text, errorr, succes} = useSelector((state)=> state.editOBJ);
 
 
   const [selectedFile, setSelectedFile] = useState(null);
+  const [profileData, setProfileData] = useState({
+    country: '',
+    bio: '',
+    Name: '',
+  });
+
+  const handleobjChange = (e) => {
+    const { name, value } = e.target;
+    setProfileData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const handleobjhandler = (e)=>{
+    e.preventDefault();
+
+      dispatch(editObjaction(profileData)); 
+  }
+
 
   const handleFileChange = (e) => {
-   
+   if(!Isauth){
+    alert.error('kindly check your internet connection or login first to access this resource');
+   }
     setSelectedFile(e.target.files[0]);
     }
 
@@ -60,7 +86,20 @@ useEffect(()=>{
 if(success){
 alert.success(message);
 }
-},[success])
+
+if(succes){
+  alert.success(text);
+}
+
+if(error){
+  alert.error(error)
+}
+
+if(errorr){
+  alert.error(errorr)
+}
+
+},[success, succes, error, errorr])
 
   return (
     <>
@@ -72,6 +111,43 @@ alert.success(message);
 <button type='submit' className='editimgButton'> Upload</button>
 </form>
 </div>
+
+<h3>Edit your Data</h3>
+<div  className='edit-obj'>
+<form className='bj-form' onSubmit={handleobjhandler}>
+<input
+          type="text"
+          name="country"
+          placeholder=" enter your Country"
+          value={profileData.country}
+          onChange={handleobjChange}
+          required // Make field required
+        />
+        <input
+          type="text"
+          name="bio"
+          placeholder="enter your Bio"
+          value={profileData.bio}
+          onChange={handleobjChange}
+          required // Make field required
+        />
+        <input
+          type="text"
+          name="Name"
+          placeholder="enter your full Name"
+          value={profileData.name}
+          onChange={handleobjChange}
+          required // Make field required
+        />
+
+<button type='submit' className='editimgButton'> Update</button>
+
+</form>
+
+</div>
+
+
+
     </div>
     
     </>
