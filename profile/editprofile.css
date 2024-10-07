@@ -5,3 +5,71 @@
      flex-direction: column;
      margin-left: 10vmax;
 }
+
+.dpchange{
+    width: 95%;
+   min-height: 5vmax;
+    border-bottom: 1px solid black;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.form-img{
+    width: 95%;
+    min-height: 5vmax;
+
+ 
+     display: flex;
+     flex-direction: row;
+     align-items: center;
+}
+
+.file-input {
+    display: block; /* Ensure it behaves like a block element */
+    width: 50%; /* Full width */
+    padding: 1vmax 1vmax; /* Padding for a nicer touch */
+    border: 2px solid #ff5722; /* Orange-red border color */
+    border-radius: 5px; /* Rounded corners */
+    background-color: #fff3e0; /* Light orange background color */
+    color: #333; /* Text color */
+    font-size: 1.2vmax; /* Font size */
+    margin: 1vmax 0vmax;
+    transition: border-color 0.3s ease, background-color 0.3s ease; /* Smooth transition */
+  }
+  
+  .file-input:hover {
+    border-color: #d45d00; /* Darker orange-red border on hover */
+    background-color: #ffe0b2; /* Slightly darker background on hover */
+  }
+  
+  .file-input:focus {
+    outline: none; /* Remove default outline */
+    border-color: #ff5722; /* Keep border color on focus */
+    background-color: #fff; /* Change background on focus */
+  }
+  
+
+  .editimgButton {
+    padding: 10px 20px; /* Padding for button */
+    background-color: #ff5722; /* Main orange-red color */
+    color: white; /* Text color */
+    margin-left: 1.2vmax;
+    border: none; /* No border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    font-size: 1.4vmax; /* Font size */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transitions */
+  }
+  
+  .editimgButton:hover {
+    background-color: #d45d00; /* Darker shade on hover */
+    transform: scale(1.05); /* Slightly enlarge on hover */
+  }
+  
+  .editimgButton:focus {
+    outline: none; /* Remove default outline */
+    box-shadow: 0 0 5px rgba(255, 87, 34, 0.5); /* Glow effect on focus */
+  }
+  

@@ -37,12 +37,12 @@ import { LOAD_USER_PROFILE_REQUEST,
  
 
     export const editDp = (file)=>async(dispatch)=>{
-
+         console.log('your file is: ', file);
        try {
         dispatch({type: EDIT_DP_REQUEST})
 
         const config = {headers: {'Content-Type' : 'multipart/form-data'}}
-        const response = await axios.post('/api/v1/setProfile', {file}, config);
+        const response = await axios.post('/api/v1/setProfile', file , config);
 
         const message = response.data.message;
 
