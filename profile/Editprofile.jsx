@@ -3,19 +3,26 @@ import {useDispatch, useSelector} from 'react-redux'
 import './editprofile.css'
 import { CountryDropdown } from 'react-country-region-selector';
 import { useAlert } from 'react-alert';
-import { editDp, editObjaction, editstkaction, profileloader } from '../src/actions/loadprofileAction';
+import { clearProfileField, editDp, editObjaction, editstkaction, profileloader } from '../src/actions/loadprofileAction';
 
 const Editprofile = () => {
 
   const dispatch = useDispatch();
   const alert = useAlert();
 
+  const handleClearField = async (field) => {
+  
+    const result = await clearProfileField(field);
+    
+
+};
+
+
   useEffect(()=>{
 dispatch(profileloader());
-  },[dispatch])
+  },[dispatch ])
 
   const {Isauth, User} = useSelector((state)=> state.displayprofile);
-
  
   const {Loaading, error, message, success} = useSelector((state)=> state.changedp);
   const {loading , text, errorr, succes} = useSelector((state)=> state.editOBJ);
@@ -39,12 +46,12 @@ dispatch(profileloader());
 
 
   const [stackData, setstackData] = useState({
-    skills:  [], // Set initial value or empty string
-    education:  [] ,
-    projects:  [],
-    achievments:  [],
-    experience:  [],
-    contacts:  [],
+    "skills ":  [], // Set initial value or empty string
+    "education":  [] ,
+    "projects":  [],
+    "achievments":  [],
+    "experience":  [],
+    "contacts" :  [],
 });
 
 
@@ -60,12 +67,12 @@ dispatch(profileloader());
 
 
       setstackData({
-        skills: User.skills || [], 
-        education: User.education || [],
-        projects: User.projects || [],
-        achievments: User.achievments || [],
-        experience: User.experience || [],
-        contacts: User.contacts || [],
+        "skills": User.skills || [], 
+        "education": User.education || [],
+        "projects": User.projects || [],
+        "achievments": User.achievments || [],
+        "experience": User.experience || [],
+        "contacts": User.contacts || [],
       })
     }
   }, [User]);
@@ -88,12 +95,12 @@ dispatch(profileloader());
 
   const handleInputChange = (e, field) => {
     const { value } = e.target;
-    const newArray = value.split(',').map(item => item.trim()); // Split by comma and trim spaces
     setstackData((prev) => ({
         ...prev,
-        [field]: newArray,
+        [field]: value, // Store the value directly
     }));
 };
+
 
 const addStackField = (field) => {
     setstackData((prev) => ({
@@ -101,6 +108,9 @@ const addStackField = (field) => {
         [field]: [...prev[field], ''], // Add an empty string for new entry
     }));
 };
+
+
+
 
 
 
@@ -237,84 +247,83 @@ if(errorr){
   <h2>Edit your stacks</h2>
   <form className='bj-form' onSubmit={Handlestksubmit}>
 
-<div className="form-group">
-    <label>Skills</label>
-    <textarea
-        className="enlarge-input"
-        name="skills"
-        placeholder="Enter your skills (comma-separated)"
-        value={Array.isArray(stackData.skills) ? stackData.skills.join(', ') : ''} // Safe check
-        onChange={(e) => handleInputChange(e, 'skills')}
-        rows="3"
-    />
-</div>
+    <div className="form-group">
+      <label>Skills</label>
+      <textarea
+          className="enlarge-input"
+          name="skills"
+          placeholder="Enter your skills"
+          value={stackData.skills} // Use the value directly
+          onChange={(e) => handleInputChange(e, 'skills')}
+          rows="3"
+      />
+      <button type='button' onClick={() => handleClearField('skills')}>Clear Skills</button>
+    </div>
 
-<div className="form-group">
-    <label>Education</label>
-    <textarea
-        className="enlarge-input"
-        name="education"
-        placeholder="Enter your education (comma-separated)"
-        value={Array.isArray(stackData.education) ? stackData.education.join(', ') : ''} // Safe check
-        onChange={(e) => handleInputChange(e, 'education')}
-        rows="3"
-    />
-</div>
+    <div className="form-group">
+      <label>Education</label>
+      <textarea
+          className="enlarge-input"
+          name="education"
+          placeholder="Enter your education"
+          value={stackData.education} // Use the value directly
+          onChange={(e) => handleInputChange(e, 'education')}
+          rows="3"
+      />
+    </div>
 
-<div className="form-group">
-    <label>Projects</label>
-    <textarea
-        className="enlarge-input"
-        name="projects"
-        placeholder="Enter your projects (comma-separated)"
-        value={Array.isArray(stackData.projects) ? stackData.projects.join(', ') : ''} // Safe check
-        onChange={(e) => handleInputChange(e, 'projects')}
-        rows="3"
-    />
-</div>
+    <div className="form-group">
+      <label>Projects</label>
+      <textarea
+          className="enlarge-input"
+          name="projects"
+          placeholder="Enter your projects"
+          value={stackData.projects} // Use the value directly
+          onChange={(e) => handleInputChange(e, 'projects')}
+          rows="3"
+      />
+    </div>
 
-<div className="form-group">
-    <label>Achievements</label>
-    <textarea
-        className="enlarge-input"
-        name="achievments"
-        placeholder="Enter your achievements (comma-separated)"
-        value={Array.isArray(stackData.achievements) ? stackData.achievments.join(', ') : ''} // Safe check
-        onChange={(e) => handleInputChange(e, 'achievements')}
-        rows="3"
-    />
-</div>
+    <div className="form-group">
+      <label>Achievements</label>
+      <textarea
+          className="enlarge-input"
+          name="achievments"
+          placeholder="Enter your achievements"
+          value={stackData.achievments} // Use the value directly
+          onChange={(e) => handleInputChange(e, 'achievments')}
+          rows="3"
+      />
+    </div>
 
-<div className="form-group">
-    <label>Experience</label>
-    <textarea
-        className="enlarge-input"
-        name="experience"
-        placeholder="Enter your experience (comma-separated)"
-        value={Array.isArray(stackData.experience) ? stackData.experience.join(', ') : ''} // Safe check
-        onChange={(e) => handleInputChange(e, 'experience')}
-        rows="3"
-    />
-</div>
+    <div className="form-group">
+      <label>Experience</label>
+      <textarea
+          className="enlarge-input"
+          name="experience"
+          placeholder="Enter your experience"
+          value={stackData.experience} // Use the value directly
+          onChange={(e) => handleInputChange(e, 'experience')}
+          rows="3"
+      />
+    </div>
 
-<div className="form-group">
-    <label>Contacts</label>
-    <textarea
-        className="enlarge-input"
-        name="contacts"
-        placeholder="Enter your contacts (comma-separated)"
-        value={Array.isArray(stackData.contacts) ? stackData.contacts.join(', ') : ''} // Safe check
-        onChange={(e) => handleInputChange(e, 'contacts')}
-        rows="3"
-    />
-</div>
+    <div className="form-group">
+      <label>Contacts</label>
+      <textarea
+          className="enlarge-input"
+          name="contacts"
+          placeholder="Enter your contacts"
+          value={stackData.contacts} // Use the value directly
+          onChange={(e) => handleInputChange(e, 'contacts')}
+          rows="3"
+      />
+    </div>
 
-<button type='submit' className='editingButton'>Update Profile</button>
-</form>
+    <button type='submit' className='editingButton'>Update Profile</button>
+  </form>
 
-
-
-</div>
+  </div>
 
 
 

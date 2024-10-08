@@ -143,3 +143,14 @@ export  const editstkaction =  (profileData)=> async(dispatch)=>{
            }
         }
        
+
+        export const clearProfileField = async (field) => {
+            try {
+
+                const config =  { headers:{ 'Content-Type' : 'application/json'}}
+                const response = await axios.delete('/api/v1/clearData', { data : {field}}, config );
+                return response.data; // Return the response data
+            } catch (error) {
+                throw error.response.data; // Handle errors appropriately
+            }
+        };
