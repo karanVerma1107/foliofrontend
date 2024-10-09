@@ -5,6 +5,8 @@ import { CountryDropdown } from 'react-country-region-selector';
 import { useAlert } from 'react-alert';
 import { clearProfileField, editDp, editObjaction, editstkaction, profileloader } from '../src/actions/loadprofileAction';
 
+
+
 const Editprofile = () => {
 
   const dispatch = useDispatch();
@@ -39,6 +41,7 @@ dispatch(profileloader());
     country: User?.country ,
     bio:  User?.bio,
     Name: User?.Name,
+    phoneNo: User?.phoneNo
   });
 
   const [selectedCountry, setSelectedCountry] = useState('');
@@ -67,6 +70,7 @@ dispatch(profileloader());
         country: User.country || '',
         bio: User.bio || '',
         Name: User.Name ,
+        phoneNo: User.phoneNo || '',
       });
 
 
@@ -242,6 +246,22 @@ if(errorr){
     />
   </div>
 
+  <div className='form-group'>
+    <label htmlFor="phoneNo"> Phone number: </label>
+    <input
+      type="text"
+      name="phoneNo"
+      id="phoneNo"
+      placeholder="Enter your phone number with country code"
+      value={profileData.phoneNo}
+      onChange={handleobjChange}
+      required // Make field required
+    />
+  </div>
+
+  
+
+
   <button type='submit' className='editingButton'>Update</button>
 </form>
 
@@ -249,6 +269,7 @@ if(errorr){
 
 <div className='edit-feilds'>
   <h2>Edit your stacks</h2>
+  
   <form className='bj-form' onSubmit={Handlestksubmit}>
 
     <div className="form-group">
