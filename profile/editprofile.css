@@ -89,7 +89,7 @@
 
 .edit-obj {
     width: 90%; /* Slightly narrower width */
-    max-width: 65%px; /* Max width for larger screens */
+    max-width: 90%; /* Max width for larger screens */
     min-height: 5vmax; /* Set min height to make it more compact */
     border-bottom: 1px solid black;
     display: flex;
@@ -101,7 +101,7 @@
 }
 
 .bj-form {
-    width: 70%; /* Use full width of the container */
+    width: 80%; /* Use full width of the container */
     margin-bottom: 1vmax; /* Spacing below the form */
     display: flex;
     flex-direction: column;
@@ -115,13 +115,14 @@
 .form-group {
     margin-bottom: 1vmax; /* Space between input groups */
     display: flex; /* Align items in a row */
+    width: 80%;
     flex-direction: column; /* Stack label and input vertically */
 }
 
 label {
     margin-bottom: 0.5vmax; /* Space between label and input */
     font-weight: bold; /* Make labels stand out */
-    font-size: 1.2vmax; /* Responsive font size for labels */
+    font-size: 1.4vmax; /* Responsive font size for labels */
     color: #d95d00; /* Medium orange-red color for labels */
 }
 
@@ -138,9 +139,9 @@ label {
     padding: 0.8vmax; /* Padding inside input */
     border: 2px solid #ff3d00; /* Darker orange-red border color */
     border-radius: 5px; /* Rounded corners */
-    font-size: 1vmax; /* Responsive font size */
+    font-size: 1.1vmax; /* Responsive font size */
     transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
-    width: 70%; /* Full width for inputs */
+    width: 90%; /* Full width for inputs */
 }
 
 .bj-form select{
@@ -180,7 +181,7 @@ label {
 
 .edit-feilds{
     width: 90%; /* Slightly narrower width */
-    max-width: 65%px; /* Max width for larger screens */
+    max-width: 90%; /* Max width for larger screens */
     min-height: 5vmax; /* Set min height to make it more compact */
     border-bottom: 1px solid black;
     display: flex;
@@ -211,4 +212,27 @@ margin-bottom: 1vmax;
 
 .xyz{
     margin-top: 2vmax;
+}
+
+
+.clearOg {
+    background-color: orangered; /* Background color */
+    color: white; /* Text color */
+    border: none; /* Remove default border */
+    border-radius: 0.5vmax; /* Rounded corners */
+    width: 40%;
+    padding: 1vmax 1.7vmax; /* Padding for better size */
+    font-size: 1vmax; /* Font size */
+    cursor: pointer; /* Change cursor on hover */
+    transition: background-color 0.3s, transform 0.2s; /* Smooth transitions */
+    margin-top: 1.1vmax; /* Margin at the top */
+}
+
+.clearOg:hover {
+    background-color: darkorange; /* Darker shade on hover */
+    transform: scale(1.05); /* Slightly increase size on hover */
+}
+
+.clearOg:active {
+    transform: scale(0.95); /* Slightly decrease size when active */
 }

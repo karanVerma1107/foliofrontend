@@ -4,15 +4,24 @@ import { allpostsaction } from '../actions/postsaction.js'
 import './posts.css'
 import Post from './post.jsx';
 import Loading from '../loading.jsx';
+import { profileloader } from '../actions/loadprofileAction.js';
 
 
 const Posts = () => {
 
+  
+
+
     const dispatch = useDispatch();
+
+    
+
+
 const {posts, loading} = useSelector(state=>state.posts);
 console.log("posts are: ", posts);
 useEffect(()=>{
-dispatch(allpostsaction())
+dispatch(profileloader());  
+dispatch(allpostsaction());
 },[dispatch])
   return (
     <div className='content'>

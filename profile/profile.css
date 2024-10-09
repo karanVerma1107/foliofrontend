@@ -132,3 +132,91 @@
         height: 10vmax;
     }
 }
+
+
+.resume {
+    font-family: Arial, sans-serif;
+    line-height: 1.5;
+    color: black;
+    background-color: white;
+    padding: 2vmax; /* Responsive padding */
+    max-width: 80vmax; /* Max width to fit within A4 */
+    max-height: 100vmax; /* Max height for A4 */
+    margin: 0 auto; /* Center align */
+    border: 1px solid #ccc; /* Optional border for styling */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.resume-header {
+    text-align: center;
+    margin-bottom: 1.7vmax; /* Space below header */
+}
+
+.resume-header h1 {
+    margin: 0;
+    font-size: 1.9vmax; /* Responsive font size */
+}
+
+.contacts {
+    margin-top: 1.2vmax; /* Space above contacts */
+}
+
+.contact-item {
+    font-weight: bold; /* Bold for emphasis */
+    margin-bottom: 0.5vmax; /* Space between contacts */
+}
+
+.resume-section {
+    margin-top: 1.4vmax; /* Space between sections */
+}
+
+.resume-section h2 {
+    border-bottom: 1px solid black; /* Underline for section titles */
+    padding-bottom: 0.3vmax; /* Space below header */
+    font-size: 1vmax; /* Responsive section header size */
+}
+
+.resume-section ul {
+    padding-left: 0; /* Remove indent */
+    list-style-type: none; /* Remove bullet points for a clean look */
+}
+
+.resume-section ul li {
+    margin-bottom: 0.5vmax; /* Space between list items */
+}
+
+.resume-footer {
+    text-align: center;
+    margin-top: 2vmax; /* Space above footer */
+    font-style: italic; /* Italics for footer */
+    font-size: 0.9vmax; /* Responsive footer size */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .resume {
+        max-width: 95vw; /* Use more of the viewport width */
+    }
+    
+    .resume-header h1 {
+        font-size: 1.2vmax; /* Increase header size on smaller screens */
+    }
+    
+    .resume-section h2 {
+        font-size: 0.8vmax; /* Increase section header size */
+    }
+}
+
+@media (max-width: 480px) {
+    .resume {
+        padding: 3vmax; /* Further adjust padding for mobile devices */
+    }
+
+    .resume-header h1 {
+        font-size: 1.2vmax; /* Increase header size for small screens */
+    }
+    
+    .resume-section h2 {
+        font-size: 0.8vmax; /* Increase section header size */
+    }
+}

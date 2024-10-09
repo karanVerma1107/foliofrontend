@@ -13,8 +13,12 @@ const Editprofile = () => {
   const handleClearField = async (field) => {
   
     const result = await clearProfileField(field);
-    
+   
+    console.log('result is :', result);
+   
+   location.reload();
 
+   alert.success(`${field} deleted successfully`);
 };
 
 
@@ -252,12 +256,12 @@ if(errorr){
       <textarea
           className="enlarge-input"
           name="skills"
-          placeholder="Enter your skills"
+          placeholder="Enter your skills, (example: Finance , Accounting,..etc"
           value={stackData.skills} // Use the value directly
           onChange={(e) => handleInputChange(e, 'skills')}
           rows="3"
       />
-      <button type='button' onClick={() => handleClearField('skills')}>Clear Skills</button>
+      <button type='button' className='clearOg' onClick={() => handleClearField('skills')}>Clear Skills</button>
     </div>
 
     <div className="form-group">
@@ -265,11 +269,13 @@ if(errorr){
       <textarea
           className="enlarge-input"
           name="education"
-          placeholder="Enter your education"
+          placeholder="Enter your education, example: Bsc biology from xyz college..., etc"
           value={stackData.education} // Use the value directly
           onChange={(e) => handleInputChange(e, 'education')}
           rows="3"
       />
+
+<button type='button' className='clearOg' onClick={() => handleClearField('education')}>Clear Education</button>
     </div>
 
     <div className="form-group">
@@ -277,11 +283,12 @@ if(errorr){
       <textarea
           className="enlarge-input"
           name="projects"
-          placeholder="Enter your projects"
+          placeholder="Enter your projects, example: XYZ( which is automated caption generator...), etc"
           value={stackData.projects} // Use the value directly
           onChange={(e) => handleInputChange(e, 'projects')}
           rows="3"
       />
+      <button type='button' className='clearOg' onClick={() => handleClearField('projects')}>Clear Projects</button>
     </div>
 
     <div className="form-group">
@@ -289,23 +296,25 @@ if(errorr){
       <textarea
           className="enlarge-input"
           name="achievments"
-          placeholder="Enter your achievements"
+          placeholder="Enter your achievements, example: successfully participated on research, won somethig, etc"
           value={stackData.achievments} // Use the value directly
           onChange={(e) => handleInputChange(e, 'achievments')}
           rows="3"
       />
+      <button type='button' className='clearOg' onClick={() => handleClearField('achievments')}>Clear Achievements</button>
     </div>
 
     <div className="form-group">
-      <label>Experience</label>
+      <label>Experience / Internship</label>
       <textarea
           className="enlarge-input"
           name="experience"
-          placeholder="Enter your experience"
+          placeholder="Enter your experience, example: i worked with XYZ organization as ABC post for 2 years, etc, Or if no experience write Fresher."
           value={stackData.experience} // Use the value directly
           onChange={(e) => handleInputChange(e, 'experience')}
           rows="3"
       />
+      <button type='button' className='clearOg'  onClick={() => handleClearField('experience')}>Clear Experience</button>
     </div>
 
     <div className="form-group">
@@ -313,11 +322,12 @@ if(errorr){
       <textarea
           className="enlarge-input"
           name="contacts"
-          placeholder="Enter your contacts"
+          placeholder="Enter your contacts, example: (gmail: xyz@gmail.com), (phoneNo: +91 xxxxxxxx89), social media user name, etc"
           value={stackData.contacts} // Use the value directly
           onChange={(e) => handleInputChange(e, 'contacts')}
           rows="3"
       />
+      <button type='button'   className='clearOg' onClick={() => handleClearField('contacts') }>Clear Contacts</button>
     </div>
 
     <button type='submit' className='editingButton'>Update Profile</button>
