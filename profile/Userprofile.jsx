@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import './profile.css'
 import pic from './pictemp.png'
 import html2pdf from 'html2pdf.js';
+import Metadata from '../metadata';
 import Loading from '../src/loading';
 import { useDispatch, useSelector } from 'react-redux'
 import { profileloader } from '../src/actions/loadprofileAction';
@@ -86,6 +87,9 @@ if(!User || loading){
 
   return (
     <>
+   {User && User.userName && (
+        <Metadata title={`${User.userName}'s Profile`} />
+      )}
     <div className='mainco'>
  <div className='upper-stuff'>
      <div className='followers'>
@@ -120,16 +124,18 @@ if(!User || loading){
                 <p>Email: {User.Email}</p>
                 <p>Phone Number: {User.phoneNo}</p>
                 <p>Country: {User.country}</p>
+                <p>City: {User.city}</p>
+
                 
             </header>
 
             <section className="resume-section">
-                <h2>Bio</h2>
+                <h2 className='sub'>Bio</h2>
                 <li>{User.bio}</li>
             </section>
 
             <section className="resume-section">
-                <h2>Education</h2>
+                <h2 className='sub'>Education</h2>
                 <ul>
                     {User.education.length > 0 ? (
                         User.education.map((edu, index) => <li key={index}>{edu}</li>)
@@ -140,7 +146,7 @@ if(!User || loading){
             </section>
 
             <section className="resume-section">
-                <h2>Skills</h2>
+                <h2 className='sub'>Skills</h2>
                 <ul>
                     {User.skills.length > 0 ? (
                         User.skills.map((skill, index) => <li key={index}>{skill}</li>)
@@ -151,7 +157,7 @@ if(!User || loading){
             </section>
 
             <section className="resume-section">
-                <h2>Projects</h2>
+                <h2 className='sub'>Projects</h2>
                 <ul>
                     {User.projects.length > 0 ? (
                         User.projects.map((project, index) => <li key={index}>{project}</li>)
@@ -162,7 +168,7 @@ if(!User || loading){
             </section>
 
             <section className="resume-section">
-                <h2>Achievements</h2>
+                <h2 className='sub'>Achievements</h2>
                 <ul>
                     {User.achievments.length > 0 ? (
                         User.achievments.map((achievement, index) => <li key={index}>{achievement}</li>)
@@ -173,7 +179,7 @@ if(!User || loading){
             </section>
 
             <section className="resume-section">
-                <h2>Experience</h2>
+                <h2 className='sub'>Experience</h2>
                 <ul>
                     {User.experience.length > 0 ? (
                         User.experience.map((exp, index) => <li key={index}>{exp}</li>)

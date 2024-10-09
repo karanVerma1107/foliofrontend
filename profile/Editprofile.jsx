@@ -23,8 +23,7 @@ const Editprofile = () => {
    alert.success(`${field} deleted successfully`);
 };
 
-
-  useEffect(()=>{
+ useEffect(()=>{
 dispatch(profileloader());
   },[dispatch ])
 
@@ -41,7 +40,9 @@ dispatch(profileloader());
     country: User?.country ,
     bio:  User?.bio,
     Name: User?.Name,
-    phoneNo: User?.phoneNo
+    phoneNo: User?.phoneNo,
+    city: User?.city,
+
   });
 
   const [selectedCountry, setSelectedCountry] = useState('');
@@ -52,18 +53,54 @@ dispatch(profileloader());
   };
 
 
-  const [stackData, setstackData] = useState({
-    "skills ":  [], // Set initial value or empty string
-    "education":  [] ,
-    "projects":  [],
-    "achievments":  [],
-    "experience":  [],
-    "contacts" :  [],
+ {/* const [stackData, setstackData] = useState({
+    "skills ":  [''], // Set initial value or empty string
+    "education":  [''] ,
+    "projects":  [''],
+    "achievments":  [''],
+    "experience":  [''],
+    "contacts" :  [''],
+}); */}
+
+const [stackData, setstackData] = useState({
+  "skills": [''], // Initial value as an array with an empty string
+  "education": [''],
+  "projects": [''],
+  "achievments": [''],
+  "experience": [''],
+  "contacts": [''],
 });
 
 
+{/*useEffect(() => {
+  if (User) {
 
-  useEffect(() => {
+    console.log('User updated:', User);
+
+    setProfileData(prevData => ({
+      ...prevData,
+      country: User.country || '',
+      bio: User.bio || '',
+      Name: User.Name || '',
+      phoneNo: User.phoneNo || '',
+    }));
+
+    setstackData(prevStackData => ({
+      ...prevStackData,
+      skills: User.skills.length > 0 ? User.skills : [''],
+      education: User.education.length > 0 ? User.education : [''],
+      projects: User.projects.length > 0 ? User.projects : [''],
+      achievments: User.achievments.length > 0 ? User.achievments : [''],
+      experience: User.experience.length > 0 ? User.experience : [''],
+      contacts: User.contacts.length > 0 ? User.contacts : [''],
+    }));
+  } 
+}, [User]); // Ensure this runs only when User changes */}
+
+
+
+
+{  useEffect(() => {
     // Update profileData when User changes
     if (User) {
       setProfileData({
@@ -71,16 +108,17 @@ dispatch(profileloader());
         bio: User.bio || '',
         Name: User.Name ,
         phoneNo: User.phoneNo || '',
+        city: User.city || '',
       });
 
 
       setstackData({
-        "skills": User.skills || [], 
-        "education": User.education || [],
-        "projects": User.projects || [],
-        "achievments": User.achievments || [],
-        "experience": User.experience || [],
-        "contacts": User.contacts || [],
+        "skills": User.skills || [''], 
+        "education": User.education || [''],
+        "projects": User.projects || [''],
+        "achievments": User.achievments || [''],
+        "experience": User.experience || [''],
+        "contacts": User.contacts || [''],
       })
     }
   }, [User]);
@@ -101,12 +139,40 @@ dispatch(profileloader());
 
 
 
-  const handleInputChange = (e, field) => {
+  {/*const handleInputChange = (e, field) => {
+    const { value } = e.target;
+  
+    // Ensure we're always setting it as an array of strings
+    if (Array.isArray(stackData[field])) {
+      const updatedArray = [...stackData[field]];
+      updatedArray[0] = value; // For the sake of simplicity, updating the first entry
+      setstackData((prev) => ({
+        ...prev,
+        [field]: updatedArray,
+      }));
+    }
+  };*/}
+  
+
+{/*  const handleInputChange = (e, field) => {
     const { value } = e.target;
     setstackData((prev) => ({
         ...prev,
         [field]: value, // Store the value directly
     }));
+};*/}
+
+
+const handleInputChange = (e, field, index) => {
+  const { value } = e.target;
+  setstackData((prev) => {
+      const updatedArray = [...prev[field]];
+      updatedArray[index] = value; // Update the specific index with new value
+      return {
+          ...prev,
+          [field]: updatedArray,
+      };
+  });
 };
 
 
@@ -219,6 +285,19 @@ if(errorr){
       required // Make field required
     />
   </div>
+
+  <div className='form-group'>
+    <label htmlFor="city">City: </label>
+    <input
+      type="text"
+      name="city"
+      id="city"
+      placeholder="Enter your city"
+      value={profileData.city}
+      onChange={handleobjChange}
+      required // Make field required
+    />
+  </div>
   
   <div className='form-group'>
     <label htmlFor="bio">Bio: </label>
@@ -269,99 +348,120 @@ if(errorr){
 
 <div className='edit-feilds'>
   <h2>Edit your stacks</h2>
-  
+
   <form className='bj-form' onSubmit={Handlestksubmit}>
 
+    {/* Skills Field */}
     <div className="form-group">
       <label>Skills</label>
-      <textarea
-          className="enlarge-input"
-          name="skills"
-          placeholder="Enter your skills, (example: Finance , Accounting,..etc"
-          value={stackData.skills} // Use the value directly
-          onChange={(e) => handleInputChange(e, 'skills')}
-          rows="3"
-      />
-      <button type='button' className='clearOg' onClick={() => handleClearField('skills')}>Clear Skills</button>
+      {stackData.skills.map((skill, index) => (
+        <div key={index} className="skill-input">
+          <textarea
+            className="enlarge-input"
+            name={`skills-${index}`}
+            placeholder="Enter your skill"
+            value={skill}
+            onChange={(e) => handleInputChange(e, 'skills', index)}
+            rows="3"
+          />
+          
+        </div>
+      ))}
+      <button type="button" className='clearOg' onClick={() => handleClearField(`skills`)}>Clear Skills</button>
+      <button type='button' className='clearOg' onClick={() => addStackField('skills')}>Add Another Skill</button>
     </div>
 
+    {/* Education Field */}
     <div className="form-group">
       <label>Education</label>
-      <textarea
-          className="enlarge-input"
-          name="education"
-          placeholder="Enter your education, example: Bsc biology from xyz college..., etc"
-          value={stackData.education} // Use the value directly
-          onChange={(e) => handleInputChange(e, 'education')}
-          rows="3"
-      />
-
-<button type='button' className='clearOg' onClick={() => handleClearField('education')}>Clear Education</button>
+      {stackData.education.map((edu, index) => (
+        <div key={index} className="edu-input">
+          <textarea
+            className="enlarge-input"
+            name={`education-${index}`}
+            placeholder="Enter your education"
+            value={edu}
+            onChange={(e) => handleInputChange(e, 'education', index)}
+            rows="3"
+          />
+          
+        </div>
+      ))}
+      <button type="button" className='clearOg' onClick={() => handleClearField(`education`)}>Clear Education</button>
+      <button type='button' className='clearOg' onClick={() => addStackField('education')}>Add Another Education</button>
     </div>
 
+    {/* Projects Field */}
     <div className="form-group">
       <label>Projects</label>
-      <textarea
-          className="enlarge-input"
-          name="projects"
-          placeholder="Enter your projects, example: XYZ( which is automated caption generator...), etc"
-          value={stackData.projects} // Use the value directly
-          onChange={(e) => handleInputChange(e, 'projects')}
-          rows="3"
-      />
-      <button type='button' className='clearOg' onClick={() => handleClearField('projects')}>Clear Projects</button>
+      {stackData.projects.map((project, index) => (
+        <div key={index} className="project-input">
+          <textarea
+            className="enlarge-input"
+            name={`projects-${index}`}
+            placeholder="Enter your project"
+            value={project}
+            onChange={(e) => handleInputChange(e, 'projects', index)}
+            rows="3"
+          />
+         
+        </div>
+      ))}
+      <button type="button" className='clearOg' onClick={() => handleClearField(`projects`)}>Clear Projects</button>
+      <button type='button' className='clearOg' onClick={() => addStackField('projects')}>Add Another Project</button>
     </div>
 
+    {/* Achievements Field */}
     <div className="form-group">
       <label>Achievements</label>
-      <textarea
-          className="enlarge-input"
-          name="achievments"
-          placeholder="Enter your achievements, example: successfully participated on research, won somethig, etc"
-          value={stackData.achievments} // Use the value directly
-          onChange={(e) => handleInputChange(e, 'achievments')}
-          rows="3"
-      />
-      <button type='button' className='clearOg' onClick={() => handleClearField('achievments')}>Clear Achievements</button>
+      {stackData.achievments.map((achievement, index) => (
+        <div key={index} className="achievement-input">
+          <textarea
+            className="enlarge-input"
+            name={`achievments-${index}`}
+            placeholder="Enter your achievement"
+            value={achievement}
+            onChange={(e) => handleInputChange(e, 'achievments', index)}
+            rows="3"
+          />
+          
+        </div>
+      ))}
+      <button type="button" className='clearOg' onClick={() => handleClearField(`achievments`)}>Clear Achievement</button>
+      <button type='button' className='clearOg' onClick={() => addStackField('achievments')}>Add Another Achievement</button>
     </div>
 
+    {/* Experience Field */}
     <div className="form-group">
       <label>Experience / Internship</label>
-      <textarea
-          className="enlarge-input"
-          name="experience"
-          placeholder="Enter your experience, example: i worked with XYZ organization as ABC post for 2 years, etc, Or if no experience write Fresher."
-          value={stackData.experience} // Use the value directly
-          onChange={(e) => handleInputChange(e, 'experience')}
-          rows="3"
-      />
-      <button type='button' className='clearOg'  onClick={() => handleClearField('experience')}>Clear Experience</button>
+      {stackData.experience.map((exp, index) => (
+        <div key={index} className="experience-input">
+          <textarea
+            className="enlarge-input"
+            name={`experience-${index}`}
+            placeholder="Enter your experience"
+            value={exp}
+            onChange={(e) => handleInputChange(e, 'experience', index)}
+            rows="3"
+          />
+         
+        </div>
+      ))}
+      <button type="button" className='clearOg' onClick={() => handleClearField(`experience`)}>Clear Experience</button>
+      <button type='button' className='clearOg' onClick={() => addStackField('experience')}>Add Another Experience</button>
     </div>
 
-    <div className="form-group">
-      <label>Contacts</label>
-      <textarea
-          className="enlarge-input"
-          name="contacts"
-          placeholder="Enter your contacts, example: (gmail: xyz@gmail.com), (phoneNo: +91 xxxxxxxx89), social media user name, etc"
-          value={stackData.contacts} // Use the value directly
-          onChange={(e) => handleInputChange(e, 'contacts')}
-          rows="3"
-      />
-      <button type='button'   className='clearOg' onClick={() => handleClearField('contacts') }>Clear Contacts</button>
-    </div>
-
+    {/* Contacts Field */}
+    
     <button type='submit' className='editingButton'>Update Profile</button>
   </form>
-
-  </div>
-
+</div>
 
 
     </div>
     
     </>
   )
-}
+}}
 
 export default Editprofile

@@ -228,11 +228,19 @@
 
 
 .resume-section li{
+    font-size: 1.5vmax;
+}
+
+.resume-section h2{
     font-size: 1.8vmax;
 }
 
+.sub{
+    font-size: 2vmax;
+}
+
 .resume-header h2{
-    font-size: 1.6vmax;
+    font-size: 1.9vmax;
 }
 
 }
