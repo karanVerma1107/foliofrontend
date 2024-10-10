@@ -9,7 +9,7 @@ import { profileloader } from '../src/actions/loadprofileAction';
 
 const Userprofile = () => {
   
-  
+    const{  loading, success, error, User, followersCount, followingCount} = useSelector((state)=> state.displayprofile);
   
   const dispatch = useDispatch();
   useEffect(()=>{
@@ -17,8 +17,7 @@ const Userprofile = () => {
     },[dispatch])
 
     
-    const{  loading, success, error, User, followersCount, followingCount} = useSelector((state)=> state.displayprofile);
-
+    
     const pdfRef = useRef(null);
 
     
@@ -72,13 +71,20 @@ useEffect(() => {
   } else {
     setdisplaypic(pic);
   }
+
+   
+
 }, [User]); 
 
 
 
-if(!User || loading){
+while(!User || loading){
+
   return <div className=' loadingc'><Loading/>
   <h1>Refresh once</h1></div>
+   
+   
+
 }
 
 
@@ -86,6 +92,7 @@ if(!User || loading){
 
 
   return (
+
     <>
    {User && User.userName && (
         <Metadata title={`${User.userName}'s Profile`} />
@@ -115,7 +122,7 @@ if(!User || loading){
  </div>
 
 
-
+{/*
  <div className='aboutcon'   ref={pdfRef} style={{ padding: '20px', backgroundColor: '#fff', border: '1px solid #ccc' }}>
 
  <div className="resume">
@@ -193,7 +200,160 @@ if(!User || loading){
         </div>
 
  
- </div>
+ </div> */}
+
+{/*
+<div className='aboutcon' ref={pdfRef} style={{ padding: '20px', backgroundColor: '#fff', border: '1px solid #ccc' }}>
+    <div className="resume">
+        <header className="resume-header">
+            <h1>{User.Name}</h1>
+            <p>Email: {User.Email}</p>
+            <p>Phone Number: {User.phoneNo}</p>
+            <p>Location: {User.city}, {User.country}</p>
+        </header>
+
+        <section className="resume-section">
+            <h2 className='sub'>Bio</h2>
+            <p>{User.bio}</p>
+        </section>
+
+        <section className="resume-section">
+            <h2 className='sub'>Education</h2>
+            <ul>
+                {User.education.length > 0 ? (
+                    User.education.map((edu, index) => <li key={index}>{edu}</li>)
+                ) : (
+                    <li>No education listed.</li>
+                )}
+            </ul>
+        </section>
+
+        <section className="resume-section">
+            <h2 className='sub'>Skills</h2>
+            <ul>
+                {User.skills.length > 0 ? (
+                    User.skills.map((skill, index) => <li key={index}>{skill}</li>)
+                ) : (
+                    <li>No skills listed.</li>
+                )}
+            </ul>
+        </section>
+
+        <section className="resume-section">
+            <h2 className='sub'>Projects</h2>
+            <ul>
+                {User.projects.length > 0 ? (
+                    User.projects.map((project, index) => <li key={index}>{project}</li>)
+                ) : (
+                    <li>No projects listed.</li>
+                )}
+            </ul>
+        </section>
+
+        <section className="resume-section">
+            <h2 className='sub'>Achievements</h2>
+            <ul>
+                {User.achievments.length > 0 ? (
+                    User.achievments.map((achievement, index) => <li key={index}>{achievement}</li>)
+                ) : (
+                    <li>No achievements listed.</li>
+                )}
+            </ul>
+        </section>
+
+        <section className="resume-section">
+            <h2 className='sub'>Experience</h2>
+            <ul>
+                {User.experience.length > 0 ? (
+                    User.experience.map((exp, index) => <li key={index}>{exp}</li>)
+                ) : (
+                    <li>No experience listed.</li>
+                )}
+            </ul>
+        </section>
+    </div>
+</div>
+*/}
+
+
+<div className='aboutcon' ref={pdfRef} style={{ padding: '20px', backgroundColor: '#fff', border: '1px solid #ccc' }}>
+    <div className="resume">
+        <header className="resume-header">
+            <h1>{User.Name}</h1>
+            <p>Email: {User.Email}</p>
+            <p>Phone: {User.phoneNo}</p>
+            <p>Location: {User.city}, {User.country}</p>
+        </header>
+
+        <section className="resume-section">
+            <h2 className='sub'>Professional Summary</h2>
+            <p>{User.bio}</p>
+        </section>
+
+        
+        <section className="resume-section">
+            <h2 className='sub'>Skills</h2>
+            <ul>
+                {User.skills.length > 0 ? (
+                    User.skills.map((skill, index) => <li key={index}><span>.</span>{skill}</li>)
+                ) : (
+                    <li>No skills listed.</li>
+                )}
+            </ul>
+        </section>
+
+        <section className="resume-section">
+            <h2 className='sub'>Work Experience</h2>
+            <ul>
+                {User.experience.length > 0 ? (
+                    User.experience.map((exp, index) => <li key={index}><span>.</span>{exp}</li>)
+                ) : (
+                    <li>No experience listed.</li>
+                )}
+            </ul>
+        </section>
+
+        <section className="resume-section">
+            <h2 className='sub'>Education</h2>
+            <ul>
+                {User.education.length > 0 ? (
+                    User.education.map((edu, index) => <li key={index}><span>.</span>{edu}</li>)
+                ) : (
+                    <li>No education listed.</li>
+                )}
+            </ul>
+        </section>
+
+       
+
+        <section className="resume-section">
+            <h2 className='sub'>Achievements</h2>
+            <ul>
+                {User.achievments.length > 0 ? (
+                    User.achievments.map((achievement, index) => <li key={index}><span>.</span>{achievement}</li>)
+                ) : (
+                    <li>No achievements listed.</li>
+                )}
+            </ul>
+        </section>
+
+
+        <section className="resume-section">
+            <h2 className='sub'>Projects</h2>
+            <ul>
+                {User.projects.length > 0 ? (
+                    User.projects.map((project, index) => <li key={index}><span>.</span>{project}</li>)
+                ) : (
+                    <li>No projects listed.</li>
+                )}
+            </ul>
+        </section>
+
+        
+    </div>
+</div>
+
+
 
  <button className= "dltbtn" onClick={downloadPDF}>Download as PDF</button>
  
@@ -201,6 +361,8 @@ if(!User || loading){
     
     
     </>
+
+           
   )
 }
 
