@@ -40,7 +40,7 @@
 .followers{
     width: 21vmax;
     height: 16vmax;
-    
+    color: #000;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -74,7 +74,7 @@
 .following{
     width: 21vmax;
     height: 16vmax;
-    
+    color: #000;
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -477,3 +477,11 @@
 .dltbtn:hover {
     background-color: #f6ac9f; /* Lighter orangered shade on hover */
 }
+
+
+
+
+
+ .mainco, .upper-stuff, .editbloc, .aboutcon, .resume, .resume-header, .resume-section, h1, h2, h3, p, li {
+    color: black; /* Set text color to black */
+  }

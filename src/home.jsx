@@ -51,7 +51,7 @@ const navigate = useNavigate();
     <a href='#)#' className={activeindex === 3 ? 'active' : ''} onClick={()=>handleclick(3 )}><SiGooglemessages/></a>
   </li>
   <li>
-    <a href='##' className={activeindex === 4 ? 'active' : ''} onClick={()=>handleclick(4)}><MdPostAdd/></a>
+    <a href='/Create-Post' className={activeindex === 4 ? 'active' : ''} onClick={()=>handleclick(4)}><MdPostAdd/></a>
   </li>
   <li>
     <a href='/signup'  onClick={(e)=>handleclick(5, '/signup', e)}  className={activeindex === 5 ? 'active' : ''} rel='noreferrer' target="_blank"><FaUserAlt/></a>

@@ -20,7 +20,7 @@ const Posts = () => {
 const {posts, loading} = useSelector(state=>state.posts);
 console.log("posts are: ", posts);
 useEffect(()=>{
-dispatch(profileloader());  
+//dispatch(profileloader());  
 dispatch(allpostsaction());
 },[dispatch])
   return (

@@ -6,6 +6,7 @@ import { getuserdetails, loginotp, signup, signupotp, surflogin } from './reduce
 import { isAvialablereducer, setuserreducer } from './reducers/setProfilereducer.js';
 import { changeDPreducer, loadselfReducer } from './reducers/loadprofileReducer.js';
 import { editobjReducer } from './reducers/editProfileReducers.js';
+import { addApostreducer } from './reducers/makepostReducer.js';
 
 
 
@@ -21,7 +22,8 @@ isUsernameAvialable: isAvialablereducer,
 setusername: setuserreducer,
 displayprofile: loadselfReducer,
 changedp: changeDPreducer,
-editOBJ: editobjReducer
+editOBJ: editobjReducer,
+addPost: addApostreducer
 });
 
 

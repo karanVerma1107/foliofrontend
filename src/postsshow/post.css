@@ -9,320 +9,113 @@
 
 
 
-
 .post {
-    display: flex;
-    flex-direction: column;
-    padding: 1vmax; /* Reduced padding */
-    border: 1px solid #e0e0e0;
-    border-radius: 0.8vmax; /* Rounded corners */
-    background-color: #fff;
-    overflow: hidden;
-    justify-content: center;
-    margin: 1vmax auto; /* Reduced margin */
+    background: white;
+    border-radius: 1vmax; /* Rounded corners */
+    box-shadow: 0 0.4vmax 0.5vmax black; /* Subtle shadow */
+    margin: 2vmax auto; /* Spacing around the post */
+    padding: 2vmax; /* Inner padding */
     max-width: 45vmax;
-    max-height: 39vmax; /* Further reduced max-width */
-    box-shadow: 0 1vmax 2vmax rgba(0, 0, 0, 0.1);
-    transition: box-shadow 0.3s ease;
+    min-height: 10vmax;
+    transition: transform 0.3s;
   }
   
   .post:hover {
-    box-shadow:  1vmax 3vmax 5vmax black;
+    transform: scale(1.02);
+    box-shadow: 0 03vmax 5vmax black; /* Subtle shadow */
   }
   
   .user-details {
     display: flex;
     align-items: center;
-    margin-bottom: 0.2vmax; /* Reduced margin */
+    margin-bottom: 1.5vmax; /* Spacing below user details */
   }
   
   .user-img {
-    width: 3.5vmax; /* Reduced image size */
-    height: 3.5vmax;
     border-radius: 50%;
-    margin-right: 0.8vmax; /* Reduced margin */
-    border: 2px solid orangered;
+    width: 3.5vmax; /* Increased size for user image */
+    height: 3.5vmax; /* Increased size for user image */
+    margin-right: 1vmax;
+    border: 1px solid orangered;
+    object-fit: cover; /* Maintain aspect ratio */
+  }
+  
+  h3 {
+    font-size: 1.4vmax; /* Reduced font size for username */
+    color: #333;
+    font-family:'Open Sans' ;
   }
   
   .post-caption {
-    margin-bottom: 1vmax; /* Reduced margin */
-    font-family: 'Open Sans';
-    font-size: 1.2vmax; /* Smaller font size */
-    
+    margin-bottom: 1vmax; /* Spacing below caption */
+    font-family: 'Merriweather';
+    font-size: 1.4vmax;
+  }
+  
+  .links {
+    color: #121212;
+    font-size: 1vmax; /* Link text size */
+  }
+  
+  .links a {
+    text-decoration: none; /* Remove underline */
+  }
+  
+  .links a:hover {
+    text-decoration: underline; /* Underline on hover */
   }
   
   .cat {
-    font-size: 1vmax; /* Smaller font size */
-    color: rgb(15, 15, 15);
+    margin-top: 1vmax; /* Spacing above categories */
+    font-size: 1vmax; /* Category text size */
+    color: #666; /* Color for categories */
+  }
 
+  .cat p{
+    color:#666;
   }
   
   .product-img {
-margin-top: 3.2vmax;
-    margin-left: auto;
+    margin-top: 1.5vmax; /* Spacing above media */
+    display: flex;
+    justify-content: center; /* Center media */
+
+     /* Center vertically */
+    flex-direction: column; /* Stack images/videos */
   }
   
-  .carousel-image {
-    width: 20vmax;
-    height: 20vmax;
-    border: 1.5px solid rgb(255, 132, 0);
-    border-radius: 0.4vmax; /* Slightly rounded */
+  .carousel-image, .carousel-video {
+   width: 30vmax; /* Responsive full width */
+   height: 30vmax; /* Maintain aspect ratio */
+   margin: auto;
+   
+    border-radius: 1vmax; /* Rounded corners for media */
+    /* Margin above and below media */
   }
   
   .like-comm {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    margin-bottom: 1vmax; 
+    justify-content: space-between; /* Space between elements */
+    margin-top: 1.1vmax; /* Spacing above like section */
   }
   
   .like {
-    font-size: 1.1vmax; /* Smaller icon size */
+    font-size: 1.7vmax; /* Size of like button */
+    cursor: pointer; /* Pointer on hover */
+    transition: color 0.3s; /* Transition for color change */
   }
   
-  .comment-section {
-    margin-top: 1vmax; /* Reduced margin */
-    border-top: 1px solid #e0e0e0;
-    padding-top: 0.8vmax; /* Reduced padding */
+  .like:hover {
+    color: orangered; /* Color change on hover */
   }
-  
-  .comment-input {
-    width: 75%; /* Adjusted width */
-    padding: 0.5vmax; /* Reduced padding */
-    border: 1px solid #ccc;
-    border-radius: 0.4vmax; /* Slightly rounded */
-  }
-  
-  .comment-submit {
-    padding: 0.5vmax 1vmax; /* Reduced padding */
-    background-color: orangered;
-    color: white;
-    border: none;
-    border-radius: 0.4vmax; /* Slightly rounded */
-    cursor: pointer;
-  }
-  
-  .comment-submit:hover {
-    background-color: darkorange;
-  }
-  
-  .comments-list {
-    margin-top: 0.8vmax; /* Reduced margin */
-  }
-  
-  .comment {
-    background-color: #f9f9f9;
-    padding: 0.5vmax; /* Reduced padding */
-    border-radius: 0.4vmax; /* Slightly rounded */
-    margin-top: 0.5vmax; /* Reduced margin */
-  }
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-  .post {
-    display: flex;
-    flex-direction: column;
-    padding: 1vmax;
-    border: 1px solid #e0e0e0;
-    border-radius: 0.8vmax;
-    background-color: #fff;
-    overflow: hidden;
-    justify-content: center;
-    margin: 1vmax auto;
-    font-family: 'Roboto';
-    max-width: 45vmax;
-    max-height: 39vmax;
-    box-shadow: 0 1vmax 2vmax rgba(0, 0, 0, 0.1);
-    transition: box-shadow 0.3s ease;
-  }
-  
-  .post:hover {
-    box-shadow: 1vmax 3vmax 5vmax black;
-  }
-  
-  .user-details {
-    display: flex;
-    align-items: center;
-    margin-bottom: 0.2vmax;
-  }
-  
-  .user-details p{
-    font-family: 'Courier New', Courier, monospace;
-    font-weight: 700;
-  }
-
-
-  .user-img {
-    width: 3.5vmax;
-    height: 3.5vmax;
-    border-radius: 50%;
-    margin-right: 0.8vmax;
-    border: 2px solid orangered;
-  }
-  
-  .post-caption {
-    margin-bottom: 1vmax;
-    font-size: 1.4vmax;
-    
-    font-family: 'Open Sans';
-  }
-  
-  .cat {
-    font-size: 1vmax;
-    
-    color: rgb(15, 15, 15);
-  }
-
-  .cat span{
-    color: black;
-    font-weight: bolder;
-    margin: 0 , 1vmax;
-  }
-  
-  .product-img {
-    margin-top: 3.2vmax;
-    margin-left: auto;
-    overflow: hidden; /* Hide overflow */
-    border-radius: 0.4vmax; /* Rounded corners */
-  }
-  
-  .carousel-image {
-    width: 100%; /* Full width */
-    height: auto; /* Maintain aspect ratio */
-    object-fit: cover; /* Fill without distortion */
-    border: 1.5px solid rgb(255, 132, 0);
-    border-radius: 0.4vmax; /* Rounded corners */
-  }
-  
-  .like-comm {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 1vmax; 
-  }
-
-  .like-comm svg{
-    font-size: 1.6vmax;
-  }
-  
-  .like-comm h2{
-    font-size: 1.4vmax;
-  }
-
-  .like {
-    font-size: 1vmax;
-  }
-  
-  .comment-section {
-    margin-top: 1vmax;
-    border-top: 1px solid #e0e0e0;
-    padding-top: 0.8vmax;
-  }
-  
-  .comment-input {
-    width: 75%;
-    padding: 0.5vmax;
-    border: 1px solid #ccc;
-    border-radius: 0.4vmax;
-  }
-  
-  .comment-submit {
-    padding: 0.5vmax 1vmax;
-    background-color: orangered;
-    color: white;
-    border: none;
-    border-radius: 0.4vmax;
-    cursor: pointer;
-  }
-  
-  .comment-submit:hover {
-    background-color: darkorange;
-  }
-  
-  .comments-list {
-    margin-top: 0.8vmax;
-  }
-  
-  .comment {
-    background-color: #f9f9f9;
-    padding: 0.5vmax;
-    border-radius: 0.4vmax;
-    margin-top: 0.5vmax;
-  }
-  
-
-
   
   
   
-  .product-img {
-    margin: auto;
-    width: 100%; /* Ensure no overflow */
-    border-radius: 0.4vmax; /* Slightly rounded corners */
-}
-
-.carousel-image {
-    width: 100%; /* Full width of the parent container */
-    height: 100%; /* Maintain aspect ratio */
-    border: 1.5px solid rgb(255, 132, 0);
-    border-radius: 0.4vmax; /* Slightly rounded */
-}
-
-/* Media queries for different screen sizes */
-@media (max-width: 1000px) {
-    .carousel-image {
-        height: 60vmax; /* Increase height for medium screens */
-    }
-}
-
-@media (max-width: 700px) {
-    .carousel-image {
-        height: 55vmax; /* Further increase height for smaller screens */
-    }
-}
-
-@media (max-width: 500px) {
-    .carousel-image {
-        height: 50vmax; /* Maximum height for the smallest screens */
-    }
-}
-
-
-
-
-
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  h6 {
+    color: #999; /* Color for date */
+    font-size: 1vmax; /* Size for date */
+    text-align: right; /* Align date to the right */
+    margin-top: 1vmax; /* Spacing above date */
+  }
+  

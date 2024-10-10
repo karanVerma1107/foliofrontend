@@ -1,0 +1,109 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap');
+
+
+.contant{
+    width: 90%;
+    min-height: 40vmax;
+     display: flex;
+     flex-direction: column;
+     margin-left: 8vmax;
+}
+
+
+
+
+.post-form {
+    display: flex;
+    flex-direction: column;
+    max-width: 91%;/* Limit form width */
+    margin-top: 2vmax;
+    color: black;
+    padding: 1vmax; /* Padding around form */
+    background-color: #fff; /* White background */
+    border-radius: 0.5vmax; /* Rounded corners */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Light shadow */
+}
+
+.post-form h2{
+font-size: 1.6vmax;
+font-family: 'Montserrat';
+}
+
+.form-group {
+    margin-bottom: 2vmax; /* Space between form groups */
+}
+
+label {
+    font-weight: bold; /* Bold labels */
+    margin-bottom: 0.5vmax; /* Space below label */
+}
+
+input[type='text'],
+input[type='url'],
+textarea,
+input[type='file'] {
+    width: 100%; /* Full width */
+    padding: 1vmax; /* Padding inside fields */
+    font-family: 'Montserrat' ;
+    border: 1px solid #ff8c00; /* Orangered border */
+    border-radius: 0.3vmax; /* Rounded corners */
+}
+
+textarea {
+    resize: none; /* Prevent resizing */
+    height: 10vmax; /* Fixed height */
+}
+
+.submit-btn {
+    background-color: orangered; /* Orangered background */
+    color: white; /* White text */
+    border: none; /* No border */
+    padding: 1vmax; /* Padding */
+    width: 55%;
+    font-family: sans-serif;
+    font-size: 1vmax;
+    border-radius: 0.4vmax; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s; /* Transition effect */
+}
+
+.submit-btn:hover {
+    background-color: #ff6a00; /* Darker orangered on hover */
+}
+
+select {
+    width: 100%; /* Full width */
+    padding: 1vmax; /* Padding inside the dropdown */
+    border: 1px solid #ff8c00; /* Orangered border */
+    border-radius: 0.3vmax; /* Rounded corners */
+    background-color: white; /* White background */
+    color: black; /* Black text */
+    appearance: none; /* Remove default arrow */
+    position: relative;
+}
+
+/* Add an arrow indicator for the dropdown */
+select:focus {
+    outline: none; /* Remove default outline */
+    border-color: #ff6a00; /* Darker orangered on focus */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

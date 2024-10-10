@@ -6,6 +6,7 @@ import Userprofile from '../profile/Userprofile.jsx'
 import Store from './store.js'
 import Signup from './authentication/signup.jsx'
 import Header from './header.jsx'
+import Addpost from '../postoperations/Addpost.jsx'
 import Posts from './postsshow/posts.jsx'
 import { useSelector } from 'react-redux'
 import TakeUserName from './authentication/takeUserName.jsx'
@@ -34,6 +35,8 @@ function App() {
       <Route exact path='/username' element={<TakeUserName/>}/> 
       <Route exact path='/profile' element={<Userprofile/>}/> 
       <Route exact path='/edit-profile' element={<Editprofile/>}/> 
+      <Route exact path='/Create-Post' element={<Addpost/>}/> 
+
 
 
         
