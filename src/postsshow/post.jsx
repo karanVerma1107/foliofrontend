@@ -32,6 +32,21 @@ const Post = ({ post }) => {
         dispatch(userdetailsfetch());
     }, [dispatch]);
 
+
+    const formatDateTime = (dateString) => {
+        const date = new Date(dateString);
+        const options = {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            hour12: false
+        };
+        return date.toLocaleString('en-US', options);
+    };
+
+
     return (
         <div className='post-card'>
             <div className='user-details'>
@@ -41,9 +56,27 @@ const Post = ({ post }) => {
 
             <div className='post-caption'>
                 <p>{post.caption}</p>
+
+                {post.links && post.links.length > 0 && (
+    <div className='post-links'>
+        <h4>Links:</h4>
+        <p>
+            {post.links.map((link, index) => (
+                <span key={index}>
+                    <a href={link} target="_blank" rel="noopener noreferrer"    className='gghg'>
+                        {link}
+                    </a>
+                    {index < post.links.length - 1 && ', '} {/* Add comma except for the last link */}
+                </span>
+            ))}
+        </p>
+    </div>
+)}
+
+                
                 <div className='categories'>
                     {post?.category ? post.category.map((item, index) => (
-                        <span key={item} className='category'>{item}{index < post.category.length - 1 && ', '}</span>
+                        <span key={item} className='category'> Category: {item}{index < post.category.length - 1 && ', '}</span>
                     )) : null}
                 </div>
             </div>
@@ -71,7 +104,7 @@ const Post = ({ post }) => {
             </div>
 
             <div className='post-date'>
-                <p>{new Date(post.createdAt).toLocaleDateString()}</p>
+            <p>{formatDateTime(post.createdAt)}</p>
             </div>
         </div>
     );

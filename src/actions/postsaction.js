@@ -55,9 +55,9 @@ export const likedislike = (postId)=>{
 
 
 //to add a post
-export const addApostAction = (postdata, fileImage)=>async(dispatch)=>{
+{/*export const addApostAction = (postdata, fileImage)=>async(dispatch)=>{
     try {
-    
+        console.log('fileimge is:', fileImage);
         dispatch({type: CREATE_POST_REQUEST});
         const config = {headers: {'Content-Type' : 'multipart/form-data'}}
 
@@ -85,3 +85,46 @@ export const addApostAction = (postdata, fileImage)=>async(dispatch)=>{
         
        }
     }
+*/}
+
+
+
+
+
+
+
+
+
+export const addApostAction = (postdata, files) => async (dispatch) => {
+    try {
+        console.log('Files are:', files);
+        dispatch({ type: CREATE_POST_REQUEST });
+        
+        const completeFormData = new FormData();
+
+        // Append post data to completeFormData
+        completeFormData.append('Category', postdata.get('Category'));
+        completeFormData.append('Caption', postdata.get('Caption'));
+        postdata.getAll('Links').forEach(link => completeFormData.append('Links', link));
+
+        // Append all files to the completeFormData
+        files.forEach(file => completeFormData.append('Files', file));
+
+        const config = { headers: { 'Content-Type': 'multipart/form-data' } };
+        const response = await axios.post('api/v1/addPost', completeFormData, config);
+
+        const message = response.data.message;
+
+        dispatch({ type: CREATE_POST_SUCCESS, payload: message });
+
+    } catch (error) {
+        let errormess;
+        if (error.response && error.response.data) {
+            errormess = error.response.data.message || 'Something went wrong';
+        } else {
+            errormess = error.message;
+        }
+        
+        dispatch({ type: CREATE_POST_FAILURE, payload: errormess });
+    }
+};

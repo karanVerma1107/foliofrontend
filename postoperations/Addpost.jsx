@@ -1,15 +1,16 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import './addpost.css';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addApostAction } from '../src/actions/postsaction';
 import Cropper from 'react-easy-crop';
 import getCroppedImg from '../profile/getCropping';
+import { useAlert } from 'react-alert';
 
 const AddPost = () => {
-
+const alert = useAlert();
 const dispatch = useDispatch();
 
-
+const {message, error, succes, loading} = useSelector(state=>state.addPost);
 
     const [postData, setPostData] = useState({
         Category: '',
@@ -22,6 +23,8 @@ const dispatch = useDispatch();
     const [crop, setCrop] = useState({ x: 0, y: 0 });
     const [zoom, setZoom] = useState(1);
     const [croppedImageUrl, setCroppedImageUrl] = useState(null);
+    const [pixelCrop, setPixelCrop] = useState({ x: 0, y: 0, width: 0, height: 0 }); // Add this line
+
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -50,17 +53,19 @@ const dispatch = useDispatch();
     };
 
     const getCroppedImage = useCallback(async () => {
-        if (!src) return;
+        console.log("dimmensions of !src || pixelCrop.width <= 0 || pixelCrop.height <= 0",  pixelCrop.width, pixelCrop.height)
+        if (!src || pixelCrop.width <= 0 || pixelCrop.height <= 0) return; // Ensure pixelCrop has valid dimensions
         try {
-            const croppedImg = await getCroppedImg(src, { width: 800, height: 800 }); // Adjust size as needed
+            const croppedImg = await getCroppedImg(src, pixelCrop);
             setCroppedImageUrl(croppedImg);
         } catch (error) {
             console.error("Error cropping image:", error);
         }
-    }, [src]);
+    }, [src, pixelCrop]); // Add pixelCrop as a dependency
 
 
-    const handleSubmit = (e) => {
+
+  {/*  const handleSubmit = (e) => {
         e.preventDefault();
         const formData = new FormData();
 
@@ -75,6 +80,50 @@ const dispatch = useDispatch();
 
         dispatch(addApostAction(formData));
     };
+*/}
+
+const handleSubmit = async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+
+    // Append post data to formData
+    formData.append('Category', postData.Category);
+    formData.append('Caption', postData.Caption);
+    postData.Links.forEach(link => formData.append('Links', link));
+
+    // Create an array to hold all files
+    const files = [];
+
+    // If there's a cropped image, convert it to a blob and add it to files
+    if (croppedImageUrl) {
+        const response = await fetch(croppedImageUrl);
+        const blob = await response.blob();
+        const imageFile = new File([blob], 'croppedImage.png', { type: 'image/png' });
+        files.push(imageFile); // Add the image file to the files array
+    }
+
+    // Add video files to the files array
+    videoFiles.forEach(file => files.push(file));
+
+    console.log('files are', files)
+
+    // Now dispatch the action with formData and files
+    dispatch(addApostAction(formData, files));
+
+    alert.show("Uploading your post please wait")
+};
+
+useEffect(()=>{
+
+if(succes){
+    alert.success(message);
+}
+
+if(error){
+    alert.error(error);
+}
+
+},[succes, error])
 
 
     return (
@@ -108,7 +157,8 @@ const dispatch = useDispatch();
 
             <div className='form-group'>
                 <label htmlFor='image'>Upload Images:</label>
-                <input type='file' accept="image/*" multiple className='file-input' onChange={handleImageChange} />
+                <input type='file' accept="image/jpeg, image/png, image/gif" multiple className='file-input' onChange={handleImageChange} />
+
 
                 {src && (
                     <div style={{ position: 'relative', width: '100%', height: '400px' }}>
@@ -119,7 +169,13 @@ const dispatch = useDispatch();
                             aspect={1} // 1:1 for square
                             onCropChange={setCrop}
                             onZoomChange={setZoom}
-                            onCropComplete={getCroppedImage}
+                            onCropComplete={(croppedArea, croppedAreaPixels) => {
+                                console.log('Cropped Area:', croppedArea);
+                                console.log('Cropped Area Pixels:', croppedAreaPixels);
+                                setPixelCrop(croppedAreaPixels); // Set pixelCrop state here
+                                getCroppedImage(); // Call to get the cropped image
+                            }}
+                        
                         />
                     </div>
                 )}

@@ -5,12 +5,12 @@
     background-color: #fff; /* White background */
     border-radius: 1vmax; /* Rounded corners */
     box-shadow: 0 2vmax 5vmax rgba(0, 0, 0, 0.1); /* Soft shadow */
-   font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    min-width: 97vmax; /* Maximum width */
-    display: flex;
-    flex-direction: column;
-
-     margin-left: 9vmax;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    /* Limit max width for better mobile view */
+    width: 90%; /* Full width */
+    padding: 2vmax; /* Padding for form */
+    margin: auto; /* Center the form */
+    margin-left: 8vmax;
 }
 
 .form-group {
@@ -26,18 +26,21 @@ label {
 input[type='text'],
 textarea,
 select {
-    width: 33vmax; /* Full width */
+    width: 100%; /* Full width */
     padding: 1vmax; /* Padding for inputs */
     border: 1px solid #ccc; /* Border color */
     border-radius: 0.5vmax; /* Rounded corners */
     font-size: 1vmax; /* Font size */
 }
 
+textarea{
+    height: 8vmax;
+}
+
 input[type='file'] {
     border: none; /* No border */
     padding: 1vmax; /* Padding */
-    margin: 1vmax 1vmax;
-    max-width: 33vmax;
+    margin: 1vmax 0; /* Margin */
 }
 
 .submit-btn {
@@ -53,4 +56,14 @@ input[type='file'] {
 
 .submit-btn:hover {
     background-color: darkorange; /* Darker color on hover */
+}
+
+/* Media queries for smaller devices */
+@media (max-width: 768px) {
+    input[type='text'],
+    textarea,
+    select,
+    input[type='file'] {
+        font-size: 3vw; /* Adjust font size */
+    }
 }

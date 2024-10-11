@@ -176,7 +176,7 @@
 .post-card {
   background: #fff; /* White background */
   border-radius: 1.5vmax;
-  box-shadow: 0 2vmax 5vmax rgba(0, 0, 0, 0.2);
+  box-shadow: 0 1vmax 3vmax rgba(0, 0, 0, 0.2);
   padding: 2vmax;
   margin: 2vmax auto; /* Center the card */
   max-width: 49vmax; /* Fixed width */
@@ -186,6 +186,7 @@
 
 .post-card:hover {
   transform: translateY(-2px);
+  box-shadow: 0 2vmax 5vmax black;
 }
 
 .user-details {
@@ -194,31 +195,43 @@
   margin-bottom: 1vmax;
 }
 
+.user-details h3{
+  font-size: 1.4vmax;
+}
+
 .user-img {
   border-radius: 50%;
-  width: 5vmax;
-  height: 5vmax;
+  width: 3.5vmax;
+  height: 3.5vmax;
   margin-right: 1vmax;
   border: 2px solid orangered; /* Orange-red border */
 }
 
 .post-caption {
+  font-family: 'Roboto';
   margin-bottom: 1.5vmax;
+  font-size: 1.3vmax;
 }
 
 .categories {
   display: flex;
   flex-wrap: wrap;
+  
   margin-top: 0.5vmax;
 }
 
+
+
 .category {
-  background: orangered; /* Orange-red background for categories */
+  /* Orange-red background for categories */
   border-radius: 1vmax;
-  padding: 0.5vmax 1vmax;
+  padding: 0.5vmax 0.1vmax;
+  font-family: monospace;
+  font-weight: 900;
   margin-right: 0.5vmax;
-  font-size: 1.2vmax;
-  color: #fff; /* White text for category */
+  background-color: white;
+  font-size: 1vmax;
+  color: #323131; /* White text for category */
 }
 
 .product-img {
@@ -227,6 +240,7 @@
   display: flex; /* Align items horizontally */
   justify-content: center; /* Center the images */
   overflow: hidden; /* Prevent overflow */
+  
   height: auto; /* Auto height to fit the content */
 }
 
@@ -235,7 +249,7 @@
 }
 
 .carousel-image {
-  max-width: 100%; /* Ensure image doesn't exceed container width */
+  width: 100%; /* Ensure image doesn't exceed container width */
   max-height: 30vmax; /* Max height for larger images */
   height: auto; /* Maintain aspect ratio */
   border-radius: 1vmax; /* Rounded corners */
@@ -244,11 +258,7 @@
 }
 
 /* Media Query for Mobile View */
-@media (max-width: 768px) {
-  .carousel-image {
-      max-height: 25vmax; /* Adjust height for smaller screens */
-  }
-}
+
 
 .like-comm {
   display: flex;
@@ -273,4 +283,71 @@
   font-size: 0.9vmax;
   color: #777; /* Light gray for date */
   margin-top: 1vmax;
+}
+
+.post-date p{
+  color: #434141; 
+}
+
+
+.Link{
+  font-size: 1vmax;
+}
+
+
+
+.post-links {
+  margin-top: 1vmax; /* Space above the links section */
+  padding: 0.1vmax; /* Padding for the links container */
+  border-top: 0.7px solid #e0e0e0; /* Top border for separation */
+}
+
+.post-links h4 {
+  margin: 0 0 1vmax; /* Space below the heading */
+  font-size: 1.3vmax; /* Font size for the heading */
+  color: #333; /* Dark color for the heading */
+}
+
+.gghg{
+  font-family: 1vmax;
+}
+
+.post-links ul {
+  list-style-type: none; /* Remove default list styles */
+  padding: 0; /* Remove default padding */
+}
+
+.post-links li {
+  margin: 0.5vmax 0; /* Space between list items */
+}
+
+.post-links a {
+  color: #007BFF; /* Link color */
+  font-size: 0.9vmax; /* Font size for links */
+  text-decoration: none; /* Remove underline */
+  transition: color 0.3s ease, text-decoration 0.3s ease; /* Smooth transition for hover effects */
+}
+
+.post-links a:hover {
+  color: #0056b3; /* Darker shade on hover */
+  text-decoration: underline; /* Underline on hover */
+}
+
+
+
+
+
+
+@media (max-width: 768px) {
+  .carousel-image {
+      max-height: 25vmax; /* Adjust height for smaller screens */
+  }
+
+  .post-caption p{
+    font-family:1.7vmax ;
+  }
+
+  .post-links a{
+    font-size: 1.3vmax;
+  }
 }
