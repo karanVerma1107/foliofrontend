@@ -1,9 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import {useDispatch, useSelector} from 'react-redux'
 import './editprofile.css'
 import { CountryDropdown } from 'react-country-region-selector';
 import { useAlert } from 'react-alert';
-import { clearProfileField, editDp, editObjaction, editstkaction, profileloader } from '../src/actions/loadprofileAction';
+import { clearProfileField, editDp, editObjaction, editstkaction,  profileloader  } from '../src/actions/loadprofileAction.js'
+import ReactCrop, { centerCrop }  from 'react-image-crop'
+import 'react-image-crop/dist/ReactCrop.css';
+import Cropper from 'react-easy-crop';
+import getCroppedImg from './getCropping.js';
+import { makeAspectCrop } from 'react-image-crop';
+
 
 
 
@@ -11,6 +17,10 @@ const Editprofile = () => {
 
   const dispatch = useDispatch();
   const alert = useAlert();
+
+  const ASPECT_RATIO = 1;
+  const MIN_DIMENSION = 150;
+
 
   const handleClearField = async (field) => {
   
@@ -35,7 +45,70 @@ dispatch(profileloader());
 
   
 
+  const [crop, setCrop] = useState({ x: 0, y: 0 });
+  const [zoom, setZoom] = useState(1);
+  const [croppedImageUrl, setCroppedImageUrl] = useState(null);
+  const [src, setSrc] = useState(null);
   const [selectedFile, setSelectedFile] = useState(null);
+
+
+
+  const handleFileChange = (e) => {
+    if (!Isauth) {
+      alert.error('kindly check your internet connection or login first to access this resource');
+      return;
+    }
+    const file = e.target.files[0];
+    setSelectedFile(file);
+    
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setSrc(reader.result);
+    };
+    if (file) {
+      reader.readAsDataURL(file);
+    }
+  };
+
+
+  const onCropComplete = useCallback(async (croppedArea, croppedAreaPixels) => {
+    try {
+      const croppedImage = await getCroppedImg(src, croppedAreaPixels);
+      setCroppedImageUrl(croppedImage);
+    } catch (error) {
+      console.error(error);
+    }
+  }, [src]);
+
+  const editImgHandler = async (e) => {
+    e.preventDefault();
+    if (!croppedImageUrl) {
+      alert.error("Please crop the image before uploading.");
+      return;
+    }
+
+    const blob = await fetch(croppedImageUrl).then((r) => r.blob());
+    const formData = new FormData();
+    formData.append('file', blob, selectedFile.name || 'croppedImage.jpeg');
+
+    dispatch(editDp(formData));
+  };
+
+
+
+  
+
+ 
+  
+  
+
+ 
+
+
+
+
+
+
   const [profileData, setProfileData] = useState({
     country: User?.country ,
     bio:  User?.bio,
@@ -53,14 +126,7 @@ dispatch(profileloader());
   };
 
 
- {/* const [stackData, setstackData] = useState({
-    "skills ":  [''], // Set initial value or empty string
-    "education":  [''] ,
-    "projects":  [''],
-    "achievments":  [''],
-    "experience":  [''],
-    "contacts" :  [''],
-}); */}
+ 
 
 const [stackData, setstackData] = useState({
   "skills": [''], // Initial value as an array with an empty string
@@ -72,30 +138,7 @@ const [stackData, setstackData] = useState({
 });
 
 
-{/*useEffect(() => {
-  if (User) {
 
-    console.log('User updated:', User);
-
-    setProfileData(prevData => ({
-      ...prevData,
-      country: User.country || '',
-      bio: User.bio || '',
-      Name: User.Name || '',
-      phoneNo: User.phoneNo || '',
-    }));
-
-    setstackData(prevStackData => ({
-      ...prevStackData,
-      skills: User.skills.length > 0 ? User.skills : [''],
-      education: User.education.length > 0 ? User.education : [''],
-      projects: User.projects.length > 0 ? User.projects : [''],
-      achievments: User.achievments.length > 0 ? User.achievments : [''],
-      experience: User.experience.length > 0 ? User.experience : [''],
-      contacts: User.contacts.length > 0 ? User.contacts : [''],
-    }));
-  } 
-}, [User]); // Ensure this runs only when User changes */}
 
 
 
@@ -202,41 +245,7 @@ const addStackField = (field) => {
   }
 
 
-  const handleFileChange = (e) => {
-   if(!Isauth){
-    alert.error('kindly check your internet connection or login first to access this resource');
-   }
-    setSelectedFile(e.target.files[0]);
-    }
-
-
-
-
-    const convertToBase64 = (file) => {
-      return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onloadend = () => resolve(reader.result);
-        reader.onerror = (error) => reject(error);
-      });
-    };
   
-
-    const editimgHandler = async (e) => {
-      e.preventDefault(); // Prevent default form submission
-      if (!selectedFile) {
-        alert.error("Please select a file.");
-        return;
-      }
-  
-      const base64String = await convertToBase64(selectedFile);
-      console.log(base64String); // This is the base64 string, if you need it
-  
-      const formData = new FormData();
-      formData.append('file', selectedFile);
-  
-      dispatch(editDp(formData));
-    };
 
 useEffect(()=>{
 
@@ -264,9 +273,38 @@ if(errorr){
     <div className='mwork'>
       <h3>Change your Display picture</h3>
 <div className='dpchange'>
- <form method='post'  name='uploader'  encType='multipart/form-data'  onSubmit={editimgHandler}  className='form-img'>
+ <form method='post'  name='uploader'  encType='multipart/form-data'  onSubmit={editImgHandler}  className='form-img'>
 <input type="file" name="file" accept="image/*"  className='file-input'  onChange={handleFileChange}/> 
+
+ {src && (
+            <div className='image-container'>
+            
+
+            
+            <div style={{ position: 'relative', width: '100%', height: '400px' }}>
+              <Cropper
+                image={src}
+                crop={crop}
+                zoom={zoom}
+                aspect={1}
+                onCropChange={setCrop}
+                onZoomChange={setZoom}
+                onCropComplete={onCropComplete}
+              />
+            </div>
+          
+
+
+{croppedImageUrl && <img src={croppedImageUrl} alt="Cropped Image"  style={{ maxHeight: '23vmax', width: 'auto', display: 'block', margin: '0 auto' }}  />}
+
+            </div>
+
+
+          )}
+
+
 <button type='submit' className='editimgButton'> Upload</button>
+
 </form>
 </div>
 

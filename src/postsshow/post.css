@@ -9,113 +9,268 @@
 
 
 
-.post {
-    background: white;
-    border-radius: 1vmax; /* Rounded corners */
-    box-shadow: 0 0.4vmax 0.5vmax black; /* Subtle shadow */
-    margin: 2vmax auto; /* Spacing around the post */
-    padding: 2vmax; /* Inner padding */
-    max-width: 45vmax;
-    min-height: 10vmax;
-    transition: transform 0.3s;
-  }
-  
-  .post:hover {
-    transform: scale(1.02);
-    box-shadow: 0 03vmax 5vmax black; /* Subtle shadow */
-  }
-  
-  .user-details {
-    display: flex;
-    align-items: center;
-    margin-bottom: 1.5vmax; /* Spacing below user details */
-  }
-  
-  .user-img {
-    border-radius: 50%;
-    width: 3.5vmax; /* Increased size for user image */
-    height: 3.5vmax; /* Increased size for user image */
-    margin-right: 1vmax;
-    border: 1px solid orangered;
-    object-fit: cover; /* Maintain aspect ratio */
-  }
-  
-  h3 {
-    font-size: 1.4vmax; /* Reduced font size for username */
-    color: #333;
-    font-family:'Open Sans' ;
-  }
-  
-  .post-caption {
-    margin-bottom: 1vmax; /* Spacing below caption */
-    font-family: 'Merriweather';
-    font-size: 1.4vmax;
-  }
-  
-  .links {
-    color: #121212;
-    font-size: 1vmax; /* Link text size */
-  }
-  
-  .links a {
-    text-decoration: none; /* Remove underline */
-  }
-  
-  .links a:hover {
-    text-decoration: underline; /* Underline on hover */
-  }
-  
-  .cat {
-    margin-top: 1vmax; /* Spacing above categories */
-    font-size: 1vmax; /* Category text size */
-    color: #666; /* Color for categories */
-  }
+.post-card {
+  background: #fbf8f8; /* Black background */
+  border-radius: 1.5vmax;
+  box-shadow: 0 2vmax 5vmax rgba(0, 0, 0, 0.3);
+  padding: 2vmax;
+  font-family: 'Roboto';
+  margin: 2vmax 0;
+  max-width: 50vmax;
+  transition: transform 0.2s;
+  color: #fff; /* White text for contrast */
+}
 
-  .cat p{
-    color:#666;
-  }
-  
-  .product-img {
-    margin-top: 1.5vmax; /* Spacing above media */
-    display: flex;
-    justify-content: center; /* Center media */
+.post-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5vmax 5vmax rgba(0, 0, 0, 0.3);
+}
 
-     /* Center vertically */
-    flex-direction: column; /* Stack images/videos */
+.user-details {
+  display: flex;
+  align-items: center;
+  font-size: 1.3vmax;
+  margin-bottom: 1vmax;
+}
+
+.user-img {
+  border-radius: 50%;
+  width: 3.5vmax;
+  height: 3.5vmax;
+  margin-right: 1vmax;
+  border: 2px solid rgb(4, 4, 4); /* Orange-red border */
+}
+
+.post-caption {
+  margin-bottom: 1.5vmax;
+  font-family: 'Open Sans';
+}
+
+.categories {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 0.5vmax;
+}
+
+.category {
+   /* Orange-red background for categories */
+  border-radius: 1vmax;
+  padding: 0.5vmax 1vmax;
+  margin-right: 0.5vmax;
+  font-size: 1vmax;
+  color: rgb(245, 239, 239);
+  background-color: rgb(87, 86, 86);
+}
+
+.product-img {
+  margin: 1.5vmax 0;
+  border-radius: 1vmax; /* Rounded corners */
+  display: flex; /* Align items horizontally */
+  justify-content: center; /* Center the images */
+}
+
+.carousel {
+  max-height: 30vmax; /* Set max height for carousel */
+  width: 100%; /* Full width */
+}
+
+.carousel-image {
+  height: 30vmax; /* Set height to 30vmax */
+  width: auto; /* Auto width to maintain aspect ratio */
+  border-radius: 1vmax; /* Rounded corners */
+  box-shadow: 0 2vmax 5vmax rgba(0, 0, 0, 0.2); /* Shadow for Instagram effect */
+  object-fit: cover; /* Maintain aspect ratio without overflow */
+}
+
+.like-comm {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1.5vmax;
+}
+
+.like-icon {
+  font-size: 2vmax;
+  cursor: pointer;
+  color: #ccc; /* Default color */
+  transition: color 0.2s;
+}
+
+.like-icon h2{
+  font-size: 1.1vmax;
+}
+
+.like-icon.liked {
+  color: orangered; /* Color when liked */
+}
+
+.post-date {
+  text-align: right;
+  font-size: 0.9vmax;
+  color: #ccc; /* Light gray for date */
+  margin-top: 1vmax;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.post-card {
+  background: #fff; /* White background */
+  border-radius: 1.5vmax;
+  box-shadow: 0 2vmax 5vmax rgba(0, 0, 0, 0.2);
+  padding: 2vmax;
+  margin: 2vmax auto; /* Center the card */
+  max-width: 49vmax; /* Fixed width */
+  transition: transform 0.2s;
+  color: #333; /* Dark text for contrast */
+}
+
+.post-card:hover {
+  transform: translateY(-2px);
+}
+
+.user-details {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1vmax;
+}
+
+.user-img {
+  border-radius: 50%;
+  width: 5vmax;
+  height: 5vmax;
+  margin-right: 1vmax;
+  border: 2px solid orangered; /* Orange-red border */
+}
+
+.post-caption {
+  margin-bottom: 1.5vmax;
+}
+
+.categories {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 0.5vmax;
+}
+
+.category {
+  background: orangered; /* Orange-red background for categories */
+  border-radius: 1vmax;
+  padding: 0.5vmax 1vmax;
+  margin-right: 0.5vmax;
+  font-size: 1.2vmax;
+  color: #fff; /* White text for category */
+}
+
+.product-img {
+  margin: 1.5vmax 0;
+  border-radius: 1vmax; /* Rounded corners */
+  display: flex; /* Align items horizontally */
+  justify-content: center; /* Center the images */
+  overflow: hidden; /* Prevent overflow */
+  height: auto; /* Auto height to fit the content */
+}
+
+.carousel {
+  width: 100%; /* Full width */
+}
+
+.carousel-image {
+  max-width: 100%; /* Ensure image doesn't exceed container width */
+  max-height: 30vmax; /* Max height for larger images */
+  height: auto; /* Maintain aspect ratio */
+  border-radius: 1vmax; /* Rounded corners */
+  box-shadow: 0 2vmax 5vmax rgba(0, 0, 0, 0.2); /* Shadow for Instagram effect */
+  object-fit: cover; /* Maintain aspect ratio without distortion */
+}
+
+/* Media Query for Mobile View */
+@media (max-width: 768px) {
+  .carousel-image {
+      max-height: 25vmax; /* Adjust height for smaller screens */
   }
-  
-  .carousel-image, .carousel-video {
-   width: 30vmax; /* Responsive full width */
-   height: 30vmax; /* Maintain aspect ratio */
-   margin: auto;
-   
-    border-radius: 1vmax; /* Rounded corners for media */
-    /* Margin above and below media */
-  }
-  
-  .like-comm {
-    display: flex;
-    align-items: center;
-    justify-content: space-between; /* Space between elements */
-    margin-top: 1.1vmax; /* Spacing above like section */
-  }
-  
-  .like {
-    font-size: 1.7vmax; /* Size of like button */
-    cursor: pointer; /* Pointer on hover */
-    transition: color 0.3s; /* Transition for color change */
-  }
-  
-  .like:hover {
-    color: orangered; /* Color change on hover */
-  }
-  
-  
-  
-  h6 {
-    color: #999; /* Color for date */
-    font-size: 1vmax; /* Size for date */
-    text-align: right; /* Align date to the right */
-    margin-top: 1vmax; /* Spacing above date */
-  }
-  
+}
+
+.like-comm {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1.5vmax;
+}
+
+.like-icon {
+  font-size: 2vmax;
+  cursor: pointer;
+  color: #ccc; /* Default color */
+  transition: color 0.2s;
+}
+
+.like-icon.liked {
+  color: orangered; /* Color when liked */
+}
+
+.post-date {
+  text-align: right;
+  font-size: 0.9vmax;
+  color: #777; /* Light gray for date */
+  margin-top: 1vmax;
+}

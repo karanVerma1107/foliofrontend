@@ -7,7 +7,7 @@
 }
 
 .dpchange{
-    width: 95%;
+    min-width: 95%;
    min-height: 5vmax;
     border-bottom: 1px solid black;
 
@@ -17,12 +17,13 @@
 }
 
 .form-img{
-    width: 95%;
+    min-width: 95%;
     min-height: 5vmax;
 
  
      display: flex;
-     flex-direction: row;
+     flex-direction: column;
+     justify-content: center;
      align-items: center;
 }
 
@@ -299,4 +300,31 @@ margin-bottom: 1vmax;
 
 .clearOg:active {
     transform: scale(0.95); /* Slightly decrease size when active */
+}
+
+
+
+
+
+.image-container{
+    width: 90%;
+    z-index: 1;
+    height: 90%;
+    background-color: aliceblue;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    overflow: visible;
+
+}
+
+
+
+
+.editimgButton{
+    margin: 1.3vmax, auto;
+    width: 70% ;
+
+    margin-top: 1.8vmax;
+
 }

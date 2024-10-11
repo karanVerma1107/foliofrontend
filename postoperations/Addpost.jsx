@@ -1,137 +1,143 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import './addpost.css';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { addApostAction } from '../src/actions/postsaction';
-import { useAlert } from 'react-alert';
-import Loading from '../src/loading';
+import Cropper from 'react-easy-crop';
+import getCroppedImg from '../profile/getCropping';
 
-const Addpost = () => {
-    const dispatch = useDispatch();
-    const alert = useAlert();
-    const { success, loading, error, message } = useSelector(state => state.addPost);
+const AddPost = () => {
+
+const dispatch = useDispatch();
+
+
 
     const [postData, setPostData] = useState({
         Category: '',
         Caption: '',
-        Links: []
+        Links: [],
     });
-
-    const [fileImage, setFileImage] = useState([]);
-
-    const handleCategoryChange = (event) => {
-        const category = event.target.value;
-        setPostData({ 
-            ...postData, 
-            Category: category 
-        });
-    };
+    const [imageFiles, setImageFiles] = useState([]);
+    const [videoFiles, setVideoFiles] = useState([]);
+    const [src, setSrc] = useState(null);
+    const [crop, setCrop] = useState({ x: 0, y: 0 });
+    const [zoom, setZoom] = useState(1);
+    const [croppedImageUrl, setCroppedImageUrl] = useState(null);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setPostData({
-            ...postData,
-            [name]: value,
-        });
+        setPostData({ ...postData, [name]: value });
     };
 
     const handleLinksChange = (e) => {
-        const linksInput = e.target.value.split(','); // Split by comma
-        const linksArray = linksInput.map(link => link.trim()).filter(link => link); // Clean up and filter out empty links
-        setPostData({
-            ...postData,
-            Links: linksArray // Update Links as an array
-        });
+        const linksArray = e.target.value.split(',').map(link => link.trim()).filter(link => link);
+        setPostData({ ...postData, Links: linksArray });
     };
 
-    const handleFileChange = (e) => {
-        const files = e.target.files; // Get the FileList
-        const filesArray = Array.from(files); // Convert FileList to an array
-        setFileImage(filesArray);
+    const handleImageChange = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setSrc(reader.result);
+            };
+            reader.readAsDataURL(file);
+        }
     };
+
 
     const handleVideoChange = (e) => {
-        const files = e.target.files;
-        const filesArray = Array.from(files);
-        setFileImage(prevVideos => [...prevVideos, ...filesArray]);
+        setVideoFiles(Array.from(e.target.files));
     };
+
+    const getCroppedImage = useCallback(async () => {
+        if (!src) return;
+        try {
+            const croppedImg = await getCroppedImg(src, { width: 800, height: 800 }); // Adjust size as needed
+            setCroppedImageUrl(croppedImg);
+        } catch (error) {
+            console.error("Error cropping image:", error);
+        }
+    }, [src]);
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        
         const formData = new FormData();
+
         formData.append('Category', postData.Category);
         formData.append('Caption', postData.Caption);
-        postData.Links.forEach(link => formData.append('Links', link)); // Append each link
-        fileImage.forEach(file => formData.append('Files', file)); // Append each file
+        postData.Links.forEach(link => formData.append('Links', link));
+        
+        if (croppedImageUrl) {
+            formData.append('Files', croppedImageUrl); // Append the cropped image
+        }
+        videoFiles.forEach(file => formData.append('Files', file));
 
         dispatch(addApostAction(formData));
-
-        alert.show('posting video may take some time');
     };
-
-    useEffect(()=>{
-       if(success){
-        alert.success(message);
-       }
-
-       if(error){
-        alert.error(error);
-       }
-
-if(loading){
-    return<>
-    <div className='contant'>
-        <Loading/>
-    </div>
-    </>
-}
-
-
-    },[success, error])
-
 
 
     return (
-        <div className='contant'>
-            <form className='post-form' onSubmit={handleSubmit}>
-                <h2>Create a New Post</h2>
+        <form className='add-post-form' onSubmit={handleSubmit}>
+            <h2>Create a New Post</h2>
 
-                <div className='form-group'>
-                    <label htmlFor='category'>Category:</label>
-                    <select id='category' name='Category' required value={postData.Category} onChange={handleCategoryChange}>
-                        <option value='' disabled>Select category</option>
-                        <option value='Research'>Research</option>
-                        <option value='Project'>Project</option>
-                        <option value='Blog'>Blog</option>
-                    </select>
-                </div>
+            <div className='form-group'>
+                <label htmlFor='category'>Category:</label>
+                <select id='category' name='Category' required value={postData.Category} onChange={handleChange}>
+                    <option value='' disabled>Select category</option>
+                    <option value='Research'>Research</option>
+                    <option value='Project'>Project</option>
+                    <option value='Blog'>Blog</option>
+                </select>
+            </div>
 
-                <div className='form-group'>
-                    <label htmlFor='caption'>Caption:</label>
-                    <textarea id='caption' name='Caption' placeholder='Enter your caption' value={postData.Caption} required onChange={handleChange}></textarea>
-                </div>
+            <div className='form-group'>
+                <label htmlFor='caption'>Caption:</label>
+                <textarea id='caption' name='Caption' placeholder='Enter your caption' value={postData.Caption} required onChange={handleChange}></textarea>
+            </div>
 
-                <div className='form-group'>
-                    <label htmlFor='links'>Links:</label>
-                    <input type='text' id='links' placeholder='Enter URLs separated by commas (optional)' onChange={handleLinksChange} />
-                </div>
+            <div className='form-group'>
+                <label htmlFor='links'>Links:</label>
+                <input 
+                    type='text' 
+                    id='links' 
+                    placeholder='Enter URLs separated by commas (optional)' 
+                    onChange={handleLinksChange} 
+                />
+            </div>
 
-                <div className='form-group'>
-                    <label htmlFor='image'>Upload Images:</label>
-                    <input type='file' id='image' name='Files' accept='image/*' multiple  onChange={handleFileChange} />
-                </div>
+            <div className='form-group'>
+                <label htmlFor='image'>Upload Images:</label>
+                <input type='file' accept="image/*" multiple className='file-input' onChange={handleImageChange} />
+
+                {src && (
+                    <div style={{ position: 'relative', width: '100%', height: '400px' }}>
+                        <Cropper
+                            image={src}
+                            crop={crop}
+                            zoom={zoom}
+                            aspect={1} // 1:1 for square
+                            onCropChange={setCrop}
+                            onZoomChange={setZoom}
+                            onCropComplete={getCroppedImage}
+                        />
+                    </div>
+                )}
+                {croppedImageUrl && (
+                    <img src={croppedImageUrl} alt="Cropped" style={{ maxWidth: '100%', height: 'auto' }} />
+                )}
 
 
-                <div className='form-group'>
-                    <label htmlFor='video'>Upload Videos:</label>
-                    <input type='file' id='video' name='Videos' accept='video/*' multiple onChange={handleVideoChange} />
-                    
-                </div>
+            </div>
 
-                <button type='submit' className='submit-btn'>Submit Post</button>
-            </form>
-        </div>
+            <div className='form-group'>
+                <label htmlFor='video'>Upload Videos:</label>
+                <input type='file' accept="video/*" multiple className='file-input' onChange={handleVideoChange} />
+            </div>
+
+            <button type='submit' className='submit-btn'>Submit Post</button>
+        </form>
     );
-}
+};
 
-export default Addpost;
+export default AddPost;
