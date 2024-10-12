@@ -204,7 +204,7 @@
   width: 3.5vmax;
   height: 3.5vmax;
   margin-right: 1vmax;
-  border: 2px solid orangered; /* Orange-red border */
+  border: 1px solid rgb(70, 69, 69); /* Orange-red border */
 }
 
 .post-caption {
@@ -335,6 +335,15 @@
 
 
 
+.post-date{
+  display: flex;
+  align-items: center;
+}
+
+.post-date p{
+
+  border-bottom:1.1px solid grey ;
+}
 
 
 
@@ -351,3 +360,348 @@
     font-size: 1.3vmax;
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.like-comm {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1.5vmax;
+}
+
+.like-icon {
+  font-size: 2vmax;
+  cursor: pointer;
+  color: #ccc; /* Default color */
+  transition: color 0.2s;
+}
+
+.like-icon.liked {
+  color: orangered; /* Color when liked */
+}
+
+.comment-toggle {
+  cursor: pointer;
+  color: orangered;
+  margin-left: 10px;
+  font-size: 1.2vmax;
+}
+
+.comment-section {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1vmax;
+  transition: height 0.2s ease;
+}
+
+.comment-input {
+  border: 1px solid gray;
+  padding: 0.5vmax;
+  border-radius: 5px;
+  margin-bottom: 0.5vmax;
+  width: 100%;
+}
+
+.add-comment-btn {
+  background-color: orangered;
+  color: white;
+  border: none;
+  padding: 0.5vmax 1vmax;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.add-comment-btn:hover {
+  background-color: darkorange;
+}
+
+
+.like{
+  display: flex;
+  flex-direction: row;
+
+}
+
+.like h2{
+  margin: auto 1vmax;
+}
+
+.like {
+  display: flex;
+  align-items: center; /* Center items vertically */
+  margin-top: 1.1vmax; /* Adjust spacing as needed */
+}
+
+.like-icon {
+  font-size: 2vmax;
+  cursor: pointer;
+  color: #ccc; /* Default color */
+  transition: color 0.2s;
+  margin-right: 7px; /* Add space between icon and star count */
+}
+
+.like-icon.liked {
+  color: orangered; /* Color when liked */
+}
+
+h2 {
+  margin: 0; /* Remove default margin */
+  font-size: 1.5vmax; /* Ensure size is consistent */
+  color: black; /* Adjust color as needed */
+}
+
+
+.fle{
+  font-size: 1vmax;
+  color: #777;
+  font-weight: 800;
+}
+
+
+
+
+.comment-section {
+  margin-top: 1rem;
+}
+
+.comments-list {
+  max-height: 200px; /* Optional: limit height */
+  overflow-y: auto; /* Scroll if too many comments */
+  margin-bottom: 1rem; /* Space between comments and input */
+}
+
+.comment-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem; /* Space between comments */
+}
+
+.comment-user-img {
+  width: 2vmax; /* Circle size */
+  height: 2vmax; /* Circle size */
+  border-radius: 50%; /* Make it circular */
+  margin-right: 0.5rem; /* Space between image and text */
+}
+
+.comment-content {
+  flex: 1; /* Allow content to take available space */
+}
+
+.comment-content span{
+  font-size: 0.9vmax;
+  color: #323131;
+}
+
+
+
+@media(max-width: 786px){
+  .comment-content span{
+    font-size: 1.1vmax;
+    color: #323131;
+  }
+  
+}
+
+
+.comment-item {
+  display: flex;
+  flex-direction: column; /* Stack items vertically */
+  padding: 10px; /* Padding inside the comment box */
+  border-bottom: 1px solid #eee; /* Subtle border for separation */
+  margin-bottom: 10px; /* Space between comments */
+  background-color: #ffffff; /* White background for comments */
+  align-items: flex-start; /* Align items to the left */
+}
+
+.comuser {
+  display: flex; /* Align image and username in a row */
+  align-items: center; /* Center align vertically */
+  margin-bottom: 5px; /* Space below username */
+}
+
+.comment-user-img {
+  width: 2vmax; /* Size of user image */
+  height: 2vmax; /* Size of user image */
+  border-radius: 50%; /* Circular image */
+  margin-right: 10px; /* Space between image and username */
+}
+
+.comment-username {
+  font-weight: bold; /* Bold for username */
+  font-size: 1.3vmax; /* Font size for username */
+  margin: 0; /* Remove default margin */
+}
+
+.comment-text {
+  font-size: 1.3vmax; /* Font size for comment text */
+  margin: 5px 0; /* Margin for spacing */
+  color: #333; /* Dark text color */
+  text-align: left; /* Align text to the left */
+}
+
+.comment-timestamp {
+  font-size: 1.1vmax; /* Smaller font for timestamp */
+  color:#323131;; /* Lighter color for timestamp */
+  margin-top: 5px; /* Space above the timestamp */
+  align-self: flex-start; /* Align timestamp to the left */
+}
+
+
+@media(max-width: 786px){
+
+  .comment-text {
+    font-size: 1.5vmax; /* Font size for comment text */
+    margin: 5px 0; /* Margin for spacing */
+    color: #333; /* Dark text color */
+    text-align: left; /* Align text to the left */
+  }
+
+  .comment-content span{
+    font-size: 1.1vmax;
+    color: #323131;
+  }
+
+  .comment-timestamp {
+    font-size: 1.1vmax; /* Smaller font for timestamp */
+    color:#323131;; /* Lighter color for timestamp */
+    margin-top: 5px; /* Space above the timestamp */
+    align-self: flex-start; /* Align timestamp to the left */
+  }
+  
+
+
+
+}
+
+
+
+.comment-actions {
+  display: flex;
+  justify-content: space-between; /* Space between stars and reply button */
+  align-items: center; /* Center align vertically */
+}
+
+.star-icon {
+  color: lightslategray; /* Color for star icon */
+}
+
+.stars-count {
+  margin-left: 5px; /* Space between star icon and count */
+}
+
+
+.reply-button {
+  background: none;
+  border: none;
+  color: orangered; /* Bootstrap primary color */
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.reply-section {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+}
+
+.reply-input {
+  margin-bottom: 5px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.add-reply-btn {
+  background-color: none;
+  color:  white;
+  border: none;
+  font-weight: 300;
+  background-color: orangered;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+@media(max-width: 786px){
+
+  .comment-text {
+    font-size: 1.5vmax; /* Font size for comment text */
+    margin: 5px 0; /* Margin for spacing */
+    color: #333; /* Dark text color */
+    text-align: left; /* Align text to the left */
+  }
+
+  .comment-content span{
+    font-size: 1.1vmax;
+    color: #323131;
+  }
+
+  .comment-timestamp {
+    font-size: 1.1vmax; /* Smaller font for timestamp */
+    color:#323131;; /* Lighter color for timestamp */
+    margin-top: 5px; /* Space above the timestamp */
+    align-self: flex-start; /* Align timestamp to the left */
+  }
+  
+
+  .add-reply-btn {
+    background-color: none;
+    color:  white;
+    border: none;
+    font-weight: 300;
+    background-color: orangered;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 1vmax;
+    cursor: pointer;
+  }
+  
+  .reply-input {
+    margin-bottom: 5px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    font-size: 1.1vmax;
+    border-radius: 4px;
+  }
+
+  .reply-button {
+    background: none;
+    border: none;
+    color: orangered; /* Bootstrap primary color */
+    cursor: pointer;
+    font-size: 1.3vmax;
+  }
+
+.star-icon {
+  color: lightslategray; /* Color for star icon */
+  font-size: 1.3vmax;
+}
+
+
+}
+

@@ -1,5 +1,5 @@
 .mwork{
-    width: 90%;
+    width: 82%;
     min-height: 40vmax;
      display: flex;
      flex-direction: column;
@@ -53,14 +53,15 @@
   
 
   .editimgButton {
-    padding: 10px 20px; /* Padding for button */
+    padding: 6px 14px; /* Padding for button */
     background-color: #ff5722; /* Main orange-red color */
     color: white; /* Text color */
     margin-left: 1.2vmax;
+    margin-bottom: 1vmax;
     border: none; /* No border */
     border-radius: 5px; /* Rounded corners */
     cursor: pointer; /* Pointer cursor on hover */
-    font-size: 1.4vmax; /* Font size */
+    font-size: 1.2vmax; /* Font size */
     transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transitions */
   }
   
@@ -77,7 +78,7 @@
 
 .edit-obj{
 
-    width: 95%;
+    width: 100%;
     min-height: 7vmax;
      border-bottom: 1px solid black;
  
@@ -89,7 +90,7 @@
 
 
 .edit-obj {
-    width: 90%; /* Slightly narrower width */
+    width: 96%; /* Slightly narrower width */
     max-width: 90%; /* Max width for larger screens */
     min-height: 5vmax; /* Set min height to make it more compact */
     border-bottom: 1px solid black;
@@ -102,7 +103,7 @@
 }
 
 .bj-form {
-    width: 80%; /* Use full width of the container */
+    width: 90%; /* Use full width of the container */
     margin-bottom: 1vmax; /* Spacing below the form */
     display: flex;
     flex-direction: column;

@@ -21,7 +21,7 @@ const [Name, setName] = useState('');
     const togglelogin = ()=>{
         setlogin(!login);
     }
-
+    
     
 
 
@@ -83,39 +83,23 @@ formData.append('email', email)
 
 dispatch(profileloader());
 
-      if(success){
-        alert.success(message);
-        setlotptog(!lotptog);
-      }else if(error){
-        alert.error(error);
-      }
+     
+const alerts = [
+  { condition: success, message: message, reset: () => setlotptog(true) },
+  { condition: error, message: error },
+  { condition: Success, message: Message },
+  { condition: Error, message: Error },
+  { condition: suucess, message: Meess, navigate: () => navigate('/username') },
+  { condition: errR, message: errR }
+];
 
-
-      if(Success){
-        alert.success(Message);
-      }else if(Error){
-        alert.error(Error);
-      }
-
-
-
-      if(suucess){
-        alert.success(Meessage);
-        setlotptog(!lotptog);
-      }else if(errorr){
-        alert.error(errorr)
-      }
-
-
-      if(suuS){
-        console.log('abe chal nhi raha');
-        alert.success(Meess);
-    
-        navigate('/username');
-        console.log('abe chal nhi raha');
-    }else if(errR){
-      alert.error(errR);
-    }
+alerts.forEach(({ condition, message, reset, navigate }) => {
+  if (condition) {
+      alert.success(message);
+      if (reset) reset();
+      if (navigate) navigate();
+  }
+});
 
 
     },[message, error, success, dispatch,Meess, errR,suuS, Meessage, errorr, suucess, Message,

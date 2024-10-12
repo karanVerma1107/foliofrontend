@@ -14,21 +14,27 @@ const Posts = () => {
 
     const dispatch = useDispatch();
 
-    
+   
 
 
 const {posts, loading} = useSelector(state=>state.posts);
 console.log("posts are: ", posts);
 useEffect(()=>{
-//dispatch(profileloader());  
+dispatch(profileloader());  
+console.log("Fetching posts");
 dispatch(allpostsaction());
 },[dispatch])
+
+const { User, Isauth } = useSelector(state => state.displayprofile);
+
+
+console.log("isauth status hereee:", Isauth)
   return (
     <div className='content'>
    {loading ? <><div className='load'><Loading/> </div></> : <>
     <div className='post-container'>
 {posts && posts.map((post)=>{
-    return <li key={post._id}><Post post={post} key={post._id}/></li>
+    return <li key={post._id}><Post post={post}    Isauth={Isauth}  User={User}    key={post._id}/></li>
 })}
     </div>
    </>}
