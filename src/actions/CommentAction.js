@@ -112,12 +112,12 @@ export const ADDcommAction = (Content, id)=> async(dispatch)=>{
         
         //  console.log("dta runned");
   
-          dispatch({type: GET_POST_COMMENT_REQUEST});
+          dispatch({type: GET_REPLY_REQUEST});
   
           const response = await axios.get(`/api/v1/getreplies/${postId}`);
   
-          const comment = response.data.replies;
+          const replies = response.data.replies;
   
-          dispatch({type: GET_POST_COMMENT_SUCCESS , payload: replies});
+          dispatch({type: GET_REPLY_SUCCESS , payload: replies});
   
       }

@@ -19,7 +19,7 @@ const Post = React.memo(({ post, User, Isauth }) => {
    // const { loading, message, error } = useSelector(state => state.like);
    
     const {error, Comment, success, message, loading} = useSelector(state => state.Addcomm);
-    const {replies, loadingss} = useSelector(state => state.getReply);
+    const {replies=[], loadingss} = useSelector(state => state.getReply);
     const { comments = [], loading: Loading } = useSelector(state => state.getComm);
 const { errorr, passed, info, loadings} = useSelector(state=>state.addReply)
     const [like, setLike] = useState(false);
@@ -93,7 +93,7 @@ const { errorr, passed, info, loadings} = useSelector(state=>state.addReply)
         }
     };
 
-
+    const [repliess, setReplies] = useState({}); // Mana
 
     const [showReplyInputs, setShowReplyInputs] = useState({});
     const [showReplyInput, setShowReplyInput] = useState(false);
@@ -304,7 +304,6 @@ const { errorr, passed, info, loadings} = useSelector(state=>state.addReply)
                                         <h4 className='comment-username'>{comment.user_name.userName}</h4>
                                     </div>
                                     <p className='comment-text'>{comment.content}</p>
-
                                     <div className='comment-actions'>
                                         <FaStar className='star-icon' />
                                         <span className='stars-count'>{comment.stars}</span>
@@ -319,20 +318,29 @@ const { errorr, passed, info, loadings} = useSelector(state=>state.addReply)
                                     </div>
 
                                     {showReplyInputs[comment._id] && (
-                                        <div className='reply-section'>
-                                            {replies[comment._id] && replies[comment._id].map(reply => (
-                                                <div key={reply._id} className='comment-item'> {/* Style like comment */}
-                                                    <div className='comuser'>
-                                                        <img src={reply.user_name.display_pic} className='comment-user-img' alt="User" />
-                                                        <h4 className='comment-username'>{reply.user_name.userName}</h4>
+                                        <div className='replies-section'>
+                                            {loadingss ? (
+                                                <p>Loading replies...</p>
+                                            ) : (
+                                                replies.map(reply => (
+                                                    <div key={reply._id} className='reply-item'> {/* Smaller size for replies */}
+                                                        <div className='comuser'>
+                                                            <img src={reply.user_name.display_pic} className='comment-user-img' alt="User" />
+                                                            <h4 className='reply-username'>{reply.user_name.userName}</h4>
+                                                        </div>
+                                                        <p className='reply-text'>{reply.content}</p>
                                                     </div>
-                                                    <p className='comment-text'>{reply.content}</p>
-                                                </div>
-                                            ))}
+                                                ))
+                                            )}
+                                        </div>
+                                    )}
+
+                                    {showReplyInputs[comment._id] && (
+                                        <div className='reply-input-section'>
                                             <input
                                                 type='text'
                                                 value={reply}
-                                                onChange={e => setReply(e.target.value)}
+                                                onChange={handleReplyChange}
                                                 placeholder='Type your reply...'
                                                 className='reply-input'
                                             />
@@ -348,14 +356,19 @@ const { errorr, passed, info, loadings} = useSelector(state=>state.addReply)
 
                     <input
                         type='text'
-                        value={comment}
-                        onChange={e => setComment(e.target.value)}
+                        value={comment.Content}
+                        onChange={handleCommentChange}
                         placeholder='Type your comment...'
                         className='comment-input'
                     />
                     <button onClick={handleAddComment} className='add-comment-btn'>Add Comment</button>
                 </div>
             )}
+
+
+
+
+
 
             <div className='post-date'>
             <p>{formatDateTime(post.createdAt)}</p>
