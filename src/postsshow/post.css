@@ -535,6 +535,7 @@ h2 {
   border-bottom: 1px solid #eee; /* Subtle border for separation */
   margin-bottom: 10px; /* Space between comments */
   background-color: #ffffff; /* White background for comments */
+  border-bottom: 1.2px solid gray;
   align-items: flex-start; /* Align items to the left */
 }
 
@@ -705,3 +706,49 @@ h2 {
 
 }
 
+
+
+
+.reply-section {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+}
+
+.reply-input {
+  margin-bottom: 5px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 0.9rem; /* Smaller font size for replies */
+}
+
+.add-reply-btn {
+  background-color: orangered;
+  color: white;
+  border: none;
+  font-weight: 300;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem; /* Smaller font size for replies */
+}
+
+.comment-item {
+  padding: 8px; /* Adjust padding for replies */
+  margin-bottom: 5px; /* Less space between replies */
+  border-bottom: 1px solid #eee; /* Keep the border for separation */
+}
+
+.comment-user-img {
+  width: 1.5rem; /* Smaller size for reply user image */
+  height: 1.5rem; /* Smaller size for reply user image */
+}
+
+.comment-username {
+  font-size: 1rem; /* Smaller font size for reply username */
+}
+
+.comment-text {
+  font-size: 0.9rem; /* Smaller font size for reply text */
+}

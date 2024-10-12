@@ -9,7 +9,8 @@ import { userdetailsfetch } from '../actions/authActions';
 
 
 
-import { ADDcommAction, getCommAction } from '../actions/CommentAction';
+import { ADDcommAction, getCommAction, ADDreplyAction, getreplyAction } from '../actions/CommentAction';
+//import { AddcommReducer } from '../reducers/commentReplyReducer';
 
 
 const Post = React.memo(({ post, User, Isauth }) => {
@@ -18,8 +19,9 @@ const Post = React.memo(({ post, User, Isauth }) => {
    // const { loading, message, error } = useSelector(state => state.like);
    
     const {error, Comment, success, message, loading} = useSelector(state => state.Addcomm);
+    const {replies, loadingss} = useSelector(state => state.getReply);
     const { comments = [], loading: Loading } = useSelector(state => state.getComm);
-
+const { errorr, passed, info, loadings} = useSelector(state=>state.addReply)
     const [like, setLike] = useState(false);
     const alert = useAlert();
 
@@ -93,19 +95,33 @@ const Post = React.memo(({ post, User, Isauth }) => {
 
 
 
-
+    const [showReplyInputs, setShowReplyInputs] = useState({});
     const [showReplyInput, setShowReplyInput] = useState(false);
     const [reply, setReply] = useState('');
+
+
+    const fetchReplies = async (commentId) => {
+        const response = await dispatch(getreplyAction(commentId));
+        if (response) {
+            setReplies(prev => ({ ...prev, [commentId]: response.replies }));
+        }
+    };
+
 
     const handleReplyChange = (e) => {
         setReply(e.target.value);
     };
 
-    const handleAddReply = () => {
-        // Logic to add reply goes here
-        console.log("Reply added:", reply);
-        setReply('');
-        setShowReplyInput(false);
+    const handleAddReply = async (commentId) => {
+        if (Isauth) {
+            await dispatch(ADDreplyAction(reply, commentId));
+            alert.info("Reply added!");
+            fetchReplies(commentId); // Fetch replies again after adding
+            setReply('');
+            setShowReplyInputs(prev => ({ ...prev, [commentId]: false }));
+        } else {
+            alert.show("Login to access this resource");
+        }
     };
 
 
@@ -206,7 +222,7 @@ const Post = React.memo(({ post, User, Isauth }) => {
                 </span>
             </div>
 
-            {showCommentInput && (
+         {/*   {showCommentInput && (
     <div className='comment-section'>
         <div className='comments-list'>
             {Loading ? (
@@ -221,13 +237,18 @@ const Post = React.memo(({ post, User, Isauth }) => {
     <p className='comment-text'>{comment.content}</p>
 
     <div className='comment-actions'>
-                    <FaStar className='star-icon' /> {/* Add star icon */}
+                    <FaStar className='star-icon' /> 
                     <span className='stars-count'>{comment.stars}</span>
-                    <button className='reply-button' onClick={() => setShowReplyInput(!showReplyInput)}>
+                    <button className='reply-button' onClick={() => {
+                                            setShowReplyInputs(prev => ({ ...prev, [comment._id]: !prev[comment._id] }));
+                                            if (!showReplyInputs[comment._id]) {
+                                                fetchReplies(comment._id); // Fetch replies when toggling
+                                            }
+                                        }}>
                         Replies
                     </button>
                 </div>
-      
+                
 
                 {showReplyInput && (
                 <div className='reply-section'>
@@ -238,7 +259,7 @@ const Post = React.memo(({ post, User, Isauth }) => {
                         placeholder='Type your reply...'
                         className='reply-input'
                     />
-                    <button onClick={handleAddReply} className='add-reply-btn'>Add Reply</button>
+                    <button onClick={()=>handleAddReply(comment._id)} className='add-reply-btn'>Add Reply</button>
                 </div>
             )}
 
@@ -263,7 +284,78 @@ const Post = React.memo(({ post, User, Isauth }) => {
     </div>
 )}
 
+*/}
 
+
+
+
+
+
+{showCommentInput && (
+                <div className='comment-section'>
+                    <div className='comments-list'>
+                        {Loading ? (
+                            <p>Loading comments...</p>
+                        ) : comments.length > 0 ? (
+                            comments.map(comment => (
+                                <div key={comment._id} className='comment-item'>
+                                    <div className='comuser'>
+                                        <img src={comment.user_name.display_pic} className='comment-user-img' alt="User" />
+                                        <h4 className='comment-username'>{comment.user_name.userName}</h4>
+                                    </div>
+                                    <p className='comment-text'>{comment.content}</p>
+
+                                    <div className='comment-actions'>
+                                        <FaStar className='star-icon' />
+                                        <span className='stars-count'>{comment.stars}</span>
+                                        <button className='reply-button' onClick={() => {
+                                            setShowReplyInputs(prev => ({ ...prev, [comment._id]: !prev[comment._id] }));
+                                            if (!showReplyInputs[comment._id]) {
+                                                fetchReplies(comment._id); // Fetch replies when toggling
+                                            }
+                                        }}>
+                                            Replies
+                                        </button>
+                                    </div>
+
+                                    {showReplyInputs[comment._id] && (
+                                        <div className='reply-section'>
+                                            {replies[comment._id] && replies[comment._id].map(reply => (
+                                                <div key={reply._id} className='comment-item'> {/* Style like comment */}
+                                                    <div className='comuser'>
+                                                        <img src={reply.user_name.display_pic} className='comment-user-img' alt="User" />
+                                                        <h4 className='comment-username'>{reply.user_name.userName}</h4>
+                                                    </div>
+                                                    <p className='comment-text'>{reply.content}</p>
+                                                </div>
+                                            ))}
+                                            <input
+                                                type='text'
+                                                value={reply}
+                                                onChange={e => setReply(e.target.value)}
+                                                placeholder='Type your reply...'
+                                                className='reply-input'
+                                            />
+                                            <button onClick={() => handleAddReply(comment._id)} className='add-reply-btn'>Add Reply</button>
+                                        </div>
+                                    )}
+                                </div>
+                            ))
+                        ) : (
+                            <p>No comments yet.</p>
+                        )}
+                    </div>
+
+                    <input
+                        type='text'
+                        value={comment}
+                        onChange={e => setComment(e.target.value)}
+                        placeholder='Type your comment...'
+                        className='comment-input'
+                    />
+                    <button onClick={handleAddComment} className='add-comment-btn'>Add Comment</button>
+                </div>
+            )}
 
             <div className='post-date'>
             <p>{formatDateTime(post.createdAt)}</p>

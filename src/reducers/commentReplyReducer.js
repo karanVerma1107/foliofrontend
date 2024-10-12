@@ -3,7 +3,12 @@ import { ADD_COMMENT_REQUEST,
     ADD_COMMENT_FAILURE,
     GET_POST_COMMENT_REQUEST,
     GET_POST_COMMENT_FAILURE,
-    GET_POST_COMMENT_SUCCESS
+    GET_POST_COMMENT_SUCCESS,
+    ADD_REPLY_REQUEST,
+    ADD_REPLY_FAILURE,
+    ADD_REPLY_SUCCESS,
+    GET_REPLY_REQUEST,
+    GET_REPLY_SUCCESS
  } from "../constants/commentAndreply";
 
 const initialState = {
@@ -62,6 +67,66 @@ export const getcommentsReducer = (state = { loading: false, comments: [] }, act
             return {
                 loading: false,
                 comments: action.payload,
+            };
+        default:
+            return state;
+    }
+};
+
+
+const initialstate2 = {
+    loadings: false,
+    passed: false,
+    errorr: null,
+    info: null
+
+}
+
+export const AddreplyReducer = (state = initialstate2, action)=>{
+    switch (action.type) {
+        case ADD_REPLY_REQUEST:
+            return {
+            loadings: true,
+            passed: false,
+            errorr: null,
+            info: null
+        }
+            
+        case ADD_REPLY_SUCCESS:
+            return{
+                loadings: false,
+            passed: true,
+            errorr: null,
+            info: action.payload.message
+            }
+
+        case ADD_COMMENT_FAILURE:
+            return{
+                loadings: false,
+                passed: false,
+                errorr: action.payload,
+                info: null
+            }    
+    
+        default:
+            return state
+    }
+} 
+
+
+
+
+export const getrepliesReducer = (state = { loadingss: false, replies: [] }, action) => {
+    switch (action.type) {
+        case GET_REPLY_REQUEST:
+            return {
+                ...state,
+                loadingss: true,
+            };
+        case GET_REPLY_SUCCESS:
+            return {
+                loadingss: false,
+                replies: action.payload,
             };
         default:
             return state;
