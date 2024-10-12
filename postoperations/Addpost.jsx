@@ -17,13 +17,16 @@ const {message, error, succes, loading} = useSelector(state=>state.addPost);
         Caption: '',
         Links: [],
     });
-    const [imageFiles, setImageFiles] = useState([]);
+
+  
+
+const [imageFiles, setImageFiles] = useState([]);
     const [videoFiles, setVideoFiles] = useState([]);
-    const [src, setSrc] = useState(null);
-    const [crop, setCrop] = useState({ x: 0, y: 0 });
-    const [zoom, setZoom] = useState(1);
-    const [croppedImageUrl, setCroppedImageUrl] = useState(null);
-    const [pixelCrop, setPixelCrop] = useState({ x: 0, y: 0, width: 0, height: 0 }); // Add this line
+    const [srcs, setSrcs] = useState([]); // Array of sources for images
+    const [crops, setCrops] = useState([]); // Array for each crop
+    const [zooms, setZooms] = useState([]); // Array for each zoom
+    const [croppedImageUrls, setCroppedImageUrls] = useState([]); // Array of cropped images
+    const [pixelCrops, setPixelCrops] = useState([]); // Array for pixel crop dimensions
 
 
     const handleChange = (e) => {
@@ -36,82 +39,128 @@ const {message, error, succes, loading} = useSelector(state=>state.addPost);
         setPostData({ ...postData, Links: linksArray });
     };
 
-    const handleImageChange = (e) => {
-        const file = e.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onloadend = () => {
-                setSrc(reader.result);
-            };
-            reader.readAsDataURL(file);
-        }
-    };
+
+const handleImageChange = (e) => {
+    const files = Array.from(e.target.files);
+    setImageFiles(files);
+
+    const newSrcs = files.map(file => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        return new Promise(resolve => {
+            reader.onloadend = () => resolve(reader.result);
+        });
+    });
+
+    Promise.all(newSrcs).then(setSrcs);
+    setCrops(new Array(files.length).fill({ x: 0, y: 0 }));
+    setZooms(new Array(files.length).fill(1));
+    setCroppedImageUrls(new Array(files.length).fill(null));
+    setPixelCrops(new Array(files.length).fill({ x: 0, y: 0, width: 0, height: 0 }));
+};
+
+
+
+
 
 
     const handleVideoChange = (e) => {
         setVideoFiles(Array.from(e.target.files));
     };
 
-    const getCroppedImage = useCallback(async () => {
-        console.log("dimmensions of !src || pixelCrop.width <= 0 || pixelCrop.height <= 0",  pixelCrop.width, pixelCrop.height)
-        if (!src || pixelCrop.width <= 0 || pixelCrop.height <= 0) return; // Ensure pixelCrop has valid dimensions
+  
+  
+  
+
+
+    const getCroppedImage = useCallback(async (index) => {
+        const src = srcs[index];
+        const pixelCrop = pixelCrops[index];
+        
+        if (!src || pixelCrop.width <= 0 || pixelCrop.height <= 0) return;
+        
         try {
             const croppedImg = await getCroppedImg(src, pixelCrop);
-            setCroppedImageUrl(croppedImg);
+            setCroppedImageUrls(prev => {
+                const updated = [...prev];
+                updated[index] = croppedImg;
+                return updated;
+            });
         } catch (error) {
             console.error("Error cropping image:", error);
         }
-    }, [src, pixelCrop]); // Add pixelCrop as a dependency
+    }, [srcs, pixelCrops]);
 
-
-
-  {/*  const handleSubmit = (e) => {
-        e.preventDefault();
-        const formData = new FormData();
-
-        formData.append('Category', postData.Category);
-        formData.append('Caption', postData.Caption);
-        postData.Links.forEach(link => formData.append('Links', link));
-        
-        if (croppedImageUrl) {
-            formData.append('Files', croppedImageUrl); // Append the cropped image
-        }
-        videoFiles.forEach(file => formData.append('Files', file));
-
-        dispatch(addApostAction(formData));
+    const handleCropChange = (index) => (crop) => {
+        setCrops(prev => {
+            const updated = [...prev];
+            updated[index] = crop;
+            return updated;
+        });
     };
-*/}
+
+    const handleZoomChange = (index) => (zoom) => {
+        setZooms(prev => {
+            const updated = [...prev];
+            updated[index] = zoom;
+            return updated;
+        });
+    };
+
+
+    const handleCropComplete = (index) => (croppedArea, croppedAreaPixels) => {
+        setPixelCrops(prev => {
+            const updated = [...prev];
+            updated[index] = croppedAreaPixels;
+            return updated;
+        });
+        getCroppedImage(index);
+    };
+
+
+
+ 
+
+
+
+
+
+
 
 const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
 
-    // Append post data to formData
     formData.append('Category', postData.Category);
     formData.append('Caption', postData.Caption);
     postData.Links.forEach(link => formData.append('Links', link));
 
-    // Create an array to hold all files
     const files = [];
 
-    // If there's a cropped image, convert it to a blob and add it to files
-    if (croppedImageUrl) {
-        const response = await fetch(croppedImageUrl);
-        const blob = await response.blob();
-        const imageFile = new File([blob], 'croppedImage.png', { type: 'image/png' });
-        files.push(imageFile); // Add the image file to the files array
+    // Process cropped images
+    for (const croppedImageUrl of croppedImageUrls) {
+        if (croppedImageUrl) {
+            const response = await fetch(croppedImageUrl);
+            const blob = await response.blob();
+            const imageFile = new File([blob], 'croppedImage.png', { type: 'image/png' });
+            files.push(imageFile);
+        }
     }
 
     // Add video files to the files array
     videoFiles.forEach(file => files.push(file));
 
-    console.log('files are', files)
+    console.log('files are', files);
 
-    // Now dispatch the action with formData and files
     dispatch(addApostAction(formData, files));
-
-    alert.show("Uploading your post please wait")
+    alert.show("Uploading your post please wait");
 };
+
+
+
+
+
+
 
 useEffect(()=>{
 
@@ -123,7 +172,7 @@ if(error){
     alert.error(error);
 }
 
-},[succes, error])
+},[succes, error, loading])
 
 
     return (
@@ -160,29 +209,24 @@ if(error){
                 <input type='file' accept="image/jpeg, image/png, image/gif" multiple className='file-input' onChange={handleImageChange} />
 
 
-                {src && (
-                    <div style={{ position: 'relative', width: '100%', height: '400px' }}>
+                {srcs.map((src, index) => (
+                    <div key={index} style={{ position: 'relative', width: '100%', height: '400px' }}>
                         <Cropper
                             image={src}
-                            crop={crop}
-                            zoom={zoom}
+                            crop={crops[index]}
+                            zoom={zooms[index]}
                             aspect={1} // 1:1 for square
-                            onCropChange={setCrop}
-                            onZoomChange={setZoom}
-                            onCropComplete={(croppedArea, croppedAreaPixels) => {
-                                console.log('Cropped Area:', croppedArea);
-                                console.log('Cropped Area Pixels:', croppedAreaPixels);
-                                setPixelCrop(croppedAreaPixels); // Set pixelCrop state here
-                                getCroppedImage(); // Call to get the cropped image
-                            }}
-                        
+                            onCropChange={handleCropChange(index)}
+                            onZoomChange={handleZoomChange(index)}
+                            onCropComplete={handleCropComplete(index)}
                         />
                     </div>
-                )}
-                {croppedImageUrl && (
-                    <img src={croppedImageUrl} alt="Cropped" style={{ maxWidth: '100%', height: 'auto' }} />
-                )}
+                ))}
 
+
+{croppedImageUrls.map((url, index) => url && (
+                    <img key={index} src={url} alt="Cropped" style={{ maxWidth: '100%', height: 'auto' }} />
+                ))}
 
             </div>
 
