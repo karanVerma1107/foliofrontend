@@ -100,6 +100,10 @@ const { errorr, passed, info, loadings} = useSelector(state=>state.addReply)
     const [reply, setReply] = useState('');
 
 
+    const [showReplyReplyInputs, setShowReplyReplyInputs] = useState({}); //
+    const [replyReply, setReplyReply] = useState({}); // For reply-replies
+
+
     const fetchReplies = async (commentId) => {
         const response = await dispatch(getreplyAction(commentId));
         if (response) {
@@ -110,6 +114,14 @@ const { errorr, passed, info, loadings} = useSelector(state=>state.addReply)
 
     const handleReplyChange = (e) => {
         setReply(e.target.value);
+    };
+
+
+    const handleReplyReplyChange = (replyId, value) => {
+        setReplyReply(prev => ({
+            ...prev,
+            [replyId]: value,
+        }));
     };
 
     const handleAddReply = async (commentId) => {
@@ -125,6 +137,17 @@ const { errorr, passed, info, loadings} = useSelector(state=>state.addReply)
     };
 
 
+    const handleAddReplyReply = async (commentId, replyId) => {
+        if (Isauth) {
+            await dispatch(ADDreplyAction(replyReply[replyId], replyId));
+            alert.info("Reply to reply added!");
+            fetchReplies(commentId); // Fetch replies again after adding
+            setReplyReply(prev => ({ ...prev, [replyId]: '' })); // Reset specific reply-reply input
+            setShowReplyReplyInputs(prev => ({ ...prev, [replyId]: false }));
+        } else {
+            alert.show("Login to access this resource");
+        }
+    };
 
 
     useEffect(() => {
@@ -222,73 +245,10 @@ const { errorr, passed, info, loadings} = useSelector(state=>state.addReply)
                 </span>
             </div>
 
-         {/*   {showCommentInput && (
-    <div className='comment-section'>
-        <div className='comments-list'>
-            {Loading ? (
-                <p>Loading comments...</p>
-            ) : comments.length > 0 ? (
-                comments.map(comment => (
-                    <div key={comment._id} className='comment-item'>
-    <div className='comuser'>
-        <img src={comment.user_name.display_pic} className='comment-user-img' alt="User" />
-        <h4 className='comment-username'>{comment.user_name.userName}</h4>
-    </div>
-    <p className='comment-text'>{comment.content}</p>
-
-    <div className='comment-actions'>
-                    <FaStar className='star-icon' /> 
-                    <span className='stars-count'>{comment.stars}</span>
-                    <button className='reply-button' onClick={() => {
-                                            setShowReplyInputs(prev => ({ ...prev, [comment._id]: !prev[comment._id] }));
-                                            if (!showReplyInputs[comment._id]) {
-                                                fetchReplies(comment._id); // Fetch replies when toggling
-                                            }
-                                        }}>
-                        Replies
-                    </button>
-                </div>
-                
-
-                {showReplyInput && (
-                <div className='reply-section'>
-                    <input
-                        type='text'
-                        value={reply}
-                        onChange={handleReplyChange}
-                        placeholder='Type your reply...'
-                        className='reply-input'
-                    />
-                    <button onClick={()=>handleAddReply(comment._id)} className='add-reply-btn'>Add Reply</button>
-                </div>
-            )}
-
-
-    <span className='comment-timestamp'>{formatDateTime(comment.createdAt)}</span>
-</div>
-
-                ))
-            ) : (
-                <p>No comments yet.</p>
-            )}
-        </div>
-
-        <input
-            type='text'
-            value={comment.Content} // Ensure this matches your state structure
-            onChange={handleCommentChange}
-            placeholder='Type your comment...'
-            className='comment-input'
-        />
-        <button onClick={handleAddComment} className='add-comment-btn'>Add Comment</button>
-    </div>
-)}
-
-*/}
 
 
 
-
+{/*
 
 
 {showCommentInput && (
@@ -323,8 +283,8 @@ const { errorr, passed, info, loadings} = useSelector(state=>state.addReply)
                                                 <p>Loading replies...</p>
                                             ) : (
                                                 replies.map(reply => (
-                                                    <div key={reply._id} className='reply-item'> {/* Smaller size for replies */}
-                                                        <div className='comuser'>
+                                                    <div key={reply._id} className='reply-item'> {/* Smaller size for replies *
+                                                        <div className=' replyU'>
                                                             <img src={reply.user_name.display_pic} className='comment-user-img' alt="User" />
                                                             <h4 className='reply-username'>{reply.user_name.userName}</h4>
                                                         </div>
@@ -366,7 +326,99 @@ const { errorr, passed, info, loadings} = useSelector(state=>state.addReply)
             )}
 
 
+*/}
 
+
+{showCommentInput && (
+    <div className='comment-section'>
+        <div className='comments-list'>
+            {Loading ? (
+                <p>Loading comments...</p>
+            ) : comments.length > 0 ? (
+                comments.map(comment => (
+                    <div key={comment._id} className='comment-item'>
+                        <div className='comuser'>
+                            <img src={comment.user_name.display_pic} className='comment-user-img' alt="User" />
+                            <h4 className='comment-username'>{comment.user_name.userName}</h4>
+                        </div>
+                        <p className='comment-text'>{comment.content}</p>
+                        <div className='comment-actions'>
+                            <FaStar className='star-icon' />
+                            <span className='stars-count'>{comment.stars}</span>
+                            <button className='reply-button' onClick={() => {
+                                setShowReplyInputs(prev => ({ ...prev, [comment._id]: !prev[comment._id] }));
+                                if (!showReplyInputs[comment._id]) {
+                                    fetchReplies(comment._id); // Fetch replies when toggling
+                                }
+                            }}>
+                                Replies
+                            </button>
+                        </div>
+                        <span className='comment-timestamp'>{formatDateTime(comment.createdAt)}</span>
+
+                        {showReplyInputs[comment._id] && (
+                            <div className='replies-section'>
+                                {loadingss ? (
+                                    <p>Loading replies...</p>
+                                ) : (
+                                    replies.map(reply => (
+                                        <div key={reply._id} className='reply-item'>
+                                            <div className='replyU'>
+                                                <img src={reply.user_name.display_pic} className='comment-user-img' alt="User" />
+                                                <h4 className='reply-username'>{reply.user_name.userName}</h4>
+                                            </div>
+                                            <p className='reply-text'>{reply.content}</p>
+                                            <div className='ips'>
+                                            <FaStar className='star-icon' />
+                                            <span className='stars-count'>{reply.stars}</span>
+                                            </div>
+                                            <span className='reply-timestamp'>{formatDateTime(reply.createdAt)}</span>
+                                            
+                                            <div className='add-reply-component'>
+                                                <input
+                                                    type='text'
+                                                    value= {replyReply[reply._id] || ''}
+                                                    onChange={(e) => handleReplyReplyChange(reply._id, e.target.value)}
+                                                    placeholder='Type your reply...'
+                                                className='reply-reply-input'
+                                                />
+                                                <button onClick={() => handleAddReply(comment._id)} className='add-reply-btn'>Add Reply</button>
+                                            </div>
+                                        </div>
+                                    ))
+                                )}
+                            </div>
+                        )}
+
+                        {showReplyInputs[comment._id] && (
+                            <div className='reply-input-section'>
+                                <input
+                                    type='text'
+                                    value={reply}
+                                    onChange={handleReplyChange}
+                                    placeholder='Type your reply...'
+                                    className='reply-input'
+                                />
+                                <button onClick={() => handleAddReply(comment._id)} className='add-reply-btn'>Add Reply</button>
+                            </div>
+                        )}
+                    </div>
+                ))
+            ) : (
+                <p>No comments yet.</p>
+            )}
+        </div>
+
+        <input
+            type='text'
+            value={comment.Content}
+            onChange={handleCommentChange}
+            placeholder='Type your comment...'
+            className='comment-input'
+        />
+        <button onClick={handleAddComment} className='add-comment-btn'>Add Comment</button>
+    </div>
+)}
 
 
 

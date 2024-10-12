@@ -712,7 +712,8 @@ h2 {
 .reply-section {
   display: flex;
   flex-direction: column;
-  margin-top: 10px;
+  margin-top: 1px;
+;
 }
 
 .reply-input {
@@ -736,7 +737,7 @@ h2 {
 
 .comment-item {
   padding: 8px; /* Adjust padding for replies */
-  margin-bottom: 5px; /* Less space between replies */
+  margin-bottom: 1px; /* Less space between replies */
   border-bottom: 1px solid #eee; /* Keep the border for separation */
 }
 
@@ -751,4 +752,213 @@ h2 {
 
 .comment-text {
   font-size: 0.9rem; /* Smaller font size for reply text */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.reply-item{
+  margin-left: 1.4vmax;
+  border: 1px solid gray;
+  display: flex;
+
+  flex-direction: column;
+  width: 140%;
+}
+
+.replyU{
+  height: auto;
+  margin-bottom: 0.1vmax;
+  display: flex; /* Align image and username in a row */
+  align-items: center; /* Center align vertically */
+  margin-bottom: 5px; /* Space below username */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.reply-item {
+  display: flex;
+  align-items: center;
+  margin-left: 40px; /* Indent to show it's a reply */
+  padding: 8px 0;
+  border-bottom: 1px solid #e6e6e6; /* Light border to separate replies */
+}
+
+.replyU {
+  display: flex;
+  align-items: center;
+}
+
+.reply-user-img {
+  width: 32px; /* Adjust size as necessary */
+  height: 32px; /* Adjust size as necessary */
+  border-radius: 50%;
+  margin-right: 8px; /* Space between image and text */
+}
+
+.reply-username {
+  font-weight: bold;
+  margin-right: 4px; /* Space between username and text */
+  color: #262626; /* Username color */
+}
+
+.reply-text {
+  margin-left: 10px; /* Space between username and reply text */
+  color: #3c4043; /* Reply text color */
+}
+
+.star-icon {
+  margin-left: 5px; /* Space before star icon */
+  color: #f9a825; /* Gold color for star */
+  font-size: 14px; /* Adjust size as necessary */
+}
+
+.stars-count {
+  margin-left: 2px; /* Space between star icon and stars count */
+  font-size: 12px; /* Adjust size as necessary */
+  color: #3c4043; /* Count color */
+}
+
+.reply-timestamp {
+  font-size: 12px; /* Smaller font for timestamp */
+  color: #a5a5a5; /* Light gray color for timestamp */
+  margin-left: 10px; /* Space before timestamp */
+}
+
+.add-reply-component {
+  display: flex;
+  align-items: center;
+  margin-top: 8px; /* Space above the reply input */
+}
+
+.reply-input {
+  flex: 1; /* Make input take full available space */
+  border: 1px solid #e6e6e6; /* Light border */
+  border-radius: 20px; /* Rounded corners */
+  padding: 8px; /* Padding for input */
+  font-size: 14px; /* Font size for input */
+  margin-right: 10px; /* Space between input and button */
+}
+
+.add-reply-btn {
+  background-color: orangered; /* Instagram blue */
+  color: white; /* Button text color */
+  border: none; /* Remove default border */
+  border-radius: 20px; /* Rounded corners */
+  padding: 6px 12px; /* Padding for button */
+  cursor: pointer; /* Pointer cursor on hover */
+}
+
+.add-reply-btn:hover {
+  background-color: rgb(255, 196, 0); /* Darker blue on hover */
+}
+
+
+
+.reply-item {
+  display: flex;
+  flex-direction: column; /* Stack items vertically */
+  margin-left: 5px; /* Indent to show it's a reply */
+  border:0.1px solid white;
+  width: 100%;
+  border-bottom: 1px solid #e6e6e6; /* Light border to separate replies */
+}
+
+.replyU {
+  display: flex;
+  align-items: center;
+  align-self: flex-start;
+  
+  margin-bottom: 1px; /* Space below user info */
+}
+
+.reply-user-img {
+  width: 2vmax; /* Adjust size as necessary */
+  height: 2vmax; /* Adjust size as necessary */
+  border-radius: 50%;
+  margin-right: 8px; /* Space between image and text */
+}
+
+.reply-username {
+  font-weight: bold;
+  color: #262626; /* Username color */
+}
+
+.reply-text {
+  margin: 0.01vmax 0; /* Space above and below reply text */
+  color: #3c4043; /* Reply text color */
+  align-self: flex-start;
+}
+
+.reply-details {
+  display: flex; /* Align star icon and timestamp horizontally */
+  align-items: center;
+  font-size: 12px; /* Smaller font for details */
+  color: #a5a5a5; /* Light gray color for details */
+}
+
+.star-icon {
+  margin-right: 4px; /* Space before star icon */
+  color: #424140; /* Gold color for star */
+}
+
+.stars-count {
+  margin-right: 10px; /* Space between star count and timestamp */
+}
+
+.reply-timestamp {
+  color: #a5a5a5; /* Light gray color for timestamp */
+  align-self: flex-start;
+}
+
+.add-reply-component {
+  display: flex;
+  align-items: center;
+  margin-top: 8px; /* Space above the reply input */
+}
+
+.reply-input {
+  flex: 1; /* Make input take full available space */
+  border: 1px solid #e6e6e6; /* Light border */
+  border-radius: 20px; /* Rounded corners */
+  padding: 8px; /* Padding for input */
+  font-size: 14px; /* Font size for input */
+  margin-right: 10px; /* Space between input and button */
+}
+
+.add-reply-btn {
+  background-color: orangered; /* Instagram blue */
+  color: white; /* Button text color */
+  border: none; /* Remove default border */
+  border-radius: 20px; /* Rounded corners */
+  padding: 6px 12px; /* Padding for button */
+  cursor: pointer; /* Pointer cursor on hover */
+}
+
+.add-reply-btn:hover {
+  background-color : darkgold; /* Darker blue on hover */
+}
+
+.ips{
+  display: flex;
+  flex-direction: row;
+  margin: 0.8vmax 0vmax;
+  align-self: flex-start;
 }
