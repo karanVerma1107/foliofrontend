@@ -112,7 +112,7 @@ const Post = React.memo(({ post, Isauth, User }) => {
                         <p>Loading comments...</p>
                     ) : (
                         comments.map((comment) => (
-                            <Comment key={comment._id} comment={comment} Isauth = {Isauth}  user={User}/>
+                            <Comment key={comment._id} comment={comment} Isauth = {Isauth}  user={User} post ={post}/>
                         ))
                     )}
                 </div>

@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useMention } from './MentionContext'; // Import the custom hook
+import { useMention } from './useMention'; // Import the custom hook
 
 // Custom hook to listen for global key events
 const useGlobalKeyListener = () => {

@@ -1,54 +1,68 @@
-.comment-card{
+
+
+
+.comment-card {
     display: flex;
     flex-direction: column;
-    border-top: 1px solid orangered;
-    margin: 1vmax auto;
+    padding: 5px; /* Adjust padding for a more compact look */
+    margin: 3px 0; /* Space between comments */
+    border: 1px solid #ddd; /* Optional: border for comments */
+    border-radius: 5px; /* Slightly rounded corners */
+    background-color: #f9f9f9; /* Background color */
+    max-width: 600px; /* Max width for the comment card */
 }
-
 
 .user-details {
     display: flex;
-    
-    align-items: center; /* Align items at the start */
-    margin-bottom: 0.1vmax; /* Reduced margin for compactness */
+    font-size: 1.3vmax;
+    align-items: center; /* Align image and username vertically */
+    margin-bottom: 5px; /* Space below user details */
+}
+
+.user-details h3{
+    font-size: 1.3vmax;
 }
 
 .user-img {
-    border-radius: 50%;
-    width: 2vmax;  /* User image size */
-    height: 2vmax; /* User image size */
-    margin-right: 0.5vmax; /* Space between image and username */
+    width: 30px; /* Smaller image size */
+    height: 30px; /* Keep image circular */
+    border-radius: 50%; /* Make the image circular */
+    margin-right: 10px; /* Space between image and username */
 }
 
 .comment-content {
-    font-size: 1.3vmax; /* Content font size */
-    color: #333;
-    
-    margin-bottom: 0.2vmax; /* Space between content and likes/timestamp */
+    font-size: 1.3vmax; /* Smaller font size for the content */
+    margin: 5px 0; /* Space above and below content */
 }
 
 .like-comm {
     display: flex;
-    align-items: center;
-    margin-bottom: 0.2vmax;
+    align-items: center; /* Center the icon and number */
+    cursor: pointer; /* Change cursor on hover */
 }
 
 .like-icon {
-    font-size: 1.5vmax; /* Size for the star icon */
-    margin-right: 0.5vmax; /* Space between icon and number */
+    color: #5d5c5b; /* Color for the like icon */
+    margin-right: 5px;
+    font-size: 1.2vmax; /* Space between icon and number */
 }
 
 .like-number {
-    font-size: 1.2vmax; /* Font size for like number */
-    color: #333; /* Color for like number */
+    font-size: 1.4vmax; /* Match the content font size */
 }
 
 .post-date {
-    text-align: left;
-    font-size: 0.9vmax;
-    color: #777; /* Light gray for date */
+    font-size: 12px; /* Smaller font size for the timestamp */
+    color: #888; /* Optional: lighter color for timestamp */
+    margin-top: 5px; /* Space above the timestamp */
+}
+
+.error-message {
+    color: red; /* Color for error messages */
+    margin-top: 5px; /* Space above the error message */
 }
 
 .liked{
     color:orangered;
 }
+

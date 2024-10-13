@@ -4,8 +4,8 @@ import { allpostsaction } from '../actions/postsaction.js'
 import './posts.css'
 import Post from './post.jsx';
 import Loading from '../loading.jsx';
-import { MentionProvider } from '../../mentionLogic/useMention.js';
-import useGlobalKeyListener from '../../mentionLogic/keyListener.js';
+import { MentionProvider } from '../../mentionLogic/useMention.jsx';
+import useGlobalKeyListener from '../../mentionLogic/keyListener.jsx';
 import MentionButton from '../../mentionLogic/mentionButton.jsx';
 import { profileloader } from '../actions/loadprofileAction.js';
 

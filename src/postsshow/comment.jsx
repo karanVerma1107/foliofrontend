@@ -6,7 +6,8 @@ import { likeComment } from '../actions/CommentAction';
 import { useDispatch, useSelector } from 'react-redux';
 import { useAlert } from 'react-alert';
 
-const Comment = ({ comment, Isauth }) => {
+
+const Comment = ({ comment, Isauth, post }) => {
     const alert = useAlert();
     const dispatch = useDispatch();
 
