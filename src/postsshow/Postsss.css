@@ -127,7 +127,7 @@
 
 .comment {
     font-size: 1.2vmax; /* Font size for comments */
-    color: #777; /* Color for comment */
+    color:   #333; /* Color for comment */
 }
 
 .post-date {
@@ -167,4 +167,30 @@
     .like>h2{
         font-size: 1.5vmax;
     }
+
+    .post-caption p {
+        font-size: 1.4vmax;
+        color: #555;
+    }
+
+    .post-links>h4{
+        font-size: 1.3vmax;
+    }
+     .post-links>p>span>a{
+        font-size: 1.3vmax;
+     }
+    .comment>span{
+        font-size: 1.4vmax;
+        color: #333;
+    }
+}
+
+
+.comments-section{
+    border-bottom: 1.2px solid #383636;
+}
+
+
+.liked{
+    color: orangered
 }

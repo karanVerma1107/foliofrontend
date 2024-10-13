@@ -7,7 +7,9 @@ import { ADD_COMMENT_REQUEST,
     ADD_REPLY_FAILURE,
     ADD_REPLY_SUCCESS,
     GET_REPLY_REQUEST,
-    GET_REPLY_SUCCESS
+    GET_REPLY_SUCCESS, LIKE_COMMENT_REQUEST,
+    LIKE_COMMENT_SUCCESS,
+    LIKE_COMMENT_FAILURE
  } from "../constants/commentAndreply";
 
 
@@ -84,10 +86,28 @@ export const ADDcommAction = (Content, id)=> async(dispatch)=>{
 
 
 
-
-
-
-
+      export const likeComment = (commentId) => {
+        return async (dispatch) => {
+            dispatch({ type: LIKE_COMMENT_REQUEST });
+            try {
+                const response = await axios.put(`/api/v1/likeComment/${commentId}`); // Adjust the endpoint if needed
+    
+                dispatch({
+                    type: LIKE_COMMENT_SUCCESS,
+                    payload: {
+                        message: response.data.message,
+                        newStars: response.data.newStars // Assuming the response contains new stars count
+                    }
+                });
+            } catch (error) {
+                console.log('Error liking comment:', error);
+                dispatch({
+                    type: LIKE_COMMENT_FAILURE,
+                    payload: error.response ? error.response.data.message : 'An error occurred'
+                });
+            }
+        };
+    };
 
 
 

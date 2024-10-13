@@ -7,7 +7,7 @@ import { isAvialablereducer, setuserreducer } from './reducers/setProfilereducer
 import { changeDPreducer, loadselfReducer } from './reducers/loadprofileReducer.js';
 import { editobjReducer } from './reducers/editProfileReducers.js';
 import { addApostreducer } from './reducers/makepostReducer.js';
-import { AddcommReducer, addReplyReducer, getcommentsReducer, getrepliesReducer } from './reducers/commentReplyReducer.js';
+import { AddcommReducer, addReplyReducer, commentLikeReducer, getcommentsReducer, getrepliesReducer } from './reducers/commentReplyReducer.js';
 
 
 
@@ -28,7 +28,8 @@ addPost: addApostreducer,
 Addcomm: AddcommReducer,
 getComm: getcommentsReducer,
 addReply: addReplyReducer,
-getReply: getrepliesReducer
+getReply: getrepliesReducer,
+Likecom:commentLikeReducer
 });
 
 

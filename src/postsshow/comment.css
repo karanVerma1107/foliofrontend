@@ -1,0 +1,54 @@
+.comment-card{
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid orangered;
+    margin: 1vmax auto;
+}
+
+
+.user-details {
+    display: flex;
+    
+    align-items: center; /* Align items at the start */
+    margin-bottom: 0.1vmax; /* Reduced margin for compactness */
+}
+
+.user-img {
+    border-radius: 50%;
+    width: 2vmax;  /* User image size */
+    height: 2vmax; /* User image size */
+    margin-right: 0.5vmax; /* Space between image and username */
+}
+
+.comment-content {
+    font-size: 1.3vmax; /* Content font size */
+    color: #333;
+    
+    margin-bottom: 0.2vmax; /* Space between content and likes/timestamp */
+}
+
+.like-comm {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.2vmax;
+}
+
+.like-icon {
+    font-size: 1.5vmax; /* Size for the star icon */
+    margin-right: 0.5vmax; /* Space between icon and number */
+}
+
+.like-number {
+    font-size: 1.2vmax; /* Font size for like number */
+    color: #333; /* Color for like number */
+}
+
+.post-date {
+    text-align: left;
+    font-size: 0.9vmax;
+    color: #777; /* Light gray for date */
+}
+
+.liked{
+    color:orangered;
+}

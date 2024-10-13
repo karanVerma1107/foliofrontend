@@ -171,3 +171,56 @@ export const DelcommentReducer = (state = initialState3, action) => {
     }
 };
 
+const initialState5 = {
+    likes: 0,
+    loading: false,
+    error: null,
+};
+
+const initialStateComment = {
+    comments: [],
+    loading: false,
+    error: null
+};
+
+export const commentLikeReducer = (state = initialStateComment, action) => {
+    switch (action.type) {
+        case 'LIKE_COMMENT_REQUEST':
+            return {
+                ...state,
+                loading: true,
+                error: null
+            };
+
+        case 'LIKE_COMMENT_SUCCESS':
+            return {
+                ...state,
+                loading: false,
+                comments: state.comments.map(comment => {
+                    if (comment._id === action.payload.commentId) {
+                        return {
+                            ...comment,
+                            stars: comment.no_of_peo_liked.includes(action.payload.userId) 
+                                ? comment.stars - 1 
+                                : comment.stars + 1,
+                            no_of_peo_liked: comment.no_of_peo_liked.includes(action.payload.userId) 
+                                ? comment.no_of_peo_liked.filter(id => id !== action.payload.userId) 
+                                : [...comment.no_of_peo_liked, action.payload.userId]
+                        };
+                    }
+                    return comment;
+                }),
+                message: action.payload.message
+            };
+
+        case 'LIKE_COMMENT_FAILURE':
+            return {
+                ...state,
+                loading: false,
+                error: action.payload
+            };
+
+        default:
+            return state;
+    }
+};
