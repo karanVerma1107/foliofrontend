@@ -1,8 +1,6 @@
-
-
-
 import React, { useState } from 'react';
-import './post.css';
+
+import './'
 import Carousel from 'react-material-ui-carousel';
 import { FaStar } from "react-icons/fa6";
 import { likedislike } from '../actions/postsaction';
@@ -71,7 +69,7 @@ const Post = React.memo(({ post, Isauth, User }) => {
                                 className='carousel-image'
                                 key={item}
                                 src={item}
-                                alt={`slide`}
+                                alt={slide}
                             />
                         ))}
                     </Carousel>
@@ -79,7 +77,7 @@ const Post = React.memo(({ post, Isauth, User }) => {
             )}
 
             <div className='like-comm'>
-                <div className='like'>``
+                <div className='like'>`
                 <FaStar onClick={handleLike} className={`like-icon ${like ? 'liked' : ''}`} />
                     <h2>{post.stars}</h2>
                 </div>
@@ -103,3 +101,5 @@ const Post = React.memo(({ post, Isauth, User }) => {
 });
 
 export default Post;
+
+
