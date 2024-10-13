@@ -962,3 +962,94 @@ h2 {
   margin: 0.8vmax 0vmax;
   align-self: flex-start;
 }
+
+
+.comment-timestamp{
+  font-size: 1.1vmax;
+  color: #a5a5a5; 
+}
+
+.reply-reply-input{
+  flex: 1; /* Make input take full available space */
+  border: 1px solid #e6e6e6; /* Light border */
+  border-radius: 20px; /* Rounded corners */
+  padding: 8px; /* Padding for input */
+  font-size: 14px; /* Font size for input */
+  margin-right: 10px; /* Space between input and button */
+}
+
+.add-reply-btn{
+  font-size: 1vmax;
+  font-weight: 500;
+}
+
+
+.replything{
+  border-bottom: 1px solid #424140;
+  display: block;
+  width: 100%;
+  margin-bottom: 1vmax;
+}
+
+.reply-text a{
+  font-style: normal;
+  color: orangered;
+  font-weight: 600;
+}
+
+.reply-text{
+  font-size: 1vmax;
+}
+
+@media(max-width: 750px){
+.reply-text{
+  font-size: 1.2vmax;
+}
+}
+.comment-timestamp{
+  font-size: 0.8vmax;
+}
+
+.text-xs{
+  font-size: 1vmax;
+  margin-top: 0.8vmax;
+  color: orangered;
+}
+
+@media(max-width: 750px){
+  .reply-text{
+    font-size: 1.2vmax;
+  }
+
+  .comment-timestamp{
+    font-size: 1vmax;
+  }
+  
+  }
+
+
+
+.reply-item{
+
+  display: flex;
+  flex-direction: column;
+}
+
+.repuser{
+  align-items: flex-start;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  background-color: #3c4043;
+}
+
+.reply-user-img{
+  width: 2.2vmax;
+  background-color: #bc2424;
+  height: 2,2vmax;
+  margin-right: 5px;
+}
+
+.repuser p{
+margin-bottom: 1vmax;
+}

@@ -8,7 +8,9 @@ import { ADD_COMMENT_REQUEST,
     ADD_REPLY_FAILURE,
     ADD_REPLY_SUCCESS,
     GET_REPLY_REQUEST,
-    GET_REPLY_SUCCESS
+    GET_REPLY_SUCCESS, DELETE_COMMENT_REQUEST,
+    DELETE_COMMENT_SUCCESS,
+    DELETE_COMMENT_FAILURE
  } from "../constants/commentAndreply";
 
 const initialState = {
@@ -74,46 +76,46 @@ export const getcommentsReducer = (state = { loading: false, comments: [] }, act
 };
 
 
-const initialstate2 = {
+const initialState2 = {
     loadings: false,
-    passed: false,
+    successs: false,
     errorr: null,
-    info: null
+    messages: null,
+};
 
-}
-
-export const AddreplyReducer = (state = initialstate2, action)=>{
+export const addReplyReducer = (state = initialState2, action) => {
     switch (action.type) {
         case ADD_REPLY_REQUEST:
             return {
-            loadings: true,
-            passed: false,
-            errorr: null,
-            info: null
-        }
-            
+                ...state,
+                loadings: true,
+                successs: false,
+                errorr: null,
+                messages: null,
+            };
+        
         case ADD_REPLY_SUCCESS:
-            return{
+            return {
+                ...state,
                 loadings: false,
-            passed: true,
-            errorr: null,
-            info: action.payload.message
-            }
+                successs: true,
+                errorr: null,
+                messages: action.payload.message,
+            };
 
-        case ADD_COMMENT_FAILURE:
-            return{
+        case ADD_REPLY_FAILURE:
+            return {
+                ...state,
                 loadings: false,
-                passed: false,
+                successs: false,
                 errorr: action.payload,
-                info: null
-            }    
+                messages: null,
+            };
     
         default:
-            return state
+            return state;
     }
-} 
-
-
+};
 
 
 export const getrepliesReducer = (state = { loadingss: false, replies: [] }, action) => {
@@ -132,3 +134,40 @@ export const getrepliesReducer = (state = { loadingss: false, replies: [] }, act
             return state;
     }
 };
+
+
+
+
+const initialState3 = {
+    comments: [],
+    loading: false,
+    error: null,
+    success: false,
+};
+
+export const DelcommentReducer = (state = initialState3, action) => {
+    switch (action.type) {
+        case DELETE_COMMENT_REQUEST:
+            return {
+                ...state,
+                loading: true,
+                error: null,
+            };
+        case DELETE_COMMENT_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                success: true,
+                comments: state.comments.filter(comment => comment._id !== action.payload.commentId), // Remove deleted comment
+            };
+        case DELETE_COMMENT_FAILURE:
+            return {
+                ...state,
+                loading: false,
+                error: action.payload,
+            };
+        default:
+            return state;
+    }
+};
+

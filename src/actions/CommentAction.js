@@ -47,49 +47,8 @@ export const ADDcommAction = (Content, id)=> async(dispatch)=>{
                 })
     
         
-       }
-    }
+       }}
 
-    export const ADDreplyAction = (Content, id)=> async(dispatch)=>{
-
-        console.log('id is,' , id);
-        try {
-            //console.log("postid and content is: ", id, Content);
-            dispatch({type:ADD_REPLY_REQUEST})
-    
-            const config = {headers: {'Content-Type' : 'application/json'}}
-    
-            const response = await axios.post(`/api/v1/replyComment/${id}`,{ Content: Content}, config);
-    
-            const message = response.data.message;
-            const reply = response.data.reply;
-    
-            dispatch({type: ADD_REPLY_SUCCESS, 
-                payload : {
-                    message,
-            
-                }
-            })
-    
-    
-    
-        } catch (error) {
-            let errormess
-            if(error.response && error.response.data){
-                errormess = error.response.data.message || 'something went wrong'
-            }else{
-                errormess = error.message
-            }
-            
-                    dispatch({type: ADD_REPLY_FAILURE,
-                        payload: errormess
-                    })
-        
-            
-           }
-        }
-    
-    
 
 
     export const getCommAction = (postId)=>async(dispatch)=>{
@@ -108,16 +67,58 @@ export const ADDcommAction = (Content, id)=> async(dispatch)=>{
 
 
 
-    export const getreplyAction = (postId)=>async(dispatch)=>{
+    export const getreplyAction = (commentId)=>async(dispatch)=>{
         
         //  console.log("dta runned");
   
           dispatch({type: GET_REPLY_REQUEST});
   
-          const response = await axios.get(`/api/v1/getreplies/${postId}`);
+          const response = await axios.get(`/api/v1/getreplies/${commentId}`);
   
           const replies = response.data.replies;
   
           dispatch({type: GET_REPLY_SUCCESS , payload: replies});
   
       }
+
+
+
+
+
+
+
+
+
+
+
+    
+
+export const replyToComment = (commentId, content, replyToId) => async (dispatch) => {
+    try {
+        dispatch({ type: ADD_COMMENT_REQUEST });
+
+        const config = { headers: { 'Content-Type': 'application/json' } };
+
+        const response = await axios.post('/api/v1/replyComment', { commentId, content, replyToId }, config);
+
+        const message = response.data.message;
+        const reply = response.data.reply;
+
+        dispatch({ 
+            type: ADD_COMMENT_SUCCESS, 
+            payload: { message, reply } 
+        });
+    } catch (error) {
+        let errormess;
+        if (error.response && error.response.data) {
+            errormess = error.response.data.message || 'Something went wrong';
+        } else {
+            errormess = error.message;
+        }
+
+        dispatch({ 
+            type: ADD_COMMENT_FAILURE, 
+            payload: errormess 
+        });
+    }
+};
