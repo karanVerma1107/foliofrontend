@@ -1,0 +1,170 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@100;400;700&family=Lexend:wght@100..900&family=Lilita+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap');
+
+.post-card {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    padding: 1vmax;
+    height: auto;
+    margin: 2vmax auto;
+    position: relative;
+    max-width: 45vmax;
+    border: 2px solid transparent;
+}
+
+.post-card:hover {
+    box-shadow: 0 12px 33px rgba(255, 69, 0, 0.7), 0 8px 23px black;
+    border: 2px solid orangered;
+    transform: scale(1);
+}
+
+.user-details {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1vmax;
+}
+
+.user-img {
+    border-radius: 50%;
+    width: 3.5vmax;
+    height: 3.5vmax;
+    margin-right: 0.5vmax;
+}
+
+.user-details h3 {
+    font-size: 1.5vmax;
+    color: #333;
+}
+
+.post-caption {
+    margin-bottom: 1vmax;
+}
+
+.post-caption p {
+    font-size: 1.2vmax;
+    color: #555;
+}
+
+.post-links h4 {
+    font-size: 1.1vmax;
+    color: #333;
+}
+
+.post-links a {
+    font-size: 1.1vmax;
+    color: #007BFF;
+    text-decoration: none;
+}
+
+.post-links a:hover {
+    text-decoration: underline;
+}
+
+.categories {
+    margin: 1vmax 0;
+}
+
+.category {
+    font-size: 1.1vmax;
+    color: #777;
+}
+
+.product-img {
+    margin: 1.5vmax 0;
+    border-radius: 1vmax; /* Rounded corners */
+    display: flex;
+    justify-content: center; /* Center the images */
+    overflow: hidden; /* Prevent overflow */
+    height: auto; /* Auto height to fit the content */
+}
+
+.carousel {
+    width: 100%; /* Full width */
+}
+
+.carousel-image {
+    width: 100%; /* Ensure image doesn't exceed container width */
+    max-height: 30vmax; /* Max height for larger images */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 1vmax; /* Rounded corners */
+    box-shadow: 0 2vmax 5vmax rgba(0, 0, 0, 0.2); /* Shadow for Instagram effect */
+    object-fit: cover; /* Maintain aspect ratio without distortion */
+}
+
+.like-comm {
+    display: flex;
+    align-items: center; /* Align items in the center */
+    justify-content: space-between;
+    margin-top: 1.5vmax;
+}
+
+.like {
+    display: flex;
+    align-items: center;
+}
+
+.like-icon {
+    font-size: 2vmax;
+    cursor: pointer;
+    color: #ccc; /* Default color */
+    transition: color 0.2s;
+    margin-right: 0.5vmax; /* Space between icon and number */
+}
+
+.like-icon.liked {
+    color: orangered; /* Color when liked */
+}
+
+.like-number {
+    font-size: 1.5vmax; /* Font size for like number */
+    color: #333; /* Color for like number */
+    margin-right: 1vmax; /* Space before comment */
+}
+
+.comment {
+    font-size: 1.2vmax; /* Font size for comments */
+    color: #777; /* Color for comment */
+}
+
+.post-date {
+    text-align: right;
+    font-size: 0.9vmax;
+    color: #777; /* Light gray for date */
+    margin-top: 1vmax;
+}
+
+.post-date p {
+    color: #434141; 
+}
+
+.Link {
+    font-size: 1vmax;
+}
+
+/* Media query for mobile devices */
+@media (max-width: 768px) {
+    .carousel-image {
+        max-height: 25vmax; /* Adjust height for smaller screens */
+    }
+  
+    .post-caption p {
+        font-size: 1.3vmax; /* Slightly smaller font size */
+    }
+  
+    .post-links a {
+        font-size: 1.1vmax; /* Consistent size */
+    }
+
+    .like-comm {
+        flex-direction: row; /* Keep items in a row */
+        justify-content: space-between; /* Space out items */
+    }
+
+    .like>h2{
+        font-size: 1.5vmax;
+    }
+}
