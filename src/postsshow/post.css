@@ -1053,3 +1053,17 @@ h2 {
 .repuser p{
 margin-bottom: 1vmax;
 }
+
+@media(max-width: 730px){
+.comment span{
+font-size: 1.4vmax;
+}
+}
+
+.categories{
+  margin-bottom: 0.6vmax;
+}
+
+.post-links{
+  margin-bottom: 0.3vmax;
+}
