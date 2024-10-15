@@ -58,7 +58,13 @@ export const AddcommReducer = (state = initialState, action)=>{
 }
 
 
-export const getcommentsReducer = (state = { loading: false, comments: [] }, action) => {
+
+const initialState1 = {
+    loading: false,
+    comments: [], // Store all comments as an array
+};
+
+export const getcommentsReducer = (state = initialState1, action) => {
     switch (action.type) {
         case GET_POST_COMMENT_REQUEST:
             return {
@@ -68,13 +74,12 @@ export const getcommentsReducer = (state = { loading: false, comments: [] }, act
         case GET_POST_COMMENT_SUCCESS:
             return {
                 loading: false,
-                comments: action.payload,
+                comments: action.payload || [], // Set comments directly from payload
             };
         default:
             return state;
     }
 };
-
 
 const initialState2 = {
     loadings: false,

@@ -17,12 +17,12 @@ import axios from "axios";
 
 export const ADDcommAction = (Content, id)=> async(dispatch)=>{
     try {
-        //console.log("postid and content is: ", id, Content);
+        console.log("postid and content is: ", id, Content);
         dispatch({type:ADD_COMMENT_REQUEST})
 
         const config = {headers: {'Content-Type' : 'application/json'}}
 
-        const response = await axios.post(`/api/v1/makeComment/${id}`,{ Content: Content}, config);
+        const response = await axios.post(`/api/v1/makeComment/${id}`,{ Content }, config);
 
         const message = response.data.message;
         const comment = response.data.Comment;
@@ -43,7 +43,7 @@ export const ADDcommAction = (Content, id)=> async(dispatch)=>{
         }else{
             errormess = error.message
         }
-        
+        s
                 dispatch({type: ADD_COMMENT_FAILURE,
                     payload: errormess
                 })
@@ -52,21 +52,22 @@ export const ADDcommAction = (Content, id)=> async(dispatch)=>{
        }}
 
 
-
-    export const getCommAction = (postId)=>async(dispatch)=>{
-        
-      //  console.log("dta runned");
-
-        dispatch({type: GET_POST_COMMENT_REQUEST});
-
-        const response = await axios.get(`/api/v1/getcomments/${postId}`);
-
-        const comment = response.data.comments;
-
-        dispatch({type: GET_POST_COMMENT_SUCCESS , payload: comment});
-
-    }
-
+       
+       export const getCommAction = (postId) => async (dispatch) => {
+           dispatch({ type: GET_POST_COMMENT_REQUEST });
+       
+           try {
+               const { data } = await axios.get(`/api/v1/getcomments/${postId}`);
+               dispatch({
+                   type: GET_POST_COMMENT_SUCCESS,
+                   payload: data.comments || [], // Directly use comments from response
+               });
+           } catch (error) {
+               console.error("Failed to fetch comments:", error);
+               // Optionally, you can dispatch an error action here
+           }
+       };
+       
 
 
     export const getreplyAction = (commentId)=>async(dispatch)=>{

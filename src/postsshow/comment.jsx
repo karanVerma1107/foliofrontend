@@ -5,7 +5,8 @@ import { FaStar } from 'react-icons/fa6';
 import { likeComment } from '../actions/CommentAction';
 import { useDispatch, useSelector } from 'react-redux';
 import { useAlert } from 'react-alert';
-
+import { ADDcommAction } from '../actions/CommentAction';
+import UnifiedInput from './UniInput';
 
 const Comment = ({ comment, Isauth, post }) => {
     const alert = useAlert();
@@ -30,7 +31,9 @@ const Comment = ({ comment, Isauth, post }) => {
         }
     };
 
-    return (
+    return (<>
+
+
         <div className="comment-card">
             <div className="user-details">
                 <img src={comment.user_name.display_pic} className="user-img" alt="User" />
@@ -53,6 +56,7 @@ const Comment = ({ comment, Isauth, post }) => {
             </div>
             {error && <p className="error-message">{error}</p>} {/* Display error if present */}
         </div>
+        </>
     );
 };
 

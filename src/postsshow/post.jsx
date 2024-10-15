@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import './postsss.css'
 import Carousel from 'react-material-ui-carousel';
@@ -7,15 +7,18 @@ import { useAlert } from 'react-alert';
 import { likedislike } from '../actions/postsaction';
 import { useDispatch, useSelector } from 'react-redux';
 import Comment from './comment.jsx';
+import { ADDcommAction, getCommAction } from '../actions/CommentAction';
+import UnifiedInput from './UniInput.jsx';
 
-import { getCommAction } from '../actions/CommentAction';
 
 
 
 const Post = React.memo(({ post, Isauth, User }) => {
     const dispatch = useDispatch();
-    const {comments=[], loading}  = useSelector(state=>state.getComm)
+    //const {comments=[], loading}  = useSelector(state=>state.getComm)
+    const { comments = [], loading } = useSelector(state => state.getComm);
 
+const {message , error, success} = useSelector(state=> state.Addcomm);
     const [showComments, setShowComments] = useState(false);
      const alert = useAlert();
         const [like, setLiked] = useState(false);
@@ -40,6 +43,32 @@ const Post = React.memo(({ post, Isauth, User }) => {
             }
         };
     
+        const addCommentAction = (content) => {
+            if (Isauth) {
+                dispatch(ADDcommAction(content, post._id)).then(() => {
+                    setTimeout(() => {
+                        dispatch(getCommAction(post._id)); // Fetch comments after 3 seconds
+                    }, 1000);
+                });
+            } else {
+                alert.show("Please log in to add a comment.");
+            }
+        };
+
+
+       
+
+
+        useEffect(()=>{
+          if(success){
+           
+           // alert.success(message);
+          }
+
+          if(error){
+            alert.error(error)
+          }
+        },[success, message, error, post._id, dispatch, alert ])
     
 
     return (
@@ -108,6 +137,12 @@ const Post = React.memo(({ post, Isauth, User }) => {
 
             {showComments && ( // Conditionally render comments based on the toggle
                 <div className='comments-section'>
+
+         <UnifiedInput 
+                        placeholder="Add a comment..." 
+                        onSubmit={addCommentAction} 
+                        id={post._id} 
+                    />
                     {loading ? (
                         <p>Loading comments...</p>
                     ) : (
@@ -135,5 +170,3 @@ const Post = React.memo(({ post, Isauth, User }) => {
 });
 
 export default Post;
-
-

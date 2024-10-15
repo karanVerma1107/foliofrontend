@@ -194,3 +194,35 @@
 .liked{
     color: orangered
 }
+
+.comments-section {
+    margin-top: 10px;
+}
+
+.unified-input-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.unified-input-container textarea {
+    flex: 1;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 8px;
+    resize: none; /* Prevent resizing */
+}
+
+.unified-input-container button {
+    background-color: orangered;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 15px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.unified-input-container button:hover {
+    background-color: darkorange;
+}
