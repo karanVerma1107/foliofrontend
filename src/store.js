@@ -8,6 +8,7 @@ import { changeDPreducer, loadselfReducer } from './reducers/loadprofileReducer.
 import { editobjReducer } from './reducers/editProfileReducers.js';
 import { addApostreducer } from './reducers/makepostReducer.js';
 import { AddcommReducer, addReplyReducer, commentLikeReducer, getcommentsReducer, getrepliesReducer } from './reducers/commentReplyReducer.js';
+import { getUserByNameReducer } from './reducers/searchingReducer.js';
 
 
 
@@ -29,7 +30,8 @@ Addcomm: AddcommReducer,
 getComm: getcommentsReducer,
 addReply: addReplyReducer,
 getReply: getrepliesReducer,
-Likecom:commentLikeReducer
+Likecom:commentLikeReducer,
+getUserByName: getUserByNameReducer
 });
 
 

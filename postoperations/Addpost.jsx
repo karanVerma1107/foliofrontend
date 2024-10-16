@@ -5,6 +5,8 @@ import { addApostAction } from '../src/actions/postsaction';
 import Cropper from 'react-easy-crop';
 import getCroppedImg from '../profile/getCropping';
 import { useAlert } from 'react-alert';
+import useGlobalKeyListener from '../mentionLogic/keyListener';
+import MentionButton from '../mentionLogic/mentionButton';
 
 const AddPost = () => {
 const alert = useAlert();
@@ -175,6 +177,8 @@ if(error){
 },[succes, error, loading])
 
 
+useGlobalKeyListener()
+
     return (
         <form className='add-post-form' onSubmit={handleSubmit}>
             <h2>Create a New Post</h2>
@@ -188,6 +192,8 @@ if(error){
                     <option value='Blog'>Blog</option>
                 </select>
             </div>
+
+            <MentionButton/>
 
             <div className='form-group'>
                 <label htmlFor='caption'>Caption:</label>

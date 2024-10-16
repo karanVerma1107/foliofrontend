@@ -15,13 +15,14 @@ const Posts = () => {
   
 
 
-    const dispatch = useDispatch();
+ const dispatch = useDispatch();
 
    
 
 
 const {posts, loading} = useSelector(state=>state.posts);
 console.log("posts are: ", posts);
+
 useEffect(()=>{
 dispatch(profileloader());  
 console.log("Fetching posts");
@@ -29,11 +30,12 @@ dispatch(allpostsaction());
 },[dispatch])
 
 const { User, Isauth } = useSelector(state => state.displayprofile);
-
+useGlobalKeyListener();
 
 console.log("isauth status hereee:", Isauth)
   return (
-    <MentionProvider>
+   // <MentionProvider>
+      //  {useGlobalKeyListener()}
     <div className='content'>
         {loading ? (
             <div className='load'><Loading /></div>
@@ -47,9 +49,11 @@ console.log("isauth status hereee:", Isauth)
                     );
                 })}
             </div>
+           
         )}
+         <MentionButton />
     </div>
-</MentionProvider>
+//</MentionProvider>
   )
 }
 

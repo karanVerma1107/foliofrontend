@@ -10,6 +10,7 @@ import Addpost from '../postoperations/Addpost.jsx'
 import Posts from './postsshow/posts.jsx'
 import { useSelector } from 'react-redux'
 import TakeUserName from './authentication/takeUserName.jsx'
+import { MentionProvider } from '../mentionLogic/useMention.jsx'
 import Editprofile from '../profile/Editprofile.jsx'
 
 function App() {
@@ -25,7 +26,7 @@ function App() {
      <Router>
     <Header/>
     <Homesidebar/>
-    
+    <MentionProvider>
    
       <Routes>
        
@@ -41,6 +42,7 @@ function App() {
 
         
       </Routes>
+      </MentionProvider>
      </Router>
      
     </>

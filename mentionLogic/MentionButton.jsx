@@ -1,18 +1,63 @@
-import React from 'react';
-import { useMention } from './useMention';// Import the MentionContext
+import React, { useState } from 'react';
+import { useMention } from './useMention';
+import MentionInput from './mentionInput';
+
 
 const MentionButton = () => {
-    const { showMentionButton } = useMention(); // Access the visibility state from context
+    const { showMentionButton } = useMention();
+    const [showMentionInput, setShowMentionInput] = useState(false);
 
-    // If the button should not be shown, return null (nothing rendered)
-    if (!showMentionButton) return null;
+    const toggleMentionInput = () => {
+        setShowMentionInput(prev => !prev);
+    };
 
-    // Render the mention button if it should be shown
+    if (!showMentionButton) return null; // Don't show the button if not necessary
+
     return (
-        <button onClick={() => alert('Mention clicked!')} style={{ position: 'fixed', bottom: '20px', right: '20px' }}>
-            Mention
-        </button>
+        <>
+            <button
+                onClick={toggleMentionInput}
+                style={{
+                    position: 'fixed',
+                    bottom: '30%',
+                    left: '50%',
+                    transform: 'translate(-50%, 0)',
+                    padding: '10px 20px',
+                    fontSize: '16px',
+                    color: '#fff',
+                    backgroundColor: '#ff5733',
+                    border: 'none',
+                    borderRadius: '5px',
+                    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
+                    cursor: 'pointer',
+                    transition: 'background-color 0.3s ease',
+                    zIndex: 1000,
+                }}
+                onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#ff704d'}
+                onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#ff5733'}
+            >
+                Mention
+            </button>
+
+            {showMentionInput && (
+                <div style={{
+                    position: 'fixed',
+                    bottom: '40%',
+                    left: '50%',
+                    transform: 'translate(-50%, 0)',
+                    height: '7vmax',
+                    width: '80%',
+                    backgroundColor: 'white',
+                    borderRadius: '5px',
+                    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
+                    padding: '20px',
+                    zIndex: 1000,
+                }}>
+                    <MentionInput onClose={() => setShowMentionInput(false)} />
+                </div>
+            )}
+        </>
     );
 };
 
-export default MentionButton; // Export the MentionButton component
+export default MentionButton;

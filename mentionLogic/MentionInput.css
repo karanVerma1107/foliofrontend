@@ -1,0 +1,58 @@
+.mention-input-container {
+    width: 50%;
+    margin: 0 auto;
+    background-color: #585656; /* Light gray background */
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    position: relative;
+    box-sizing: border-box; /* Ensures padding is included in the width */
+}
+
+.mention-input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc; /* Light border for the input */
+    border-radius: 5px;
+    font-size: 16px;
+    margin-bottom: 10px; /* Space between input and output */
+    box-sizing: border-box; /* Ensures padding is included in the width */
+}
+
+.output {
+    color: #333; /* Dark gray for the output text */
+    font-size: 16px;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.7); /* Slightly transparent background */
+    border-radius: 5px;
+}
+
+
+
+
+.user-suggestions {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.user-suggestion {
+    display: flex;
+    align-items: center;
+    margin: 5px 0;
+}
+
+.user-image {
+    width: 2vmax;
+    height: 2vmax;
+    border-radius: 50%; /* Circular image */
+    margin-right: 10px; /* Space between image and text */
+}
+
+.user-name {
+    font-size: 1.3vmax; /* Font size for usernames */
+}
+
+.error {
+    color: red; /* Style for error messages */
+}
