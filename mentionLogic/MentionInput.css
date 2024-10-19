@@ -1,58 +1,103 @@
 .mention-input-container {
-    width: 50%;
-    margin: 0 auto;
-    background-color: #585656; /* Light gray background */
-    border-radius: 8px;
-    padding: 20px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     position: relative;
-    box-sizing: border-box; /* Ensures padding is included in the width */
+    width: 100%; /* Full width */
+    max-width: 500px; /* Set a max width for the input container */
+    margin: 0 auto; /* Center the container */
 }
 
 .mention-input {
     width: 100%;
     padding: 10px;
-    border: 1px solid #ccc; /* Light border for the input */
+    border: 1px solid #ccc; /* Light gray border */
     border-radius: 5px;
-    font-size: 16px;
-    margin-bottom: 10px; /* Space between input and output */
-    box-sizing: border-box; /* Ensures padding is included in the width */
+    font-size: 1.2vmax;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    background-color: #f5f5f5; /* Light gray background */
 }
-
-.output {
-    color: #333; /* Dark gray for the output text */
-    font-size: 16px;
-    padding: 10px;
-    background-color: rgba(255, 255, 255, 0.7); /* Slightly transparent background */
-    border-radius: 5px;
-}
-
-
-
 
 .user-suggestions {
-    margin-top: 10px;
-    display: flex;
-    flex-direction: column;
+    position: absolute; /* Change to absolute */
+    top: 100%; /* Position below the input */
+    left: 0;
+    right: 0;
+    background-color: #f5f5f5; /* Light gray background */
+    border: 1px solid black; /* Black border */
+    border-radius: 5px;
+    max-height: 200px; /* Max height for the suggestion box */
+    overflow-y: auto; /* Enable vertical scrolling */
+    z-index: 1000; /* Higher z-index to appear above other components */
+    padding: 10px; /* Padding for better spacing */
 }
 
 .user-suggestion {
     display: flex;
-    align-items: center;
-    margin: 5px 0;
+    align-items: center; /* Center image and text vertically */
+    padding: 5px; /* Padding for suggestion items */
+    cursor: pointer;
+    transition: background-color 0.3s; /* Smooth transition for hover */
+    border-radius: 5px; /* Rounded corners */
+}
+
+.user-suggestion:hover {
+    background-color: rgba(255, 69, 0, 0.2); /* Light shade of orangered on hover */
 }
 
 .user-image {
-    width: 2vmax;
-    height: 2vmax;
+    width: 2.4vmax; /* Set image size */
+    height: 2.4vmax; /* Set image size */
     border-radius: 50%; /* Circular image */
     margin-right: 10px; /* Space between image and text */
 }
 
 .user-name {
-    font-size: 1.3vmax; /* Font size for usernames */
+    font-size: 1.2vmax; /* Text size for usernames */
+    color: black; /* Text color */
 }
 
+/* Loading and error messages */
 .error {
-    color: red; /* Style for error messages */
+    color: red; /* Error text color */
+}
+
+
+
+
+
+
+
+
+
+
+@media (max-width: 600px) {
+    .mention-input {
+        font-size: 3vw; /* Adjust font size for smaller screens */
+    }
+
+    .user-suggestions {
+        max-height: 150px; /* Reduce max height on small screens */
+    }
+
+    .user-image {
+        width: 6vw; /* Adjust image size for smaller screens */
+        height: 6vw; /* Adjust image size for smaller screens */
+    }
+
+    .user-name {
+        font-size: 3vw; /* Adjust username size for smaller screens */
+    }
+}
+
+@media (max-width: 400px) {
+    .mention-input {
+        font-size: 4vw; /* Further adjust font size for very small screens */
+    }
+
+    .user-image {
+        width: 8vw; /* Further adjust image size for very small screens */
+        height: 8vw; /* Further adjust image size for very small screens */
+    }
+
+    .user-name {
+        font-size: 4vw; /* Further adjust username size for very small screens */
+    }
 }

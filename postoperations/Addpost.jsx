@@ -6,8 +6,7 @@ import Cropper from 'react-easy-crop';
 import getCroppedImg from '../profile/getCropping';
 import { useAlert } from 'react-alert';
 import useGlobalKeyListener from '../mentionLogic/keyListener';
-import MentionButton from '../mentionLogic/mentionButton';
-
+import MentionInput from '../mentionLogic/mentionInput';
 const AddPost = () => {
 const alert = useAlert();
 const dispatch = useDispatch();
@@ -29,6 +28,11 @@ const [imageFiles, setImageFiles] = useState([]);
     const [zooms, setZooms] = useState([]); // Array for each zoom
     const [croppedImageUrls, setCroppedImageUrls] = useState([]); // Array of cropped images
     const [pixelCrops, setPixelCrops] = useState([]); // Array for pixel crop dimensions
+
+
+
+    const [userSuggestions, setUserSuggestions] = useState([]);
+    const [showMentionInput, setShowMentionInput] = useState(false);
 
 
     const handleChange = (e) => {
@@ -158,6 +162,25 @@ const handleSubmit = async (e) => {
     alert.show("Uploading your post please wait");
 };
 
+const handleCaptionChange = (e) => {
+    const value = e.target.value;
+    setPostData({ ...postData, Caption: value });
+
+    // Show mention input when typing "/"
+    if (value.endsWith('/')) {
+        setShowMentionInput(true);
+        // Example static user list; replace with your logic to fetch users
+        setUserSuggestions(['karan43', 'user123', 'exampleUser']);
+    } else if (showMentionInput && !value.endsWith('/')) {
+        setShowMentionInput(false);
+    }
+};
+
+const handleUserSelect = (userName) => {
+    const updatedCaption = postData.Caption.substring(0, postData.Caption.lastIndexOf('/') + 1) + userName + ' ';
+    setPostData({ ...postData, Caption: updatedCaption });
+    setShowMentionInput(false);
+};
 
 
 
@@ -193,11 +216,21 @@ useGlobalKeyListener()
                 </select>
             </div>
 
-            <MentionButton/>
+            
 
             <div className='form-group'>
                 <label htmlFor='caption'>Caption:</label>
-                <textarea id='caption' name='Caption' placeholder='Enter your caption' value={postData.Caption} required onChange={handleChange}></textarea>
+                <textarea
+                    id='caption'
+                    name='Caption'
+                    placeholder='Enter your caption'
+                    value={postData.Caption}
+                    required
+                    onChange={handleCaptionChange}
+                />
+                {showMentionInput && (
+                    <MentionInput onSelect={handleUserSelect} />
+                )}
             </div>
 
             <div className='form-group'>

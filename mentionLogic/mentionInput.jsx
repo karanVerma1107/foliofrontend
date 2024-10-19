@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getUserByUsername } from '../src/actions/searchingAction'; // Import the action
 
 // Define the MentionInput component
-const MentionInput = () => {
+const MentionInput = ({onSelect}) => {
     const [input, setInput] = useState('');
     const dispatch = useDispatch();
     const { users = [], loading, error } = useSelector(state => state.getUserByName); // Corrected selector syntax
@@ -22,6 +22,11 @@ const MentionInput = () => {
         if (value) {
             dispatch(getUserByUsername(value));
         }
+    };
+
+    const handleUserSelect = (userName) => {
+        onSelect(userName);
+        setInput(''); // Clear the input after selection
     };
 
     return (
@@ -40,7 +45,7 @@ const MentionInput = () => {
             {users.length > 0 && (
                 <div className="user-suggestions">
                     {users.map(user => (
-                        <div key={user.userName} className="user-suggestion">
+                        <div key={user.userName} className="user-suggestion"  onClick={() => handleUserSelect(user.userName)} >
                             <img 
                                 src={user.display_pic} 
                                 alt={user.userName} 

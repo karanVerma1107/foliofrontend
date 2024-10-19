@@ -1,8 +1,11 @@
-
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
+import MentionInput from '../../mentionLogic/mentionInput'; // Import MentionInput
+import useGlobalKeyListener from '../../mentionLogic/keyListener';
+import MentionButton from '../../mentionLogic/mentionButton';
 
 const UnifiedInput = ({ placeholder, onSubmit, id }) => {
     const [inputValue, setInputValue] = useState('');
+    const [showMentionInput, setShowMentionInput] = useState(false); // State to control MentionInput visibility
     const textareaRef = useRef(null);
 
     const handleSubmit = (e) => {
@@ -14,25 +17,50 @@ const UnifiedInput = ({ placeholder, onSubmit, id }) => {
     };
 
     useEffect(() => {
-        // Adjust the height of the textarea based on its scroll height
         if (textareaRef.current) {
-            textareaRef.current.style.height = 'auto'; // Reset height
-            textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`; // Set to scroll height
+            textareaRef.current.style.height = 'auto'; 
+            textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
         }
     }, [inputValue]);
 
+    const handleInputChange = (e) => {
+        const value = e.target.value;
+        setInputValue(value);
+
+        // Show mention input when typing "/"
+        if (value.endsWith('/')) {
+            setShowMentionInput(true);
+        } else if (showMentionInput && !value.endsWith('/')) {
+            setShowMentionInput(false);
+        }
+    };
+
+    const handleUserSelect = (userName) => {
+        // Keep the "/" and add the selected username
+        setInputValue(prev => prev + userName + ' '); // Append username after '/'
+        setShowMentionInput(false); // Close mention input
+    };
+
+    useGlobalKeyListener();
+
     return (
-        <form onSubmit={handleSubmit} className="unified-input-container">
-            <textarea
-                ref={textareaRef}
-                value={inputValue}
-                onChange={(e) => setInputValue(e.target.value)}
-                placeholder={placeholder}
-                rows="1"
-                style={{ resize: 'none', overflow: 'hidden' }} // Prevent resizing and show no overflow
-            />
-            <button type="submit">Add</button>
-        </form>
+        <>
+            <form onSubmit={handleSubmit} className="unified-input-container">
+                <textarea
+                    ref={textareaRef}
+                    value={inputValue}
+                    onChange={handleInputChange}
+                    placeholder={placeholder}
+                    rows="1"
+                    style={{ resize: 'none', overflow: 'hidden' }}
+                />
+                <button type="submit">Add</button>
+            </form>
+            {showMentionInput && (
+                <MentionInput onSelect={handleUserSelect} />
+            )}
+            
+        </>
     );
 };
 
