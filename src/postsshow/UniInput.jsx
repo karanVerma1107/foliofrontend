@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import MentionInput from '../../mentionLogic/mentionInput'; // Import MentionInput
 import useGlobalKeyListener from '../../mentionLogic/keyListener';
 import MentionButton from '../../mentionLogic/mentionButton';
+import './unitinput.css'
 
 const UnifiedInput = ({ placeholder, onSubmit, id }) => {
     const [inputValue, setInputValue] = useState('');
@@ -45,6 +46,7 @@ const UnifiedInput = ({ placeholder, onSubmit, id }) => {
 
     return (
         <>
+          <div className='bulla'>
             <form onSubmit={handleSubmit} className="unified-input-container">
                 <textarea
                     ref={textareaRef}
@@ -55,11 +57,13 @@ const UnifiedInput = ({ placeholder, onSubmit, id }) => {
                     style={{ resize: 'none', overflow: 'hidden' }}
                 />
                 <button type="submit">Add</button>
+                
             </form>
+          
             {showMentionInput && (
                 <MentionInput onSelect={handleUserSelect} />
             )}
-            
+            </div>
         </>
     );
 };

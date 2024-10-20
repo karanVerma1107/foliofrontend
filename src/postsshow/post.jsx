@@ -68,7 +68,29 @@ const {message , error, success} = useSelector(state=> state.Addcomm);
           if(error){
             alert.error(error)
           }
-        },[success, message, error, post._id, dispatch, alert ])
+        },[success, message, error, post._id, dispatch, alert ]);
+
+
+
+        const renderCaption = (caption) => {
+            const mentionRegex = /\/(\w+)/g; // Regex to match /username format
+            const parts = caption.split(mentionRegex); // Split the caption by mentions
+    
+            return parts.map((part, index) => {
+                // If the part matches the mention regex, return a link
+                if (index % 2 === 1) {
+                    return (
+                        <a key={index} href={`/${part}`} style={{ color: 'blue', textDecoration: 'none' }}>
+                            {`/${part}`}
+                        </a>
+                    );
+                }
+                // Otherwise, return the normal text
+                return part;
+            });
+        };
+
+
     
 
     return (
@@ -79,7 +101,8 @@ const {message , error, success} = useSelector(state=> state.Addcomm);
             </div>
 
             <div className='post-caption'>
-                <p>{post.caption}</p>
+            <p>{renderCaption(post.caption)}</p>
+
 
                 {post.links && post.links.length > 0 && (
                     <div className='post-links'>

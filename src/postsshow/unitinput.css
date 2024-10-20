@@ -1,0 +1,56 @@
+.bulla {
+    display: flex;
+    flex-direction: column; /* Stack children vertically */
+    max-width: 98%; /* Set a max width */
+    margin: 2vmax auto; /* Center the container with margin */
+    padding: 5px; /* Padding for spacing */
+  
+   
+    border-radius: 10px; /* Rounded corners */
+}
+
+.unified-input-container {
+    display: flex; /* Align items in a row */
+    align-items: center; /* Center items vertically */
+    width: 100%; /* Full width */
+}
+
+textarea {
+    flex: 1; /* Allow the textarea to grow and take available space */
+    padding: 10px; /* Padding for better text area appearance */
+    border: 1px solid gray; /* Gray border */
+    border-radius: 5px; /* Rounded corners */
+    font-size: 1.2vmax; /* Font size */
+    background-color: white; /* White background for the textarea */
+    color: black; /* Black text color */
+    resize: none; /* Disable resizing */
+    outline: none; /* Remove default outline */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+textarea::placeholder {
+    color: gray; /* Gray placeholder text */
+}
+
+button {
+    margin-left: 10px; /* Space between textarea and button */
+    padding: 10px; /* Padding for the button */
+    border: none; /* No border */
+    border-radius: 5px; /* Rounded corners */
+    background-color: orangered; /* Orangered background */
+    color: white; /* White text color */
+    font-size: 1.2vmax; /* Font size */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s; /* Smooth transition for hover */
+}
+
+button:hover {
+    background-color: darkorange; /* Darker shade on hover */
+}
+
+
+@media(max-width: 700px){
+    textarea{
+        font-size: 1.4vmax;
+    }
+}

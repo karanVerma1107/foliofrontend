@@ -31,6 +31,31 @@ const Comment = ({ comment, Isauth, post }) => {
         }
     };
 
+
+
+
+    
+    const renderCaption = (caption) => {
+        const mentionRegex = /\/(\w+)/g; // Regex to match /username format
+        const parts = caption.split(mentionRegex); // Split the caption by mentions
+
+        return parts.map((part, index) => {
+            // If the part matches the mention regex, return a link
+            if (index % 2 === 1) {
+                return (
+                    <a key={index} href={`/${part}`} style={{ color: 'blue', textDecoration: 'none' }}>
+                        {`/${part}`}
+                    </a>
+                );
+            }
+            // Otherwise, return the normal text
+            return part;
+        });
+    };
+
+
+
+
     return (<>
 
 
@@ -39,7 +64,7 @@ const Comment = ({ comment, Isauth, post }) => {
                 <img src={comment.user_name.display_pic} className="user-img" alt="User" />
                 <h3>{comment.user_name.userName}</h3>
             </div>
-            <p className="comment-content">{comment.content}</p>
+            <p className="comment-content">{renderCaption(comment.content)}</p>
             <div className="like-comm" onClick={handleLikeClick} style={{ cursor: 'pointer' }}>
                 <FaStar className="like-icon" />
                 <span className="like-number">{comment.stars}</span>
