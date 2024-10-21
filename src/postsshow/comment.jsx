@@ -6,6 +6,7 @@ import { getreplyAction, likeComment, replyToComment } from '../actions/CommentA
 import { useDispatch, useSelector } from 'react-redux';
 import { useAlert } from 'react-alert';
 ///import { ADDcommAction } from '../actions/CommentAction'; 
+import Reply from './Reply';
 import UnifiedInput from './UniInput';
 
 const Comment = ({ comment, Isauth, post }) => {
@@ -15,7 +16,8 @@ const Comment = ({ comment, Isauth, post }) => {
     // Use the likes and loading states from the Redux store
     const { likes, loading, error } = useSelector(state => state.Likecom);
 
-const {loadingss, replies} = useSelector(state => state.getReply);
+    
+const {loadingss, replies=[]} = useSelector(state => state.getReply);
 
     const [like, setLiked] = useState(false);
     const [replyContent, setReplyContent] = useState("");
@@ -105,6 +107,22 @@ const {loadingss, replies} = useSelector(state => state.getReply);
                     />
                     </div>
                 )}
+
+
+  {/* Loading state for replies */}
+  {showReplyInput && loadingss ? (
+                    <p className="loading-message">Loading replies...</p>
+                ) : (
+                    showReplyInput && replies.length > 0 && (
+                        <div className="replies">
+                            {replies.map(reply => (
+                                <Reply key={reply._id} reply={reply} Isauth={Isauth}/> // Ensure Reply component handles rendering of each reply
+                            ))}
+                        </div>
+                    )
+                )}
+
+
             <div className="post-date">
                 <p>{new Date(comment.createdAt).toLocaleString('en-US', {
                     year: 'numeric',

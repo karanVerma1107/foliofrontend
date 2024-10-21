@@ -112,6 +112,56 @@ export const ADDcommAction = (Content, id)=> async(dispatch)=>{
 
 
 
+
+
+
+
+    export const likeReply = (replyId) => {
+        return async (dispatch) => {
+            dispatch({ type: 'LIKE_REPLY_REQUEST' });
+            try {
+                const response = await axios.post(`/api/v1/like/${replyId}`); // Updated endpoint for replies
+        
+                dispatch({
+                    type: 'LIKE_REPLY_SUCCESS',
+                    payload: {
+                        message: response.data.message,
+                        newStars: response.data.al // Assuming the response contains the new stars count
+                    }
+                });
+            } catch (error) {
+                console.log('Error liking reply:', error);
+                dispatch({
+                    type: 'LIKE_REPLY_FAILURE',
+                    payload: error.response ? error.response.data.message : 'An error occurred'
+                });
+            }
+        };
+    };
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     
 
 export const replyToComment = (id, content,) => async (dispatch) => {

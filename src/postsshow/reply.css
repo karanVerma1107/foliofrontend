@@ -1,0 +1,36 @@
+.reply-card {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+  }
+  
+  .user-details {
+    display: flex;
+    align-items: center;
+  }
+  
+  .user-img {
+    width: 1.9vmax; /* Set width to 2vmax */
+    height: 1.9vmax; /* Set height to 2vmax */
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  
+  .user-name {
+    font-size: 1.1vmax; /* Set font size to 1.2vmax */
+  }
+  
+  .reply-content {
+    margin: 5px 0;
+    font-size: 1.2vmax; /* Set font size to 1.2vmax */
+  }
+  
+  .reply-date {
+    font-size: 1vmax; /* Set font size to 1.2vmax */
+    margin-top: 1vmax;
+    color: #888;
+    display: block; /* Ensures timestamp is on a new line */
+  }
+  

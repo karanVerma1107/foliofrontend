@@ -8,7 +8,7 @@
     margin: 3px 0; /* Space between comments */
     border: 1px solid #ddd; /* Optional: border for comments */
     border-radius: 5px; /* Slightly rounded corners */
-    background-color: rgb(248, 224, 216); /* Background color */
+    background-color: rgb(252, 232, 232); /* Background color */
     max-width: 600px; /* Max width for the comment card */
 }
 
