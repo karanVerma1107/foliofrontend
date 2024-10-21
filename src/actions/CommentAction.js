@@ -114,16 +114,16 @@ export const ADDcommAction = (Content, id)=> async(dispatch)=>{
 
     
 
-export const replyToComment = (commentId, content, replyToId) => async (dispatch) => {
+export const replyToComment = (id, content,) => async (dispatch) => {
     try {
         dispatch({ type: ADD_COMMENT_REQUEST });
 
         const config = { headers: { 'Content-Type': 'application/json' } };
 
-        const response = await axios.post('/api/v1/replyComment', { commentId, content, replyToId }, config);
+        const response = await axios.post(`/api/v1/replyComment/${id}`, { id, content}, config);
 
         const message = response.data.message;
-        const reply = response.data.reply;
+        const reply = response.data.newReply;
 
         dispatch({ 
             type: ADD_COMMENT_SUCCESS, 

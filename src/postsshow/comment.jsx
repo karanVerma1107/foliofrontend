@@ -2,10 +2,10 @@
 import React, { useState } from 'react';
 import './comment.css'; // Import the new CSS file for comments
 import { FaStar } from 'react-icons/fa6';
-import { likeComment } from '../actions/CommentAction';
+import { getreplyAction, likeComment, replyToComment } from '../actions/CommentAction';
 import { useDispatch, useSelector } from 'react-redux';
 import { useAlert } from 'react-alert';
-import { ADDcommAction } from '../actions/CommentAction'; 
+///import { ADDcommAction } from '../actions/CommentAction'; 
 import UnifiedInput from './UniInput';
 
 const Comment = ({ comment, Isauth, post }) => {
@@ -14,7 +14,11 @@ const Comment = ({ comment, Isauth, post }) => {
 
     // Use the likes and loading states from the Redux store
     const { likes, loading, error } = useSelector(state => state.Likecom);
+
+const {loadingss, replies} = useSelector(state => state.getReply);
+
     const [like, setLiked] = useState(false);
+    const [replyContent, setReplyContent] = useState("");
 
     const toggleLike = () => {
         setLiked(prev => !prev);
@@ -34,14 +38,24 @@ const Comment = ({ comment, Isauth, post }) => {
     const [showReplyInput, setShowReplyInput] = useState(false);
 
     const handleReplyClick = () => {
+        setReplyContent(`/${comment.user_name.userName} `); 
+        dispatch(getreplyAction(comment._id));
         setShowReplyInput(prev => !prev); // Toggle reply input visibility
+
     };
 
     const handleAddReply = (content) => {
-        addReplyAction(content, comment._id); // Call the addReplyAction function with the reply content and comment ID
+         dispatch(replyToComment(comment._id, content))
         setShowReplyInput(false); // Hide the reply input after submitting
+        setReplyContent('')
     };
     
+    const handleInputChange = (value) => {
+        setReplyContent(value); // Update the reply content based on user input
+    };
+
+
+
     const renderCaption = (caption) => {
         const mentionRegex = /\/(\w+)/g; // Regex to match /username format
         const parts = caption.split(mentionRegex); // Split the caption by mentions
@@ -76,11 +90,21 @@ const Comment = ({ comment, Isauth, post }) => {
                 <FaStar className="like-icon" />
                 <span className="like-number">{comment.stars}</span>
             </div>
-            <div style={{ color: 'orangered', cursor: 'pointer', marginTop: '1vmax' }} onClick={handleReplyClick}>
+            <div style={{ color: 'orangered', cursor: 'pointer', marginTop: '1vmax', fontSize:'1.1vmax' }} onClick={handleReplyClick}>
                     Reply
-                </div>
-
-             
+                   
+ </div>
+             {/* Conditionally render the UnifiedInput component */}
+ {showReplyInput && (<div className='inp'>
+                    <UnifiedInput 
+                        onChange={handleInputChange}
+                        value = {replyContent}
+                        onSubmit={handleAddReply} // Pass the handleAddReply function to UnifiedInput
+                        placeholder="Write your reply..." // Add a placeholder for user guidance
+                        
+                    />
+                    </div>
+                )}
             <div className="post-date">
                 <p>{new Date(comment.createdAt).toLocaleString('en-US', {
                     year: 'numeric',

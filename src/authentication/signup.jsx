@@ -79,32 +79,30 @@ formData.append('email', email)
       
     }
 
-    useEffect(()=>{
+    useEffect(() => {
+      dispatch(profileloader());
 
-dispatch(profileloader());
+      if (success) {
+          alert.success(message);
+          setlotptog(true);
+      } else if (error) {
+          alert.error(error);
+      } else if (Success) {
+          alert.success(Message);
+      } else if (Error) {
+          alert.error(Error);
+      } else if (suucess) {
+          alert.success(Meessage);
+          setlotptog(true);
+      } 
+      if(suuS){
+        alert.success(Meess)
+      }else if (errR) {
+          alert.error(errR);
+      }
 
-     
-const alerts = [
-  { condition: success, message: message, reset: () => setlotptog(true) },
-  { condition: error, message: error },
-  { condition: Success, message: Message },
-  { condition: Error, message: Error },
-  { condition: suucess, message: Meess, navigate: () => navigate('/username') },
-  { condition: errR, message: errR }
-];
 
-alerts.forEach(({ condition, message, reset, navigate }) => {
-  if (condition) {
-      alert.success(message);
-      if (reset) reset();
-      if (navigate) navigate();
-  }
-});
-
-
-    },[message, error, success, dispatch,Meess, errR,suuS, Meessage, errorr, suucess, Message,
-      Success,
-      Error])
+  }, [message, error, success, dispatch, Meess, errR, suuS, Meessage, errorr, suucess, Message, Success, Error]);
    
 
       if(Isauth){

@@ -73,3 +73,8 @@
         margin-top: 5px; /* Space above the timestamp */
     }
 }
+
+.inp{
+    width: 100%;
+    font-size: 1.2vmax;
+}

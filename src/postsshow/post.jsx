@@ -18,6 +18,9 @@ const Post = React.memo(({ post, Isauth, User }) => {
     //const {comments=[], loading}  = useSelector(state=>state.getComm)
     const { comments = [], loading } = useSelector(state => state.getComm);
 
+    const [commentValue, setCommentValue] = useState('');
+
+
 const {message , error, success} = useSelector(state=> state.Addcomm);
     const [showComments, setShowComments] = useState(false);
      const alert = useAlert();
@@ -50,6 +53,7 @@ const {message , error, success} = useSelector(state=> state.Addcomm);
                         dispatch(getCommAction(post._id)); // Fetch comments after 3 seconds
                     }, 1000);
                 });
+                setCommentValue('')
             } else {
                 alert.show("Please log in to add a comment.");
             }
@@ -165,6 +169,7 @@ const {message , error, success} = useSelector(state=> state.Addcomm);
                         placeholder="Add a comment..." 
                         onSubmit={addCommentAction} 
                         id={post._id} 
+                        value={commentValue}   
                     />
                     {loading ? (
                         <p>Loading comments...</p>
