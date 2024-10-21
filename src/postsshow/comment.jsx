@@ -37,7 +37,8 @@ const {loadingss, replies=[]} = useSelector(state => state.getReply);
         }
     };
 
-    const [showReplyInput, setShowReplyInput] = useState(false);
+   
+ const [showReplyInput, setShowReplyInput] = useState(false);
 
     const handleReplyClick = () => {
         setReplyContent(`/${comment.user_name.userName} `); 
@@ -93,7 +94,7 @@ const {loadingss, replies=[]} = useSelector(state => state.getReply);
                 <span className="like-number">{comment.stars}</span>
             </div>
             <div style={{ color: 'orangered', cursor: 'pointer', marginTop: '1vmax', fontSize:'1.1vmax' }} onClick={handleReplyClick}>
-                    Reply
+                    {comment.replies.length} Replies
                    
  </div>
              {/* Conditionally render the UnifiedInput component */}

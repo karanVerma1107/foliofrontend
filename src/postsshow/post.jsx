@@ -60,7 +60,9 @@ const {message , error, success} = useSelector(state=> state.Addcomm);
         };
 
 
-       
+        const handleInputChange = (event) => {
+            setCommentValue(event.target.value);
+        };
 
 
         useEffect(()=>{
@@ -166,10 +168,13 @@ const {message , error, success} = useSelector(state=> state.Addcomm);
                 <div className='comments-section'>
 
          <UnifiedInput 
-                        placeholder="Add a comment..." 
+            onChange={handleInputChange}
+             value={commentValue}   
+                     
+                       
                         onSubmit={addCommentAction} 
-                        id={post._id} 
-                        value={commentValue}   
+                        placeholder="Add a comment..." 
+                       
                     />
                     {loading ? (
                         <p>Loading comments...</p>

@@ -28,9 +28,21 @@
   }
   
   .reply-date {
-    font-size: 1vmax; /* Set font size to 1.2vmax */
+    font-size: 0.8vmax; /* Set font size to 1.2vmax */
     margin-top: 1vmax;
     color: #888;
     display: block; /* Ensures timestamp is on a new line */
   }
   
+
+  
+.inp{
+  width: 100%;
+  font-size: 1.2vmax;
+}
+
+  @media(max-width:700px){
+.reply-date{
+  font-size: 1vmax;
+}
+  }

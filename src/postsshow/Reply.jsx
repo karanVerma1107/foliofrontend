@@ -3,7 +3,8 @@ import './reply.css'
 import { FaStar } from 'react-icons/fa6';
 import { useAlert } from 'react-alert';
 import { useDispatch } from 'react-redux';
-import { likeReply } from '../actions/CommentAction';
+import UnifiedInput from './UniInput';
+import { likeReply, replyToComment } from '../actions/CommentAction';
 
 const Reply = ({reply, Isauth}) => {
 const dispatch = useDispatch();
@@ -16,6 +17,17 @@ const alert = useAlert();
     };
 
 
+
+    const [showReplyInput, setShowReplyInput] = useState(false);
+    const [replyContent, setReplyContent] = useState("");
+
+
+    const handleReplyClick = () => {
+      setReplyContent(`/${reply.user_name.userName} `); 
+      
+      setShowReplyInput(prev => !prev); // Toggle reply input visibility
+
+  };
     const handleLikeClick = async () => {
         if(Isauth){
             dispatch(likeReply(reply._id));
@@ -25,6 +37,17 @@ const alert = useAlert();
         }
     };
 
+
+    const handleInputChange = (value) => {
+      setReplyContent(value); // Update the reply content based on user input
+  };
+
+  
+  const handleAddReply = (content) => {
+   dispatch(replyToComment(reply._id, content))
+   setShowReplyInput(false); // Hide the reply input after submitting
+   setReplyContent('')
+};
 
 
     const renderCaption = (caption) => {
@@ -58,6 +81,24 @@ const alert = useAlert();
                 <FaStar className="like-icon" />
                 <span className="like-number">{reply.stars}</span>
             </div>
+
+
+            <div style={{ color: 'orangered', cursor: 'pointer', marginTop: '1vmax', fontSize:'1.1vmax' } } onClick={handleReplyClick} >
+                        Reply
+                   
+ </div>
+
+ {showReplyInput && (<div className='inp'>
+                    <UnifiedInput 
+                        onChange={handleInputChange}
+                        value = {replyContent}
+                        onSubmit={handleAddReply} // Pass the handleAddReply function to UnifiedInput
+                        placeholder="Write your reply..." // Add a placeholder for user guidance
+                        
+                    />
+                    </div>
+                )}
+
       <div className="reply-meta">
         <span className="reply-date">
           {new Date(reply.createdAt).toLocaleString('en-US', {
