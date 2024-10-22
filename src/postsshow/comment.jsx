@@ -90,7 +90,7 @@ const {loadingss, replies=[]} = useSelector(state => state.getReply);
         <div className="comment-card">
             <div className="user-details">
                 <img src={comment.user_name.display_pic} className="user-img" alt="User" />
-                <h3>{comment.user_name.userName}</h3>
+                <h3><a href={`/${comment.user_name.userName}`} style={{textDecoration:"none", color:"black"}}>{comment.user_name.userName}</a></h3>
             </div>
             <p className="comment-content">{renderCaption(comment.content)}</p>
             <div className="like-comm" onClick={handleLikeClick} style={{ cursor: 'pointer' }}>

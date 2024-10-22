@@ -79,7 +79,7 @@ const alert = useAlert();
     <div className="reply-card">
       <div className="user-details">
         <img src={reply.user_name.display_pic} className="user-img" alt="User" />
-        <h5>{reply.user_name.userName}</h5>
+        <h5><a href={`${reply.user_name.userName}`} style={{textDecoration:"none", color:"black"}}>{reply.user_name.userName}</a></h5>
       </div>
       <p className="reply-content">{renderCaption(reply.content)}</p>
       <div className="like-comm" onClick={handleLikeClick} style={{ cursor: 'pointer' }}>

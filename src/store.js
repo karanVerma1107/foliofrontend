@@ -9,6 +9,7 @@ import { editobjReducer } from './reducers/editProfileReducers.js';
 import { addApostreducer } from './reducers/makepostReducer.js';
 import { AddcommReducer, addReplyReducer, commentLikeReducer, getcommentsReducer, getrepliesReducer } from './reducers/commentReplyReducer.js';
 import { getUserByNameReducer } from './reducers/searchingReducer.js';
+import { userPostReducer } from './reducers/userpostReducer.js';
 
 
 
@@ -31,7 +32,8 @@ getComm: getcommentsReducer,
 addReply: addReplyReducer,
 getReply: getrepliesReducer,
 Likecom:commentLikeReducer,
-getUserByName: getUserByNameReducer
+getUserByName: getUserByNameReducer,
+userPost : userPostReducer
 });
 
 

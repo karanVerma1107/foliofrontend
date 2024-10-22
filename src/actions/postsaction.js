@@ -10,6 +10,12 @@ import { CREATE_POST_REQUEST,
          GIVE_POST_LIKE_SUCCESS } from '../constants/Postconstant.js'
 
 
+import { GET_USER_POST_REQUEST,
+    GET_USER_POST_SUCCESS,
+    GET_USER_POST_FAILURE
+ } from '../constants/Postconstant.js'         
+
+
 //get all posts
 export const allpostsaction =  ()=>async(dispatch)=>{
     try {
@@ -54,39 +60,6 @@ export const likedislike = (postId)=>{
 
 
 
-//to add a post
-{/*export const addApostAction = (postdata, fileImage)=>async(dispatch)=>{
-    try {
-        console.log('fileimge is:', fileImage);
-        dispatch({type: CREATE_POST_REQUEST});
-        const config = {headers: {'Content-Type' : 'multipart/form-data'}}
-
-        const response = await axios.post('api/v1/addPost' , postdata, fileImage, config);
-
-        const message = response.data.message;
-
-        dispatch({type: CREATE_POST_SUCCESS, 
-            payload: message});
-
-
-        
-    } catch (error) {
-        let errormess
-        if(error.response && error.response.data){
-            errormess = error.response.data.message || 'something went wrong'
-        }else{
-            errormess = error.message
-        }
-        
-                dispatch({type: CREATE_POST_FAILURE,
-                    payload: errormess
-                })
-    
-        
-       }
-    }
-*/}
-
 
 
 
@@ -128,3 +101,36 @@ export const addApostAction = (postdata, files) => async (dispatch) => {
         dispatch({ type: CREATE_POST_FAILURE, payload: errormess });
     }
 };
+
+
+
+
+//to get user post 
+export const getUserPost = (id)=>async(dispatch)=>{
+    try {
+        dispatch({type: GET_USER_POST_REQUEST})
+        
+        const config = { headers: { 'Content-Type': 'application/json' } };
+
+
+        const response = await axios.get('getUserPost', id ,config);
+        const posts = response.data.posts
+
+        dispatch({type: GET_USER_POST_SUCCESS, 
+            payload: posts
+        })
+
+
+
+
+    } catch (error) {
+        let errormess;
+        if (error.response && error.response.data) {
+            errormess = error.response.data.message || 'Something went wrong';
+        } else {
+            errormess = error.message;
+        }
+        
+        dispatch({ type: GET_USER_POST_FAILURE, payload: errormess });
+    }
+    }

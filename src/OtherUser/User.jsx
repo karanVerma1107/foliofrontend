@@ -1,16 +1,17 @@
 
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useParams, useSearchParams } from 'react-router-dom';
 import { getUserByUsername } from '../actions/searchingAction';
 import './User.css'
+import { getUserPost } from '../actions/postsaction';
 
 
 const User = () => {
     const { username } = useParams();
     const dispatch = useDispatch();
     const { users = [], loading, error } = useSelector(state => state.getUserByName);
-
+    const {posts=[]} = useSelector(state => state.userPost)
     // Fetch the user when the component mounts or username changes
     useEffect(() => {
         dispatch(getUserByUsername(username));
@@ -34,6 +35,12 @@ const User = () => {
 
     const user = users.length > 0 ? users[0] : null;
 
+
+
+    const handlepostshow = ()=>{
+        dispatch(getUserPost(user._id))
+    }
+
     return (
         <div className='mainco'>
             {user ? (
@@ -54,7 +61,7 @@ const User = () => {
                     </div>
 
                     <div style={{ margin: '2vmax 0', width: '100%', display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
-    <h3 style={{ fontSize: '1.4vmax', marginLeft: '0vmax', cursor: 'pointer' }}>Posts</h3>
+    <h3 style={{ fontSize: '1.4vmax', marginLeft: '0vmax', cursor: 'pointer' }}    onClick={handlepostshow}>Posts</h3>
     <button style={{
         fontSize: '1.4vmax',
         backgroundColor: 'orangered',
