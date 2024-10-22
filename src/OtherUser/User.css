@@ -1,0 +1,487 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton+SC&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Lexend:wght@100..900&family=Lilita+One&family=Outfit:wght@100..900&display=swap');
+
+
+@import url('https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&family=Bebas+Neue&family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Lexend:wght@100..900&family=Lilita+One&family=Outfit:wght@100..900&display=swap');
+
+
+
+@import url('https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&family=Bebas+Neue&family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Lexend:wght@100..900&family=Lilita+One&family=Outfit:wght@100..900&family=Prosto+One&display=swap');
+
+
+.mainco{
+    width: 90%;
+    min-height: 40vmax;
+     display: flex;
+     flex-direction: column;
+     margin-left: 10vmax;
+}
+
+.loadingc{
+    width: 90%;
+    min-height: 40vmax;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     flex-direction: column;
+     margin-left: 10vmax;
+}
+
+.upper-stuff{
+    width:90%;
+    min-height: 16vmax;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    border-bottom: 1.2px solid black;
+
+}
+
+.followers{
+    width: 21vmax;
+    height: 16vmax;
+    color: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 1vmax 1.8vmax;
+    
+    
+}
+
+.followers h2{
+    font-family: 'Outfit';
+}
+
+.profilepic{
+    width: 28vmax;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    height: 16vmax;
+    
+    justify-content: center;
+    margin: 1.6vmax 0vmax;
+    
+}
+
+.profilepic h3{
+    font-family: 'Outfit';
+    font-size: 1.2vmax;
+}
+
+.following{
+    width: 21vmax;
+    height: 16vmax;
+    color: #000;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin: 1vmax 1.8vmax;
+    justify-content: center;
+
+}
+
+.following h2{
+    font-family: 'Outfit';
+}
+
+.profilepic img{
+    width: 13vmax;
+    height: 12vmax;
+    border-radius: 11px;
+    border: 1.3 px solid orangered;
+}
+
+
+.editbloc{
+    height: 4.5vmax;
+    width: 95%;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    
+
+}
+
+.editbloc h3{
+    font-size: 1.5vmax;
+    margin: 1vmax 2.5vmax;
+    font-family:Arial, Helvetica, sans-serif;
+    
+}
+
+.editbloc h3 a{
+    text-decoration: none;
+    color: black;
+}
+
+
+
+@media(max-width: 1000px){
+    .followers h2{
+        font-size: 1.6vmax;
+    }
+
+    .following h2{
+        font-size: 1.6vmax;
+    }
+    .profilepic img{
+        width: 11vmax;
+        height: 10vmax;
+    }
+}
+
+
+
+.aboutcon {
+    min-width: 90%; /* A4 width */
+    height: auto;
+    padding: 1.5vmax; /* Padding for the container */
+    background-color: #fff;
+    border: 1px solid #312f2f;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    overflow: hidden; /* Ensure no overflow */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center content horizontally */
+    justify-content: center; /* Center content vertically */
+}
+
+.resume {
+    font-family: Arial, sans-serif;
+    color: #000; /* Black text */
+    border: 1px solid black;
+    flex-grow: 1; /* Allow resume content to grow and fill space */
+    width: 100%; /* Full width of the parent */
+    max-width: 800px; /* Maximum width to maintain A4 proportions */
+    box-sizing: border-box; /* Include padding and border in element's total width */
+    padding: 1.3vmax; /* Add padding inside the resume */
+}
+
+.resume-header {
+    margin-bottom: 1vmax; /* Space below header */
+    border-bottom: 1px solid #ccc; /* Separator */
+    font-size: 1.2vmax;
+    text-align: center; /* Center header text */
+    padding-bottom: 0.2vmax; /* Padding below header */
+}
+
+.resume-header h1 {
+    font-size: 1.5vmax; /* Title size */
+    margin: 0; /* Remove default margin */
+}
+
+.resume-section {
+    margin-bottom: 1vmax; /* Space between sections */
+    page-break-inside: avoid;
+}
+
+.resume-section h2 {
+    font-size: 1.2vmax; /* Section title size */
+    margin: 0 0 1vmax; /* Space below section title */
+    border-bottom: 1px solid #ccc; /* Underline for section titles */
+    
+}
+
+.resume-section ul {
+    list-style-type: none; /* Remove bullet points */
+    padding-left: 0; /* Remove padding */
+}
+
+.resume-section li {
+    font-size: 1vmax; /* List item size */
+    margin-bottom: 0.3vmax; /* Space between list items */
+}
+
+.resume-footer {
+    margin-top: 0.7vmax; /* Space above footer */
+    border-top: 1px solid #ccc; /* Separator */
+    text-align: center; /* Center footer text */
+    padding-top: 0; /* Padding above footer */
+}
+
+.resume-footer p {
+    font-size: 0.8vmax; /* Footer text size */
+    margin: 0; /* Remove default margin */
+}
+
+
+
+
+
+@media(max-width: 1000px){
+    .followers h2{
+        font-size: 1.6vmax;
+    }
+
+    .following h2{
+        font-size: 1.6vmax;
+    }
+    .profilepic img{
+        width: 11vmax;
+        height: 10vmax;
+    }
+
+.resume-header h1{
+    font-size: 2vmax;
+}
+
+
+.resume-section li{
+    font-size: 1.5vmax;
+}
+
+.resume-section h2{
+    font-size: 1.8vmax;
+}
+
+.sub{
+    font-size: 2vmax;
+}
+
+.resume-header h2{
+    font-size: 1.9vmax;
+}
+
+}
+
+
+
+
+
+
+.aboutcon {
+    min-width: 90%;
+    height: auto;
+    padding: 1.5vmax;
+    background-color: #fff;
+    border: 1px solid #312f2f;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.resume {
+    font-family: 'Verdana', sans-serif; /* Changed font style */
+    color: #000;
+    border: 1px solid black;
+    flex-grow: 1;
+    width: 100%;
+    max-width: 800px;
+    box-sizing: border-box;
+    padding: 1.3vmax;
+}
+
+.resume-header {
+    margin-bottom: 1vmax;
+    border-bottom: 1px solid #ccc;
+    font-size: 1.2vmax;
+    text-align: center;
+    padding-bottom: 0.2vmax;
+}
+
+.resume-header h1 {
+    font-size: 1.5vmax;
+    margin: 0;
+}
+
+.resume-section {
+    margin-bottom: 1vmax;
+    page-break-inside: avoid;
+}
+
+.resume-section h2 {
+    font-size: 1.2vmax;
+    margin: 0 0 1vmax;
+    border-bottom: 1px solid #ccc;
+}
+
+.resume-section ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.resume-section li {
+    font-size: 1vmax;
+    margin-bottom: 0.3vmax;
+}
+
+.resume-footer {
+    margin-top: 0.7vmax;
+    border-top: 1px solid #ccc;
+    text-align: center;
+    padding-top: 0;
+}
+
+.resume-footer p {
+    font-size: 0.8vmax;
+    margin: 0;
+}
+
+@media(max-width: 1000px) {
+    .resume-header h1 {
+        font-size: 2vmax;
+    }
+
+    .resume-section li {
+        font-size: 1.5vmax;
+    }
+
+    .resume-section h2 {
+        font-size: 1.8vmax;
+    }
+
+    .sub {
+        font-size: 2vmax;
+    }
+
+    .resume-header h2 {
+        font-size: 1.9vmax;
+    }
+}
+
+
+
+
+
+
+.aboutcon {
+    min-width: 90%;
+    height: auto;
+    padding: 1.5vmax;
+    background-color: #fff;
+    border: 1px solid #312f2f;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.resume {
+    font-family: 'Verdana', sans-serif; /* Changed font style */
+    color: #000;
+    border: 1px solid black;
+    flex-grow: 1;
+    width: 100%;
+    max-width: 800px;
+    box-sizing: border-box;
+    padding: 1.3vmax;
+}
+
+.resume-header {
+    margin-bottom: 1vmax;
+    border-bottom: 0.1px solid whitesmoke;
+    font-size: 1.2vmax;
+    text-align: center;
+    padding-bottom: 0.2vmax;
+}
+
+.resume-header h1 {
+    font-size: 1.5vmax;
+    margin: 0;
+}
+
+.resume-section {
+    margin-bottom: 1vmax;
+    page-break-inside: avoid;
+}
+
+.resume-section h2 {
+    font-size: 1.2vmax;
+    margin: 0 0 1vmax;
+    border-bottom: 1px solid #2e2d2d;
+}
+
+.resume-section ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.resume-section li {
+    font-size: 1vmax;
+    display: flex;
+    flex-direction: row;
+    
+    margin-bottom: 0.3vmax;
+}
+
+.resume-section li span{
+    font-size: 0vmax;
+}
+
+.resume-footer {
+    margin-top: 0.7vmax;
+    border-top: 1px solid #2e2d2d;
+    text-align: center;
+    padding-top: 0;
+}
+
+.resume-footer p {
+    font-size: 0.8vmax;
+    margin: 0;
+}
+
+@media(max-width: 1000px) {
+    .resume-header h1 {
+        font-size: 2vmax;
+    }
+
+    .resume-section li {
+        font-size: 1.5vmax;
+    }
+
+    .resume-section h2 {
+        font-size: 1.8vmax;
+    }
+
+    .sub {
+        font-size: 2vmax;
+    }
+
+    .resume-header h2 {
+        font-size: 1.9vmax;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+.dltbtn {
+    background-color: #FF4500; /* Orangered shade */
+    color: white; /* Text color */
+    border: none; /* Remove border */
+    border-radius: 5px; /* Rounded corners */
+    padding: 1vmax 1vmax; /* Vertical and horizontal padding */
+    font-size: 1rem; /* Font size */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s ease; /* Smooth background color transition */
+    margin-top: 3vmax;
+    margin-bottom: 3vmax;
+     
+}
+
+.dltbtn:hover {
+    background-color: #f6ac9f; /* Lighter orangered shade on hover */
+}
+
+
+
+
+
+ .mainco, .upper-stuff, .editbloc, .aboutcon, .resume, .resume-header, .resume-section, h1, h2, h3, p, li {
+    color: black; /* Set text color to black */
+  }

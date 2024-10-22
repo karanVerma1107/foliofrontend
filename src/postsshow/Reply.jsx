@@ -63,7 +63,7 @@ const alert = useAlert();
             // If the part matches the mention regex, return a link
             if (index % 2 === 1) {
                 return (
-                    <a key={index} href={`/${part}`} style={{ color: 'blue', textDecoration: 'none' }}>
+                    <a key={index} href={`/${part}`} style={{ color: 'blue', textDecoration: 'none' }} target='_blank'>
                         {`/${part}`}
                     </a>
                 );

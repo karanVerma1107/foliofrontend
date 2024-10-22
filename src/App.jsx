@@ -11,6 +11,7 @@ import Posts from './postsshow/posts.jsx'
 import { useSelector } from 'react-redux'
 import TakeUserName from './authentication/takeUserName.jsx'
 import { MentionProvider } from '../mentionLogic/useMention.jsx'
+import User from './OtherUser/User.jsx'
 import Editprofile from '../profile/Editprofile.jsx'
 
 function App() {
@@ -37,6 +38,7 @@ function App() {
       <Route exact path='/profile' element={<Userprofile/>}/> 
       <Route exact path='/edit-profile' element={<Editprofile/>}/> 
       <Route exact path='/Create-Post' element={<Addpost/>}/> 
+      <Route exact path='/:username' element={<User/>}/> 
 
 
 

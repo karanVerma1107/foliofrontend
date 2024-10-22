@@ -7,6 +7,7 @@ import { useAlert } from 'react-alert';
 import { likedislike } from '../actions/postsaction';
 import { useDispatch, useSelector } from 'react-redux';
 import Comment from './comment.jsx';
+import MentionInput from '../../mentionLogic/mentionInput.jsx';
 import { ADDcommAction, getCommAction } from '../actions/CommentAction';
 import UnifiedInput from './UniInput.jsx';
 
@@ -20,6 +21,8 @@ const Post = React.memo(({ post, Isauth, User,  showComments, onPostClick  }) =>
 
     const [commentValue, setCommentValue] = useState('');
 
+    
+    const [showMentionInput, setShowMentionInput] = useState(false); 
 
 const {message , error, success} = useSelector(state=> state.Addcomm);
     //const [showComments, setShowComments] = useState(false);
@@ -49,9 +52,9 @@ const {message , error, success} = useSelector(state=> state.Addcomm);
         }
         };
     
-        const addCommentAction = (content) => {
+        const addCommentAction = () => {
             if (Isauth) {
-                dispatch(ADDcommAction(content, post._id)).then(() => {
+                dispatch(ADDcommAction(commentValue, post._id)).then(() => {
                     setTimeout(() => {
                         dispatch(getCommAction(post._id)); // Fetch comments after 3 seconds
                     }, 1000);
@@ -64,7 +67,19 @@ const {message , error, success} = useSelector(state=> state.Addcomm);
 
 
         const handleInputChange = (event) => {
-            setCommentValue(event.target.value);
+           const newValue = event.target.value;
+
+           setCommentValue(newValue); // Update the input value in the parent component
+
+           // Show mention input when typing "/"
+           if (newValue.endsWith('/')) {
+               setShowMentionInput(true);
+           } else if (showMentionInput && !newValue.endsWith('/')) {
+               setShowMentionInput(false);
+           }
+
+
+
         };
 
 
@@ -89,7 +104,7 @@ const {message , error, success} = useSelector(state=> state.Addcomm);
                 // If the part matches the mention regex, return a link
                 if (index % 2 === 1) {
                     return (
-                        <a key={index} href={`/${part}`} style={{ color: 'blue', textDecoration: 'none' }}>
+                        <a key={index} href={`/${part}`} style={{ color: 'blue', textDecoration: 'none' }} target='_blank'>
                             {`/${part}`}
                         </a>
                     );
@@ -185,6 +200,15 @@ const {message , error, success} = useSelector(state=> state.Addcomm);
             />
             <button onClick={addCommentAction} className='add-comment-button'>Add</button>
         </div>
+        {showMentionInput && (
+                <MentionInput onSelect={(userName) => {
+                    setCommentValue(prev => prev + userName + ' '); // Append username after '/'
+                    setShowMentionInput(false); // Close mention input
+                }} />
+            )}
+
+
+
                     {loading ? (
                         <p>Loading comments...</p>
                     ) : (
