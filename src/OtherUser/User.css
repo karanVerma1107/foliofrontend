@@ -488,3 +488,60 @@
  .mainco, .upper-stuff, .editbloc, .aboutcon, .resume, .resume-header, .resume-section, h1, h2, h3, p, li {
     color: black; /* Set text color to black */
   }
+
+
+  .contentt{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    margin: 1vmax 0vmax;
+    
+    width: 90%;
+    min-height: 44vmax;
+}
+
+@media(max-width:600px){
+    .content{
+        width: 79%;
+    }
+}
+
+.load{
+    display: flex;
+    width: 100%;
+    
+    min-height: 47vmax;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+
+.post-container{
+    width: 95%;
+    display: flex;
+align-items: center;
+flex-direction: column;
+  
+    overflow: auto;
+   
+}
+
+.post-container li{
+    list-style: none;
+    border-radius: 2px;
+    margin: 3vmax;
+    width: 98%;
+    min-height: auto;
+    border-bottom: 1px solid black;
+}
+
+
+
+
+
+
+
+
+

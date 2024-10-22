@@ -1,26 +1,37 @@
 
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useParams, useSearchParams } from 'react-router-dom';
-import { getUserByUsername } from '../actions/searchingAction';
-import './User.css'
-import { getUserPost } from '../actions/postsaction';
 
+
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import { getUserByUsername } from '../actions/searchingAction';
+import './User.css';
+import Post from '../postsshow/post';
+import Loading from '../loading';
+import { getUserPost } from '../actions/postsaction';
 
 const User = () => {
     const { username } = useParams();
     const dispatch = useDispatch();
     const { users = [], loading, error } = useSelector(state => state.getUserByName);
-    const {posts=[]} = useSelector(state => state.userPost)
+    const { posts = [] } = useSelector(state => state.userPost);
+    const { User, Isauth } = useSelector(state => state.displayprofile);
+
+    const [activePostId, setActivePostId] = useState(null);
+
+    const [showPosts, setShowPosts] = useState(false);
+
+
     // Fetch the user when the component mounts or username changes
     useEffect(() => {
         dispatch(getUserByUsername(username));
     }, [dispatch, username]);
 
+    // Handle loading and error states
     if (loading) {
         return (
             <div className='loadingc'>
-                <p>Loading...</p>
+                <Loading />
             </div>
         );
     }
@@ -35,12 +46,24 @@ const User = () => {
 
     const user = users.length > 0 ? users[0] : null;
 
+    const handlePostShow = () => {
+        if (user) {
+            dispatch(getUserPost(user._id));
+            console.log('User ID is', user._id);
+        }
+    };
+
+    const handlePostClick = (postId) => {
+        setActivePostId(prevPostId => (prevPostId === postId ? null : postId));
+    };
 
 
-    const handlepostshow = ()=>{
-        dispatch(getUserPost(user._id))
-        console.log('user id is', user._id);
-    }
+
+
+    const togglePosts = () => {
+        setShowPosts(prevShowPosts => !prevShowPosts); // Toggle the visibility of posts
+        handlePostShow(); // Fetch posts when toggled
+    };
 
     return (
         <div className='mainco'>
@@ -52,37 +75,48 @@ const User = () => {
                             <h2>Followers</h2>
                         </div>
                         <div className='profilepic'>
-                            <img className='userpic' src={user.display_pic || 'default-pic.png'} alt='user-profile' />
+                            <img className='userpic' src={user.display_pic || 'default-pic.png'} alt='User profile' />
                             <h3>{user.userName}</h3>
                         </div>
                         <div className='following'>
                             <h2>{user.following.length}</h2>
                             <h2>Following</h2>
                         </div>
-                      
                     </div>
                     <button style={{
-        fontSize: '1.4vmax',
-        backgroundColor: 'orangered',
-        color: 'white',
-        width:"50%",
-        border: 'none',
-        padding: '5px 20px', // Increased padding for better button size
-        margin: '1vmax auto', // Added margin to the left of the button
-        cursor: 'pointer',
-        borderRadius: '10px'
-    }}>
-        Follow
-    </button>
+                        fontSize: '1.4vmax',
+                        backgroundColor: 'orangered',
+                        color: 'white',
+                        width: "50%",
+                        border: 'none',
+                        padding: '5px 20px',
+                        margin: '1vmax auto',
+                        cursor: 'pointer',
+                        borderRadius: '10px'
+                    }}>
+                        Follow
+                    </button>
                     <div style={{ margin: '2vmax 0', width: '100%', display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
-    <h3 style={{ fontSize: '1.4vmax', marginLeft: '0vmax', cursor: 'pointer' }}    onClick={handlepostshow}>Posts</h3>
-   
-</div>
+                        <h3 style={{ fontSize: '1.4vmax', marginLeft: '0vmax', cursor: 'pointer' }} onClick={togglePosts}>
+                            {showPosts ? 'Hide Posts' : 'Show Posts'}
+                        </h3>
+                    </div>
 
+                    {showPosts && ( // Render posts only if showPosts is true
+                        <div className='contentt'>
+                            <div className='post-container'>
+                                {posts.map((post) => (
+                                    <li key={post._id}>
+                                        <Post post={post} Isauth={Isauth} User={User}
+                                            showComments={activePostId === post._id}
+                                            onPostClick={handlePostClick} />
+                                    </li>
+                                ))}
+                            </div>
+                        </div>
+                    )}
 
-
-
-                    <div className='aboutcon' >
+                    <div className='aboutcon'>
                         <div className="resume">
                             <header className="resume-header">
                                 <h1>{user.Name}</h1>

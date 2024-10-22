@@ -7,6 +7,7 @@ import Loading from '../src/loading';
 import { useDispatch, useSelector } from 'react-redux'
 import { logout, profileloader } from '../src/actions/loadprofileAction';
 import { useNavigate } from 'react-router-dom';
+import Post from '../src/postsshow/post';
 
 const Userprofile = () => {
   
@@ -101,6 +102,7 @@ const handleLogout = () => {
 
 
 
+
   return (
 
     <>
@@ -126,11 +128,10 @@ const handleLogout = () => {
 
  <div className='editbloc'>
 <h3> <a href='/edit-profile'>Edit profile</a></h3>
-<h3> <a href='###'>Posts</a></h3>
+<h3 > <p>Posts</p></h3>
 
 
  </div>
-
 
 
 
