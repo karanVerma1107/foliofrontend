@@ -48,7 +48,11 @@ const {loadingss, replies=[]} = useSelector(state => state.getReply);
     };
 
     const handleAddReply = (content) => {
-         dispatch(replyToComment(comment._id, content))
+         dispatch(replyToComment(comment._id, content)).then(()=>{
+            setTimeout(()=>{
+                dispatch(getreplyAction(comment._id))
+            }, 1000)
+         })
         setShowReplyInput(false); // Hide the reply input after submitting
         setReplyContent('')
     };
@@ -117,7 +121,7 @@ const {loadingss, replies=[]} = useSelector(state => state.getReply);
                     showReplyInput && replies.length > 0 && (
                         <div className="replies">
                             {replies.map(reply => (
-                                <Reply key={reply._id} reply={reply} Isauth={Isauth}/> // Ensure Reply component handles rendering of each reply
+                                <Reply key={reply._id} reply={reply} Isauth={Isauth} comment = {comment}/> // Ensure Reply component handles rendering of each reply
                             ))}
                         </div>
                     )

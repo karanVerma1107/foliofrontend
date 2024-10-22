@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { allpostsaction } from '../actions/postsaction.js'
 import './posts.css'
@@ -21,7 +21,9 @@ const Posts = () => {
 
 
 const {posts, loading} = useSelector(state=>state.posts);
-console.log("posts are: ", posts);
+//console.log("posts are: ", posts);
+const [activePostId, setActivePostId] = useState(null);
+
 
 useEffect(()=>{
 dispatch(profileloader());  
@@ -32,7 +34,11 @@ dispatch(allpostsaction());
 const { User, Isauth } = useSelector(state => state.displayprofile);
 useGlobalKeyListener();
 
-console.log("isauth status hereee:", Isauth)
+const handlePostClick = (postId) => {
+    setActivePostId(prevPostId => (prevPostId === postId ? null : postId));
+};
+
+//console.log("isauth status hereee:", Isauth)
   return (
    // <MentionProvider>
       //  {useGlobalKeyListener()}
@@ -44,7 +50,9 @@ console.log("isauth status hereee:", Isauth)
                 {posts && posts.map((post) => {
                     return (
                         <li key={post._id}>
-                            <Post post={post} Isauth={Isauth} User={User} />
+                            <Post post={post} Isauth={Isauth} User={User} 
+                             showComments={activePostId === post._id} 
+                             onPostClick={handlePostClick}  />
                         </li>
                     );
                 })}

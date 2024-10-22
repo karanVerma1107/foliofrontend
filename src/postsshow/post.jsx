@@ -13,7 +13,7 @@ import UnifiedInput from './UniInput.jsx';
 
 
 
-const Post = React.memo(({ post, Isauth, User }) => {
+const Post = React.memo(({ post, Isauth, User,  showComments, onPostClick  }) => {
     const dispatch = useDispatch();
     //const {comments=[], loading}  = useSelector(state=>state.getComm)
     const { comments = [], loading } = useSelector(state => state.getComm);
@@ -22,7 +22,10 @@ const Post = React.memo(({ post, Isauth, User }) => {
 
 
 const {message , error, success} = useSelector(state=> state.Addcomm);
-    const [showComments, setShowComments] = useState(false);
+    //const [showComments, setShowComments] = useState(false);
+
+    
+
      const alert = useAlert();
         const [like, setLiked] = useState(false);
     
@@ -40,10 +43,10 @@ const {message , error, success} = useSelector(state=> state.Addcomm);
         };
     
         const handleCommentsClick = () => {
-            setShowComments(prev => !prev); // Toggle the comments visibility
-            if (!showComments) { // Only fetch comments if they are not currently shown
-                dispatch(getCommAction(post._id));
-            }
+            onPostClick(post._id); // Call the parent's click handler
+        if (!showComments) {
+            dispatch(getCommAction(post._id));
+        }
         };
     
         const addCommentAction = (content) => {
@@ -96,7 +99,7 @@ const {message , error, success} = useSelector(state=> state.Addcomm);
             });
         };
 
-
+        
     
 
     return (
@@ -167,15 +170,21 @@ const {message , error, success} = useSelector(state=> state.Addcomm);
             {showComments && ( // Conditionally render comments based on the toggle
                 <div className='comments-section'>
 
-         <UnifiedInput 
-            onChange={handleInputChange}
-             value={commentValue}   
-                     
-                       
-                        onSubmit={addCommentAction} 
-                        placeholder="Add a comment..." 
-                       
-                    />
+<div className='comment-input-container'> {/* New div for flex layout */}
+<textarea
+                value={commentValue}
+                onChange={handleInputChange}
+                placeholder="Add a comment..."
+                className='comment-input'
+                rows={1} // Start with a single row
+                style={{ resize: 'none' , height: "2.8vmax" }} // Prevent manual resizing
+                onInput={(e) => {
+                    e.target.style.height = 'auto'; // Reset height
+                    e.target.style.height = `${e.target.scrollHeight}px`; // Set height to scroll height
+                }}
+            />
+            <button onClick={addCommentAction} className='add-comment-button'>Add</button>
+        </div>
                     {loading ? (
                         <p>Loading comments...</p>
                     ) : (

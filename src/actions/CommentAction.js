@@ -43,11 +43,11 @@ export const ADDcommAction = (Content, id)=> async(dispatch)=>{
         }else{
             errormess = error.message
         }
-        s
+        
                 dispatch({type: ADD_COMMENT_FAILURE,
                     payload: errormess
                 })
-    
+    console.log("error is, ", error)
         
        }}
 

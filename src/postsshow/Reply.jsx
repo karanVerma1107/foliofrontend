@@ -4,9 +4,9 @@ import { FaStar } from 'react-icons/fa6';
 import { useAlert } from 'react-alert';
 import { useDispatch } from 'react-redux';
 import UnifiedInput from './UniInput';
-import { likeReply, replyToComment } from '../actions/CommentAction';
+import { likeReply, replyToComment, getreplyAction } from '../actions/CommentAction';
 
-const Reply = ({reply, Isauth}) => {
+const Reply = ({reply, Isauth, comment}) => {
 const dispatch = useDispatch();
 const alert = useAlert();
     const [like, setLiked] = useState(false);
@@ -44,7 +44,12 @@ const alert = useAlert();
 
   
   const handleAddReply = (content) => {
-   dispatch(replyToComment(reply._id, content))
+   dispatch(replyToComment(reply._id, content)).then(()=>{
+    setTimeout(()=>{
+        dispatch(getreplyAction(comment._id))
+    }, 1000)
+ })
+   
    setShowReplyInput(false); // Hide the reply input after submitting
    setReplyContent('')
 };

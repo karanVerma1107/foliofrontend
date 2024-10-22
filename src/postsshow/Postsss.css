@@ -226,3 +226,32 @@
 .unified-input-container button:hover {
     background-color: darkorange;
 }
+.comment-input-container {
+    display: flex; /* Use flexbox for alignment */
+    align-items: center; /* Center items vertically */
+    margin-bottom: 10px; /* Optional: space below the input/button */
+}
+
+.comment-input {
+    flex: 1; /* Allow input to take available space */
+    padding: 8px;
+    margin-right: 10px;
+    border: 1px solid orangered; /* Border color */
+    border-radius: 4px;
+    font-size: 1.2vmax; /* Font size */
+    color: rgb(2, 2, 2); /* Text color */
+}
+
+.add-comment-button {
+    padding: 8px 12px;
+    background-color: orangered; /* Background color */
+    color: white; /* Text color */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1.2vmax; /* Font size */
+}
+
+.add-comment-button:hover {
+    background-color: #ff4500; /* Darker shade for hover effect */
+}
