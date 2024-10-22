@@ -106,22 +106,24 @@ export const addApostAction = (postdata, files) => async (dispatch) => {
 
 
 //to get user post 
-export const getUserPost = (id)=>async(dispatch)=>{
+export const getUserPost = (id) => async (dispatch) => {
     try {
-        dispatch({type: GET_USER_POST_REQUEST})
+        dispatch({ type: GET_USER_POST_REQUEST });
+        console.log("ID is", id);
         
         const config = { headers: { 'Content-Type': 'application/json' } };
 
+        // Changed to POST request
+        const response = await axios.post('/api/v1/getUserPost', { id }, config);
+        console.log('Response is', response);
+        
+        const posts = response.data.posts;
+        console.log("Posts are", posts);
 
-        const response = await axios.get('getUserPost', id ,config);
-        const posts = response.data.posts
-
-        dispatch({type: GET_USER_POST_SUCCESS, 
-            payload: posts
-        })
-
-
-
+        dispatch({
+            type: GET_USER_POST_SUCCESS,
+            payload: posts,
+        });
 
     } catch (error) {
         let errormess;
@@ -130,7 +132,7 @@ export const getUserPost = (id)=>async(dispatch)=>{
         } else {
             errormess = error.message;
         }
-        
+
         dispatch({ type: GET_USER_POST_FAILURE, payload: errormess });
     }
-    }
+};

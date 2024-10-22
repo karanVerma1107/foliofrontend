@@ -39,6 +39,7 @@ const User = () => {
 
     const handlepostshow = ()=>{
         dispatch(getUserPost(user._id))
+        console.log('user id is', user._id);
     }
 
     return (
@@ -58,22 +59,24 @@ const User = () => {
                             <h2>{user.following.length}</h2>
                             <h2>Following</h2>
                         </div>
+                      
                     </div>
-
-                    <div style={{ margin: '2vmax 0', width: '100%', display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
-    <h3 style={{ fontSize: '1.4vmax', marginLeft: '0vmax', cursor: 'pointer' }}    onClick={handlepostshow}>Posts</h3>
-    <button style={{
+                    <button style={{
         fontSize: '1.4vmax',
         backgroundColor: 'orangered',
         color: 'white',
+        width:"50%",
         border: 'none',
         padding: '5px 20px', // Increased padding for better button size
-        marginLeft: '3vmax', // Added margin to the left of the button
+        margin: '1vmax auto', // Added margin to the left of the button
         cursor: 'pointer',
         borderRadius: '10px'
     }}>
         Follow
     </button>
+                    <div style={{ margin: '2vmax 0', width: '100%', display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
+    <h3 style={{ fontSize: '1.4vmax', marginLeft: '0vmax', cursor: 'pointer' }}    onClick={handlepostshow}>Posts</h3>
+   
 </div>
 
 
