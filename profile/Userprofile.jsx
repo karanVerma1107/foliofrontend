@@ -5,7 +5,8 @@ import html2pdf from 'html2pdf.js';
 import Metadata from '../metadata';
 import Loading from '../src/loading';
 import { useDispatch, useSelector } from 'react-redux'
-import { profileloader } from '../src/actions/loadprofileAction';
+import { logout, profileloader } from '../src/actions/loadprofileAction';
+import { useNavigate } from 'react-router-dom';
 
 const Userprofile = () => {
   
@@ -19,7 +20,7 @@ const Userprofile = () => {
     
     
     const pdfRef = useRef(null);
-
+const navigate = useNavigate();
     
 
     const adjustFontSize = () => {
@@ -88,6 +89,15 @@ while(!User || loading){
 }
 
 
+
+const handleLogout = () => {
+    // Add your logout logic here
+    console.log('User logged out');
+    logout();
+    navigate('/')
+    // For example, redirecting to the login page
+    // history.push('/login');
+};
 
 
 
@@ -204,10 +214,10 @@ while(!User || loading){
 
 
  <button className= "dltbtn" onClick={downloadPDF}>Download as PDF</button>
- 
+    
+ <button className="logoutbtn" onClick={handleLogout}>Logout</button>
     </div>
-    
-    
+ 
     </>
 
            

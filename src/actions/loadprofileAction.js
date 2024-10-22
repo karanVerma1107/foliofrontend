@@ -154,3 +154,10 @@ export  const editstkaction =  (profileData)=> async(dispatch)=>{
                 throw error.response.data; // Handle errors appropriately
             }
         };
+
+
+
+        export const logout = async()=>{
+            const response = await axios.post('/api/v1/logout');
+            console.log(response.data);
+        }

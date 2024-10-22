@@ -1,3 +1,4 @@
+
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
@@ -52,7 +53,26 @@ const User = () => {
                         </div>
                     </div>
 
-                    <div className='aboutcon' style={{ padding: '20px', backgroundColor: '#fff', border: '1px solid #ccc' }}>
+                    <div style={{ margin: '2vmax 0', width: '100%', display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
+    <h3 style={{ fontSize: '1.4vmax', marginLeft: '0vmax', cursor: 'pointer' }}>Posts</h3>
+    <button style={{
+        fontSize: '1.4vmax',
+        backgroundColor: 'orangered',
+        color: 'white',
+        border: 'none',
+        padding: '5px 20px', // Increased padding for better button size
+        marginLeft: '3vmax', // Added margin to the left of the button
+        cursor: 'pointer',
+        borderRadius: '10px'
+    }}>
+        Follow
+    </button>
+</div>
+
+
+
+
+                    <div className='aboutcon' >
                         <div className="resume">
                             <header className="resume-header">
                                 <h1>{user.Name}</h1>
