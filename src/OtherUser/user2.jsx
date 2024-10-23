@@ -63,12 +63,12 @@ const User2 = () => {
 
     const handleModalOpen = (content) => {
 
-        if (content === 'Followers' && User) {
+        if (content === 'Followers' && user) {
             dispatch(Getfollowers(user._id)); // Call the action with User._id
             //setModalData(followers);
         }
 
-        if(content == 'Following' && User){
+        if(content == 'Following' && user){
             dispatch(getFollowing(user._id));
            // setModalData(following);
         }
