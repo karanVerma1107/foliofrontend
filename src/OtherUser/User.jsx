@@ -3,16 +3,20 @@
 
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useNavigation, useParams } from 'react-router-dom';
 import { getUserByUsername } from '../actions/searchingAction';
 import './User.css';
 import Post from '../postsshow/post';
 import Loading from '../loading';
 import { getUserPost } from '../actions/postsaction';
+import { profileloader } from '../actions/loadprofileAction';
 
 const User = () => {
     const { username } = useParams();
     const dispatch = useDispatch();
+     // Fetch the user when the component mounts or username changes
+    
+
     const { users = [], loading, error } = useSelector(state => state.getUserByName);
     const { posts = [] } = useSelector(state => state.userPost);
     const { User, Isauth } = useSelector(state => state.displayprofile);
@@ -22,10 +26,28 @@ const User = () => {
     const [showPosts, setShowPosts] = useState(false);
 
 
-    // Fetch the user when the component mounts or username changes
+   
+    const navigate = useNavigate()
+
+   
+
     useEffect(() => {
         dispatch(getUserByUsername(username));
+        dispatch(profileloader());
     }, [dispatch, username]);
+
+
+    const user = users.length > 0 ? users[0] : null;
+
+
+    //Check if User is defined and matches the fetched user
+    useEffect(() => {
+        if (User && user && User._id === user._id) {
+            navigate('/profile');
+        }
+    }, [User, user, navigate]);
+
+
 
     // Handle loading and error states
     if (loading) {
@@ -44,7 +66,12 @@ const User = () => {
         );
     }
 
-    const user = users.length > 0 ? users[0] : null;
+
+
+
+    //
+
+
 
     const handlePostShow = () => {
         if (user) {
@@ -64,6 +91,10 @@ const User = () => {
         setShowPosts(prevShowPosts => !prevShowPosts); // Toggle the visibility of posts
         handlePostShow(); // Fetch posts when toggled
     };
+
+    
+ 
+
 
     return (
         <div className='mainco'>

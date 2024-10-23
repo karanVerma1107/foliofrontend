@@ -8,10 +8,11 @@ import { useDispatch, useSelector } from 'react-redux'
 import { logout, profileloader } from '../src/actions/loadprofileAction';
 import { useNavigate } from 'react-router-dom';
 import Post from '../src/postsshow/post';
+import { getUserPost } from '../src/actions/postsaction';
 
 const Userprofile = () => {
   
-    const{  loading, success, error, User, followersCount, followingCount} = useSelector((state)=> state.displayprofile);
+    const{  loading, success, error, User, followersCount, followingCount, Isauth} = useSelector((state)=> state.displayprofile);
   
   const dispatch = useDispatch();
   useEffect(()=>{
@@ -80,15 +81,6 @@ useEffect(() => {
 
 
 
-while(!User || loading){
-
-  return <div className=' loadingc'><Loading/>
-  <h1>Refresh once</h1></div>
-   
-   
-
-}
-
 
 
 const handleLogout = () => {
@@ -101,6 +93,39 @@ const handleLogout = () => {
 };
 
 
+const [activePostId, setActivePostId] = useState(null);
+
+const [showPosts, setShowPosts] = useState(false);
+
+const { posts = [] } = useSelector(state => state.userPost);
+
+const handlePostShow = () => {
+    if (User) {
+        dispatch(getUserPost(User._id));
+        console.log('User ID is', User._id);
+    }
+};
+
+const handlePostClick = (postId) => {
+    setActivePostId(prevPostId => (prevPostId === postId ? null : postId));
+};
+
+
+
+
+const togglePosts = () => {
+    setShowPosts(prevShowPosts => !prevShowPosts); // Toggle the visibility of posts
+    handlePostShow(); // Fetch posts when toggled
+};
+
+if (loading || !User) {
+    return (
+        <div className='loadingc'>
+            <Loading />
+            <h1>Refresh once</h1>
+        </div>
+    );
+}
 
 
   return (
@@ -128,10 +153,26 @@ const handleLogout = () => {
 
  <div className='editbloc'>
 <h3> <a href='/edit-profile'>Edit profile</a></h3>
-<h3 > <p>Posts</p></h3>
+<h3  onClick={togglePosts}  style={{cursor: "pointer"}}>  {showPosts ? 'Hide Posts' : 'Show Posts'}</h3>
 
 
  </div>
+
+
+
+ {showPosts && ( // Render posts only if showPosts is true
+                        <div className='contentt'>
+                            <div className='post-container'>
+                                {posts.map((post) => (
+                                    <li key={post._id}>
+                                        <Post post={post} Isauth={Isauth} User={User}
+                                            showComments={activePostId === post._id}
+                                            onPostClick={handlePostClick} />
+                                    </li>
+                                ))}
+                            </div>
+                        </div>
+                    )}
 
 
 
