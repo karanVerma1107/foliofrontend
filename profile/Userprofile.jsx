@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import './profile.css'
+import './profile2.css'
 import pic from './pictemp.png'
 import html2pdf from 'html2pdf.js';
 import Metadata from '../metadata';

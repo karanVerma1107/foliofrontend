@@ -120,7 +120,7 @@ const {message , error, success} = useSelector(state=> state.Addcomm);
     return (
         <div className='post-card'>
             <div className='user-details'>
-                <img src={post.user_name.display_pic} className='user-img' alt="User" />
+                <img src={post.user_name.display_pic} className='user-img' alt="User"  style={{width: "3vmax", height: "3vmax"}}/>
                 <h3><a href={`/${post.user_name.userName}`} style={{textDecoration: "none" , color: "black" }}>{post.user_name.userName}</a></h3>
             </div>
 

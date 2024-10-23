@@ -13,6 +13,7 @@ import TakeUserName from './authentication/takeUserName.jsx'
 import { MentionProvider } from '../mentionLogic/useMention.jsx'
 import User from './OtherUser/User.jsx'
 import Editprofile from '../profile/Editprofile.jsx'
+import User2 from './OtherUser/user2.jsx'
 
 function App() {
   
@@ -38,7 +39,7 @@ function App() {
       <Route exact path='/profile' element={<Userprofile/>}/> 
       <Route exact path='/edit-profile' element={<Editprofile/>}/> 
       <Route exact path='/Create-Post' element={<Addpost/>}/> 
-      <Route exact path='/:username' element={<User/>}/> 
+      <Route exact path='/:username' element={<User2/>}/> 
 
 
 

@@ -1,0 +1,194 @@
+.user-profile {
+    margin-left: 5vmax;
+    background-color: #f8f9fa; /* Light background for contrast */
+    font-family: 'Arial', sans-serif;
+    padding: 2vmax;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.profile-header {
+    display: flex;
+    justify-content: center; /* Center items in a row */
+    align-items: center;
+    margin-bottom: 3vmax;
+}
+
+.followers-info, .following-info {
+    text-align: center;
+    margin: 0 2vmax; /* Spacing between elements */
+}
+
+.followers-info h2, .following-info h2 {
+    font-size: 2rem; /* Default font size */
+    color: orangered; /* Using orangered */
+}
+
+.followers-info h3, .following-info h3 {
+    font-size: 1rem; /* Smaller font for labels */
+    color: #555;
+}
+
+.profile-picture {
+    text-align: center;
+    margin: 0 2vmax; /* Spacing between elements */
+}
+
+.user-image {
+    width: 100px; /* Default image size */
+    height: 100px; /* Default image size */
+    border-radius: 50%;
+    border: 3px solid orangered; /* Border in orangered */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.username {
+    margin-top: 1vmax;
+    font-size: 1.5rem; /* Default font size */
+    color: orangered;
+}
+
+.follow-button {
+    background-color: orangered; /* Using orangered */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 1rem; /* Default font size */
+    cursor: pointer;
+    margin: 1vmax auto; /* Center button */
+    display: block; /* Centering */
+    transition: background-color 0.3s;
+}
+
+.follow-button:hover {
+    background-color: #c84b1c; /* Darker shade on hover */
+}
+
+.toggle-posts {
+    text-align: center;
+    cursor: pointer;
+    margin: 1vmax 0;
+}
+
+.toggle-posts h3 {
+    font-size: 1.2rem; /* Default font size */
+    color: orangered;
+    transition: color 0.3s;
+}
+
+.toggle-posts h3:hover {
+    color: #c84b1c; /* Darker shade on hover */
+}
+
+.posts-section {
+    margin-top: 2vmax;
+}
+
+.post-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.resume-card {
+    background-color: white;
+    border-radius: 10px;
+    padding: 2vmax;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    margin-top: 3vmax;
+}
+
+.resume-header {
+    text-align: center;
+    margin-bottom: 2vmax;
+}
+
+.resume-header h1 {
+    font-size: 2rem; /* Default font size */
+    color: orangered;
+}
+
+.resume-header p {
+    font-size: 1rem; /* Default font size */
+    color: #555;
+    margin: 0.5vmax 0;
+}
+
+.resume-section {
+    margin: 2vmax 0;
+}
+
+.section-title {
+    font-size: 1.5rem; /* Default font size */
+    color: orangered;
+    margin-bottom: 1vmax;
+}
+
+.resume-section ul {
+    padding-left: 20px;
+    color: #333;
+}
+
+.resume-section li {
+    margin: 0.5vmax 0;
+    position: relative;
+}
+
+.resume-section li span {
+    position: absolute;
+    left: -15px;
+    color: orangered;
+    font-weight: bold;
+}
+
+.error {
+    color: red;
+    font-size: 1.2rem;
+    text-align: center;
+    margin-top: 5vmax;
+}
+
+.loading-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .user-image {
+        width: 80px; /* Smaller image size for mobile */
+        height: 80px; /* Smaller image size for mobile */
+    }
+
+    .followers-info h2, .following-info h2 {
+        font-size: 1.5rem; /* Smaller font size */
+    }
+
+    .followers-info h3, .following-info h3 {
+        font-size: 0.8rem; /* Smaller font size for labels */
+    }
+
+    .username {
+        font-size: 1.2rem; /* Smaller username font size */
+    }
+
+    .follow-button {
+        width: 100%;
+        padding: 12px;
+        font-size: 0.9rem; /* Smaller font size for button */
+    }
+
+    .toggle-posts h3 {
+        font-size: 1rem; /* Smaller font size */
+    }
+
+    .resume-header h1 {
+        font-size: 1.5rem; /* Smaller font size */
+    }
+
+    .user-profile{
+        margin-left: 6.5vmax;
+    }
+}

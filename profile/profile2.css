@@ -1,0 +1,113 @@
+/* Main Container */
+/* Main Container */
+.mainco {
+    margin: 0 auto;
+    padding: 2vmax;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    max-width: 800px; /* Limit width for better readability */
+}
+
+/* Upper Section */
+.upper-stuff {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 3vmax;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 2vmax;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.followers, .following {
+    text-align: center;
+    flex: 1; /* Equal space for followers and following */
+}
+
+.followers h2, .following h2 {
+    font-size: 1.5vmax;
+    color: orangered;
+}
+
+.followers h3, .following h3 {
+    font-size: 1.0vmax;
+    color: #555;
+}
+
+.profilepic {
+    text-align: center;
+    flex: 1; /* Flex for equal spacing */
+}
+
+.userpic {
+    width: 80px; /* Image size */
+    height: 80px;
+    border-radius: 50%;
+    border: 3px solid orangered;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Edit Profile and Toggle Posts */
+.editbloc {
+    text-align: center;
+    margin: 1vmax 0;
+}
+
+.editbloc h3 {
+    font-size: 1.5vmax;
+    color: orangered;
+}
+
+/* About Section */
+.aboutcon {
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    margin-top: 3vmax;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 100%; /* A4 width for PDF */
+    max-width: 100%;
+}
+
+/* PDF Section */
+.resume {
+    max-width: 100%;
+    padding: 20px;
+}
+
+/* Buttons */
+.dltbtn, .logoutbtn {
+    background-color: orangered;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 1.0vmax;
+    cursor: pointer;
+    margin: 1vmax auto;
+    display: block;
+    transition: background-color 0.3s;
+}
+
+.dltbtn:hover, .logoutbtn:hover {
+    background-color: #c84b1c; /* Darker shade on hover */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .upper-stuff {
+        flex-direction: column; /* Stack vertically on small screens */
+        align-items: center;
+    }
+
+    .followers, .following {
+        margin: 0; /* Remove margin */
+    }
+
+    .userpic {
+        width: 60px;
+    }
+}
