@@ -7,6 +7,7 @@ import Post from '../postsshow/post';
 import Loading from '../loading';
 import { getUserPost } from '../actions/postsaction';
 import { profileloader } from '../actions/loadprofileAction';
+import { Getfollowers, getFollowing } from '../actions/folllowAction';
 
 const User2 = () => {
     const { username } = useParams();
@@ -19,12 +20,93 @@ const User2 = () => {
     const [showPosts, setShowPosts] = useState(false);
     const navigate = useNavigate();
 
+
+
+ 
+    const { followers,
+        following ,
+        loadingFollowers,
+        loadingFollowing,
+    } = useSelector(state=> state.getconnection)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     useEffect(() => {
         dispatch(getUserByUsername(username));
         dispatch(profileloader());
     }, [dispatch, username]);
 
     const user = users.length > 0 ? users[0] : null;
+
+
+
+
+    const [modalVisible, setModalVisible] = useState(false);
+    const [modalContent, setModalContent] = useState('');
+
+    const [modalData, setModalData] = useState([]);
+
+
+
+
+    const handleModalOpen = (content) => {
+
+        if (content === 'Followers' && User) {
+            dispatch(Getfollowers(user._id)); // Call the action with User._id
+            //setModalData(followers);
+        }
+
+        if(content == 'Following' && User){
+            dispatch(getFollowing(user._id));
+           // setModalData(following);
+        }
+
+        setModalContent(content);
+        setModalVisible(true);
+    };
+
+    const handleModalClose = () => {
+        setModalVisible(false);
+    };
+
+
+
+    useEffect(() => {
+        if (modalContent === 'Followers') {
+            setModalData(followers);
+        } else if (modalContent === 'Following') {
+            setModalData(following);
+        }
+    }, [followers, following, modalContent]);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     useEffect(() => {
         if (User && user && User._id === user._id) {
@@ -68,7 +150,7 @@ const User2 = () => {
             {user ? (
                 <>
                     <div className='profile-header'>
-                        <div className='followers-info'>
+                        <div className='followers-info'  onClick={() => handleModalOpen('Followers')}    style={{cursor: "pointer"}}>
                             <h2>{user.followers.length}</h2>
                             <h3>Followers</h3>
                         </div>
@@ -76,10 +158,37 @@ const User2 = () => {
                             <img className='user-image' src={user.display_pic || 'default-pic.png'} alt='User profile' />
                             <h2 className='username'>{user.userName}</h2>
                         </div>
-                        <div className='following-info'>
+                        <div className='following-info'  onClick={() => handleModalOpen('Following')}  style={{cursor: "pointer"}}>
                             <h2>{user.following.length}</h2>
                             <h3>Following</h3>
                         </div>
+
+
+                        
+                        {modalVisible && (
+                        <div className="modal" onClick={handleModalClose}>
+                            <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+                                <button className="close-button" onClick={handleModalClose}>×</button>
+                                <h2>{modalContent}</h2>
+                                {modalContent === 'Followers' && loadingFollowers ? (
+                                    <p>Loading followers...</p>
+                                ) : modalContent === 'Following' && loadingFollowing ? (
+                                    <p>Loading following...</p>
+                                ) : (
+                                    <ul>
+                                        {modalData.length > 0 ? modalData.map((user) => (
+                                            <li key={user._id}>
+                                                <img src={user.display_pic} alt={user.userName} style={{ width: '50px', height: '50px' }} />
+                                                <span><a href={`/${user.userName}`} style={{fontSize: "1.1vmax", textDecoration:"none", color: "black"}}>{user.userName}</a></span>
+                                            </li>
+                                        )) : (
+                                            <li>No {modalContent.toLowerCase()} found.</li>
+                                        )}
+                                    </ul>
+                                )}
+                            </div>
+                        </div>
+                    )}
                     </div>
 
                     <button className='follow-button'>Follow</button>

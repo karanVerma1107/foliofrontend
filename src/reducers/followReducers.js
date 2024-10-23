@@ -27,7 +27,7 @@ export const userFollowReducer = (state = initialState, action) => {
             return {
                 ...state,
                 loadingFollowers: false,
-                followers: action.payload.followers,
+                followers: action.payload,
             };
         case GET_USER_FOLLOWERS_FAILURE:
             return {
@@ -47,7 +47,7 @@ export const userFollowReducer = (state = initialState, action) => {
             return {
                 ...state,
                 loadingFollowing: false,
-                following: action.payload.followings,
+                following: action.payload,
             };
         case GET_USER_FOLLOWING_FAILURE:
             return {

@@ -192,3 +192,114 @@
         margin-left: 6.5vmax;
     }
 }
+
+
+
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 45vmax;
+    height: 45vmax;
+    background-color: rgba(12, 0, 0, 0.5); /* Semi-transparent background */
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Center items vertically */
+    border-radius: 12px;
+    margin-top: 1vmax;
+    border: 2px solid orangered;
+    z-index: 1000; /* Ensure it's on top */
+}
+
+.modal-content {
+    background-color: white; /* Add background color to content */
+    border-radius: 8px;
+    padding: 20px;
+    width: 40vmax; /* Adjust width to fit better */
+    height: auto; /* Allow height to adjust based on content */
+    max-height: 80vh; /* Limit height to viewport */
+    overflow-y: auto; /* Enable scrolling if content overflows */
+    display: flex;
+    flex-direction: column; /* Stack content vertically */
+    align-items: center;
+    text-align: center;
+    color: black; /* Text color */
+    font-size: 2vmax; /* Adjust font size as needed */
+}
+
+.modal-content h2 {
+    color: orangered; /* Use orangered for the title */
+    margin-bottom: 15px; /* Space below title */
+    font-size: 1.5vmax;
+}
+
+.close-button {
+    position: absolute; /* Position the button absolutely */
+    top: 10px; /* Distance from top */
+    right: 10px; /* Distance from right */
+    background-color: transparent; /* Transparent background */
+    border: none; /* No border */
+    color: black; /* Change to black for contrast */
+    font-size: 20px; /* Font size */
+    cursor: pointer; /* Pointer cursor */
+}
+
+.following-list, .followers-list {
+    list-style: none; /* Remove bullet points */
+    padding: 0; /* Remove padding */
+    margin: 0; /* Remove margin */
+    width: 100%; /* Full width */
+}
+
+.following-list li, .followers-list li {
+    display: flex; /* Flex layout for items */
+    align-items: center; /* Center items vertically */
+    padding: 10px; /* Space around items */
+    border-bottom: 1px solid #ddd; /* Divider between items */
+}
+
+.following-list li:last-child, .followers-list li:last-child {
+    border-bottom: none; /* Remove last item divider */
+}
+
+.following-list img, .followers-list img {
+    width: 2.8vmax; /* Image size */
+    height: 2.8vmax; /* Image size */
+    border-radius: 50%; /* Circular images */
+    margin-right: 10px; /* Space between image and text */
+}
+
+.following-list span, .followers-list span {
+    color: black; /* Text color for usernames */
+    font-weight: bold; /* Bold text */
+}
+
+
+.modal-content ul {
+    list-style-type: none; /* Remove default list styles */
+    padding: 0; /* Remove padding */
+}
+
+.modal-content li {
+    display: flex; /* Use flexbox to align items */
+    align-items: center; /* Center items vertically */
+    margin: 10px 0; /* Add some margin between list items */
+    padding: 10px; /* Add padding for better spacing */
+    background-color: rgba(255, 255, 255, 0.1); /* Light background for each item */
+    border-radius: 8px; /* Rounded corners */
+}
+
+.modal-content li img {
+    width: 2.7vmax; /* Fixed width */
+    height: 2.7vmax; /* Fixed height */
+    border-radius: 50%; /* Make the image circular */
+    margin-right: 15px; /* Space between image and text */
+}
+
+.modal-content li span {
+    color: rgb(10, 10, 10); /* Text color */
+    font-size: 1vmax; /* Adjust font size */
+    font-weight: 500;
+
+}

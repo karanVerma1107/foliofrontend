@@ -6,7 +6,7 @@
     background-color: #f9f9f9;
     border-radius: 10px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    max-width: 800px; /* Limit width for better readability */
+    max-width: 80%; /* Limit width for better readability */
 }
 
 /* Upper Section */
@@ -63,7 +63,7 @@
 /* About Section */
 .aboutcon {
     background-color: #fff;
-    padding: 20px;
+    padding: 14px;
     border: 1px solid #ccc;
     border-radius: 10px;
     margin-top: 3vmax;
@@ -75,7 +75,7 @@
 /* PDF Section */
 .resume {
     max-width: 100%;
-    padding: 20px;
+    padding: 15px;
 }
 
 /* Buttons */
@@ -110,4 +110,15 @@
     .userpic {
         width: 60px;
     }
+}
+
+
+.resume {
+    page-break-inside: avoid; /* Prevent breaking within the resume */
+    max-height: 11.7in; /* Maximum height for A4 */
+    overflow: hidden; /* Prevent overflow */
+}
+
+.resume-section {
+    page-break-inside: avoid; /* Prevent breaking within sections */
 }

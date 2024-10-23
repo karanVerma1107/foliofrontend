@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import './profile2.css'
+import './profile.css'
 import pic from './pictemp.png'
 import html2pdf from 'html2pdf.js';
 import Metadata from '../metadata';
@@ -8,11 +8,21 @@ import { useDispatch, useSelector } from 'react-redux'
 import { logout, profileloader } from '../src/actions/loadprofileAction';
 import { useNavigate } from 'react-router-dom';
 import Post from '../src/postsshow/post';
+import { Getfollowers, getFollowing } from '../src/actions/folllowAction';
 import { getUserPost } from '../src/actions/postsaction';
 
 const Userprofile = () => {
   
-    const{  loading, success, error, User, followersCount, followingCount, Isauth} = useSelector((state)=> state.displayprofile);
+    const{  loading, success, User, followersCount, followingCount, Isauth} = useSelector((state)=> state.displayprofile);
+    
+    const { followers,
+        following ,
+        loadingFollowers,
+        loadingFollowing,
+        error} = useSelector(state=> state.getconnection)
+
+
+
   
   const dispatch = useDispatch();
   useEffect(()=>{
@@ -48,25 +58,94 @@ const navigate = useNavigate();
         }
     };
     
-    // Call this function before generating the PDF
     const downloadPDF = () => {
         adjustFontSize(); // Adjust font size based on content
         const element = pdfRef.current;
+    
         const options = {
-            margin: [0.1, 0.1, 0.1, 0.1],
+            margin: [0.1, 0.1, 0.1, 0.1], // Adjust margins as needed
             filename: `${User.userName}'s-ATS.pdf`,
             image: { type: 'jpeg', quality: 0.98 },
             html2canvas: { scale: 2 },
             jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
         };
-        
+    
+        // Calculate total height and adjust if necessary
+        const totalHeight = element.scrollHeight;
+        const maxHeight = 11.7 * 72; // A4 height in points
+    
+        if (totalHeight > maxHeight) {
+            // You can adjust this font size reduction logic as needed
+            const sections = element.querySelectorAll('.resume-section');
+            sections.forEach(section => {
+                const heading = section.querySelector('h2');
+                const items = section.querySelectorAll('li');
+                const currentFontSize = parseFloat(getComputedStyle(heading).fontSize);
+                
+                // Reduce font size
+                heading.style.fontSize = `${currentFontSize * 1}px`;
+                items.forEach(item => {
+                    item.style.fontSize = `${currentFontSize *  0.9}px`;
+                });
+            });
+        }
+    
         html2pdf()
             .from(element)
             .set(options)
             .save();
     };
 
+
+
+
 const [displaypic , setdisplaypic] = useState(pic);
+
+
+
+const [modalVisible, setModalVisible] = useState(false);
+    const [modalContent, setModalContent] = useState('');
+
+    const [modalData, setModalData] = useState([]);
+
+
+
+
+    const handleModalOpen = (content) => {
+
+        if (content === 'Followers' && User) {
+            dispatch(Getfollowers(User._id)); // Call the action with User._id
+            //setModalData(followers);
+        }
+
+        if(content == 'Following' && User){
+            dispatch(getFollowing(User._id));
+           // setModalData(following);
+        }
+
+        setModalContent(content);
+        setModalVisible(true);
+    };
+
+    const handleModalClose = () => {
+        setModalVisible(false);
+    };
+
+
+
+    useEffect(() => {
+        if (modalContent === 'Followers') {
+            setModalData(followers);
+        } else if (modalContent === 'Following') {
+            setModalData(following);
+        }
+    }, [followers, following, modalContent]);
+
+
+
+
+
+
 
 useEffect(() => {
   if (User && User.display_pic && User.display_pic.length > 0) {
@@ -80,7 +159,9 @@ useEffect(() => {
 }, [User]); 
 
 
+const isSmallScreen = window.innerWidth <= 700; // Check if the screen is small
 
+    const fontSize = isSmallScreen ? "1.5vmax" : "1vmax"
 
 
 const handleLogout = () => {
@@ -128,6 +209,7 @@ if (loading || !User) {
 }
 
 
+
   return (
 
     <>
@@ -135,20 +217,48 @@ if (loading || !User) {
         <Metadata title={`${User.userName}'s Profile`} />
       )}
     <div className='mainco'>
- <div className='upper-stuff'>
-     <div className='followers'>
- <h2>{followersCount}</h2>     
-<h2>Follwers</h2>
-     </div>
-     <div className='profilepic'>
-<img  className='userpic' src={displaypic} alt='user-profile' />
-<h3>{User.userName}</h3>
-     </div>
-     <div className='following'>
-     <h2>{followingCount}</h2>
-<h2>Following</h2>
-     </div>
- </div>
+    <div className='profile-header'>
+                        <div className='followers-info'   onClick={() => handleModalOpen('Followers')}    style={{cursor: "pointer"}}>
+                            <h2>{followersCount}</h2>
+                            <h3>Followers</h3>
+                        </div>
+                        <div className='profile-picture'>
+                            <img className='user-image' src={User.display_pic || 'default-pic.png'} alt='User profile' />
+                            <h2 className='username'>{User.userName}</h2>
+                        </div>
+                        <div className='following-info'   onClick={() => handleModalOpen('Following')}  style={{cursor: "pointer"}}>
+                            <h2>{followingCount}</h2>
+                            <h3>Following</h3>
+                        </div>
+
+
+                        {modalVisible && (
+                        <div className="modal" onClick={handleModalClose}>
+                            <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+                                <button className="close-button" onClick={handleModalClose}>×</button>
+                                <h2>{modalContent}</h2>
+                                {modalContent === 'Followers' && loadingFollowers ? (
+                                    <p>Loading followers...</p>
+                                ) : modalContent === 'Following' && loadingFollowing ? (
+                                    <p>Loading following...</p>
+                                ) : (
+                                    <ul>
+                                        {modalData.length > 0 ? modalData.map((user) => (
+                                            <li key={user._id}>
+                                                <img src={user.display_pic} alt={user.userName} style={{ width: '50px', height: '50px' }} />
+                                                <span><a href={`/${user.userName}`} style={{fontSize: "1.1vmax", textDecoration:"none", color: "black"}}>{user.userName}</a></span>
+                                            </li>
+                                        )) : (
+                                            <li>No {modalContent.toLowerCase()} found.</li>
+                                        )}
+                                    </ul>
+                                )}
+                            </div>
+                        </div>
+                    )}
+
+                    </div>
+
 
 
  <div className='editbloc'>
@@ -186,16 +296,16 @@ if (loading || !User) {
         </header>
 
         <section className="resume-section">
-            <h2 className='sub'>Professional Summary</h2>
-            <p>{User.bio}</p>
+            <h2 className='sub' style={{ fontSize }}>Professional Summary</h2>
+            <li  style={{ fontSize }}>{User.bio}</li>
         </section>
 
         
         <section className="resume-section">
-            <h2 className='sub'>Skills</h2>
+            <h2 className='sub' style={{ fontSize }}>Skills</h2>
             <ul>
                 {User.skills.length > 0 ? (
-                    User.skills.map((skill, index) => <li key={index}><span>.</span>{skill}</li>)
+                    User.skills.map((skill, index) => <li key={index}   style={{ fontSize }}><span>.</span>{skill}</li>)
                 ) : (
                     <li>No skills listed.</li>
                 )}
@@ -203,10 +313,10 @@ if (loading || !User) {
         </section>
 
         <section className="resume-section">
-            <h2 className='sub'>Work Experience</h2>
+            <h2 className='sub' style={{ fontSize }}>Work Experience</h2>
             <ul>
                 {User.experience.length > 0 ? (
-                    User.experience.map((exp, index) => <li key={index}><span>.</span>{exp}</li>)
+                    User.experience.map((exp, index) => <li key={index}  style={{ fontSize }}><span>.</span>{exp}</li>)
                 ) : (
                     <li>No experience listed.</li>
                 )}
@@ -214,10 +324,10 @@ if (loading || !User) {
         </section>
 
         <section className="resume-section">
-            <h2 className='sub'>Education</h2>
+            <h2 className='sub' style={{ fontSize }}>Education</h2>
             <ul>
                 {User.education.length > 0 ? (
-                    User.education.map((edu, index) => <li key={index}><span>.</span>{edu}</li>)
+                    User.education.map((edu, index) => <li key={index}  style={{ fontSize }}><span>.</span>{edu}</li>)
                 ) : (
                     <li>No education listed.</li>
                 )}
@@ -227,10 +337,10 @@ if (loading || !User) {
        
 
         <section className="resume-section">
-            <h2 className='sub'>Achievements</h2>
+            <h2 className='sub' style={{ fontSize }}>Achievements</h2>
             <ul>
                 {User.achievments.length > 0 ? (
-                    User.achievments.map((achievement, index) => <li key={index}><span>.</span>{achievement}</li>)
+                    User.achievments.map((achievement, index) => <li key={index} style={{ fontSize }}><span>.</span>{achievement}</li>)
                 ) : (
                     <li>No achievements listed.</li>
                 )}
@@ -239,10 +349,10 @@ if (loading || !User) {
 
 
         <section className="resume-section">
-            <h2 className='sub'>Projects</h2>
+            <h2 className='sub' style={{ fontSize }}>Projects</h2>
             <ul>
                 {User.projects.length > 0 ? (
-                    User.projects.map((project, index) => <li key={index}><span>.</span>{project}</li>)
+                    User.projects.map((project, index) => <li key={index}  style={{ fontSize }}><span>.</span>{project}</li>)
                 ) : (
                     <li>No projects listed.</li>
                 )}

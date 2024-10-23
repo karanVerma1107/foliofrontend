@@ -17,6 +17,13 @@
      margin-left: 5vmax;
 }
 
+
+@media(max-width:700px){
+    .mainco{
+        margin-left: 7vmax;
+    }
+}
+
 .loadingc{
     width: 90%;
     min-height: 40vmax;
@@ -135,118 +142,6 @@
 
 
 
-.aboutcon {
-    min-width: 90%; /* A4 width */
-    height: auto;
-    padding: 1.5vmax; /* Padding for the container */
-    background-color: #fff;
-    border: 1px solid #312f2f;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-    overflow: hidden; /* Ensure no overflow */
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Center content horizontally */
-    justify-content: center; /* Center content vertically */
-}
-
-.resume {
-    font-family: Arial, sans-serif;
-    color: #000; /* Black text */
-    border: 1px solid black;
-    flex-grow: 1; /* Allow resume content to grow and fill space */
-    width: 100%; /* Full width of the parent */
-    max-width: 800px; /* Maximum width to maintain A4 proportions */
-    box-sizing: border-box; /* Include padding and border in element's total width */
-    padding: 1.3vmax; /* Add padding inside the resume */
-}
-
-.resume-header {
-    margin-bottom: 1vmax; /* Space below header */
-    border-bottom: 1px solid #ccc; /* Separator */
-    font-size: 1.2vmax;
-    text-align: center; /* Center header text */
-    padding-bottom: 0.2vmax; /* Padding below header */
-}
-
-.resume-header h1 {
-    font-size: 1.5vmax; /* Title size */
-    margin: 0; /* Remove default margin */
-}
-
-.resume-section {
-    margin-bottom: 1vmax; /* Space between sections */
-    page-break-inside: avoid;
-}
-
-.resume-section h2 {
-    font-size: 1.2vmax; /* Section title size */
-    margin: 0 0 1vmax; /* Space below section title */
-    border-bottom: 1px solid #ccc; /* Underline for section titles */
-    
-}
-
-.resume-section ul {
-    list-style-type: none; /* Remove bullet points */
-    padding-left: 0; /* Remove padding */
-}
-
-.resume-section li {
-    font-size: 1vmax; /* List item size */
-    margin-bottom: 0.3vmax; /* Space between list items */
-}
-
-.resume-footer {
-    margin-top: 0.7vmax; /* Space above footer */
-    border-top: 1px solid #ccc; /* Separator */
-    text-align: center; /* Center footer text */
-    padding-top: 0; /* Padding above footer */
-}
-
-.resume-footer p {
-    font-size: 0.8vmax; /* Footer text size */
-    margin: 0; /* Remove default margin */
-}
-
-
-
-
-
-@media(max-width: 1000px){
-    .followers h2{
-        font-size: 1.6vmax;
-    }
-
-    .following h2{
-        font-size: 1.6vmax;
-    }
-    .profilepic img{
-        width: 11vmax;
-        height: 10vmax;
-    }
-
-.resume-header h1{
-    font-size: 2vmax;
-}
-
-
-.resume-section li{
-    font-size: 1.5vmax;
-}
-
-.resume-section h2{
-    font-size: 1.8vmax;
-}
-
-.sub{
-    font-size: 2vmax;
-}
-
-.resume-header h2{
-    font-size: 1.9vmax;
-}
-
-}
-
 
 
 
@@ -296,7 +191,7 @@
 }
 
 .resume-section h2 {
-    font-size: 1.2vmax;
+    font-size: 1vmax;
     margin: 0 0 1vmax;
     border-bottom: 1px solid #ccc;
 }
@@ -395,7 +290,7 @@
 }
 
 .resume-section h2 {
-    font-size: 1.2vmax;
+    font-size: 1vmax;
     margin: 0 0 1vmax;
     border-bottom: 1px solid #2e2d2d;
 }
@@ -447,7 +342,7 @@
     }
 
     .resume-header h2 {
-        font-size: 1.9vmax;
+        font-size: 1.6vmax;
     }
 }
 
@@ -550,3 +445,153 @@ flex-direction: column;
     border-bottom: 1px solid black;
 }
 
+
+.profile-header {
+    display: flex;
+    justify-content: center; /* Center items in a row */
+    align-items: center;
+    margin-bottom: 3vmax;
+    margin-top: 1vmax;
+}
+
+.followers-info, .following-info {
+    text-align: center;
+    margin: 0 2vmax; /* Spacing between elements */
+}
+
+.followers-info h2, .following-info h2 {
+    font-size: 2rem; /* Default font size */
+    color: orangered; /* Using orangered */
+}
+
+.followers-info h3, .following-info h3 {
+    font-size: 1rem; /* Smaller font for labels */
+    color: #555;
+}
+
+.profile-picture {
+    text-align: center;
+    margin: 0 2vmax; /* Spacing between elements */
+}
+
+.user-image {
+    width: 100px; /* Default image size */
+    height: 100px; /* Default image size */
+    border-radius: 50%;
+    border: 3px solid orangered; /* Border in orangered */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.username {
+    margin-top: 1vmax;
+    font-size: 1.5rem; /* Default font size */
+    color: orangered;
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 45vmax;
+    height: 45vmax;
+    background-color: rgba(12, 0, 0, 0.5); /* Semi-transparent background */
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Center items vertically */
+    border-radius: 12px;
+    margin-top: 1vmax;
+    border: 2px solid orangered;
+    z-index: 1000; /* Ensure it's on top */
+}
+
+.modal-content {
+    background-color: white; /* Add background color to content */
+    border-radius: 8px;
+    padding: 20px;
+    width: 40vmax; /* Adjust width to fit better */
+    height: auto; /* Allow height to adjust based on content */
+    max-height: 80vh; /* Limit height to viewport */
+    overflow-y: auto; /* Enable scrolling if content overflows */
+    display: flex;
+    flex-direction: column; /* Stack content vertically */
+    align-items: center;
+    text-align: center;
+    color: black; /* Text color */
+    font-size: 2vmax; /* Adjust font size as needed */
+}
+
+.modal-content h2 {
+    color: orangered; /* Use orangered for the title */
+    margin-bottom: 15px; /* Space below title */
+    font-size: 1.5vmax;
+}
+
+.close-button {
+    position: absolute; /* Position the button absolutely */
+    top: 10px; /* Distance from top */
+    right: 10px; /* Distance from right */
+    background-color: transparent; /* Transparent background */
+    border: none; /* No border */
+    color: black; /* Change to black for contrast */
+    font-size: 20px; /* Font size */
+    cursor: pointer; /* Pointer cursor */
+}
+
+.following-list, .followers-list {
+    list-style: none; /* Remove bullet points */
+    padding: 0; /* Remove padding */
+    margin: 0; /* Remove margin */
+    width: 100%; /* Full width */
+}
+
+.following-list li, .followers-list li {
+    display: flex; /* Flex layout for items */
+    align-items: center; /* Center items vertically */
+    padding: 10px; /* Space around items */
+    border-bottom: 1px solid #ddd; /* Divider between items */
+}
+
+.following-list li:last-child, .followers-list li:last-child {
+    border-bottom: none; /* Remove last item divider */
+}
+
+.following-list img, .followers-list img {
+    width: 2.8vmax; /* Image size */
+    height: 2.8vmax; /* Image size */
+    border-radius: 50%; /* Circular images */
+    margin-right: 10px; /* Space between image and text */
+}
+
+.following-list span, .followers-list span {
+    color: black; /* Text color for usernames */
+    font-weight: bold; /* Bold text */
+}
+
+
+.modal-content ul {
+    list-style-type: none; /* Remove default list styles */
+    padding: 0; /* Remove padding */
+}
+
+.modal-content li {
+    display: flex; /* Use flexbox to align items */
+    align-items: center; /* Center items vertically */
+    margin: 10px 0; /* Add some margin between list items */
+    padding: 10px; /* Add padding for better spacing */
+    background-color: rgba(255, 255, 255, 0.1); /* Light background for each item */
+    border-radius: 8px; /* Rounded corners */
+}
+
+.modal-content li img {
+    width: 2.7vmax; /* Fixed width */
+    height: 2.7vmax; /* Fixed height */
+    border-radius: 50%; /* Make the image circular */
+    margin-right: 15px; /* Space between image and text */
+}
+
+.modal-content li span {
+    color: rgb(10, 10, 10); /* Text color */
+    font-size: 1vmax; /* Adjust font size */
+    font-weight: 500;
+
+}
