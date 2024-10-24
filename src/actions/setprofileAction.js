@@ -6,6 +6,11 @@ import { IS_USERNAME_AVIALABLE_REQUEST,
 IS_USERNAME_DONE_SUCCESS,
 IS_USERNAME_DONE_FAILURE } from "../constants/editprofile.js"
 
+import { USER_CONNECT_REQ,
+    USER_CONNECT_SUCCESS,
+    USER_CONNECT_FAIL
+ } from "../constants/connect.js";
+
 
 import axios from "axios";
 
@@ -66,3 +71,28 @@ export const setusername = (username)=>async(dispatch)=>{
     
     }
 }
+
+
+
+export const ConnectUser = (username) => async (dispatch) => {
+    dispatch({ type: USER_CONNECT_REQ });
+
+    try {
+    
+        const response = await axios.put(`/api/v1/connect/${username}`); // Adjust the URL as necessary
+        const message = response.data.message; // Destructure the data from the response
+
+        dispatch({ type: USER_CONNECT_SUCCESS, payload: message});
+    } catch (error) {
+        let errormess
+        if(error.response && error.response.data){
+            errormess = error.response.data.message || 'something went wrong'
+        }else{
+            errormess = error.message
+        }
+        
+                dispatch({type: USER_CONNECT_FAIL,
+                    payload: errormess
+                })
+    }
+};

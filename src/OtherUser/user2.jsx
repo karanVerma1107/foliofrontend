@@ -8,80 +8,39 @@ import Loading from '../loading';
 import { getUserPost } from '../actions/postsaction';
 import { profileloader } from '../actions/loadprofileAction';
 import { Getfollowers, getFollowing } from '../actions/folllowAction';
+import { useAlert } from 'react-alert';
+import { ConnectUser } from '../actions/setprofileAction';
 
 const User2 = () => {
     const { username } = useParams();
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const alert = useAlert();
+    
     const { users = [], loading, error } = useSelector(state => state.getUserByName);
     const { posts = [] } = useSelector(state => state.userPost);
-    const { User, Isauth } = useSelector(state => state.displayprofile);
+    const { User } = useSelector(state => state.displayprofile);
+    const { followers, following, loadingFollowers, loadingFollowing } = useSelector(state => state.getconnection);
+
+    const user = users.length > 0 ? users[0] : null;
 
     const [activePostId, setActivePostId] = useState(null);
     const [showPosts, setShowPosts] = useState(false);
-    const navigate = useNavigate();
-
-
-
- 
-    const { followers,
-        following ,
-        loadingFollowers,
-        loadingFollowing,
-    } = useSelector(state=> state.getconnection)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    const [modalVisible, setModalVisible] = useState(false);
+    const [modalContent, setModalContent] = useState('');
+    const [modalData, setModalData] = useState([]);
+    const [userFollowing, setUserFollowing] = useState(false);
 
     useEffect(() => {
         dispatch(getUserByUsername(username));
         dispatch(profileloader());
     }, [dispatch, username]);
 
-    const user = users.length > 0 ? users[0] : null;
-
-
-
-
-    const [modalVisible, setModalVisible] = useState(false);
-    const [modalContent, setModalContent] = useState('');
-
-    const [modalData, setModalData] = useState([]);
-
-
-
-
-    const handleModalOpen = (content) => {
-
-        if (content === 'Followers' && user) {
-            dispatch(Getfollowers(user._id)); // Call the action with User._id
-            //setModalData(followers);
+    useEffect(() => {
+        if (user) {
+            setUserFollowing(User && User.following.includes(user._id));
         }
-
-        if(content == 'Following' && user){
-            dispatch(getFollowing(user._id));
-           // setModalData(following);
-        }
-
-        setModalContent(content);
-        setModalVisible(true);
-    };
-
-    const handleModalClose = () => {
-        setModalVisible(false);
-    };
-
-
+    }, [User, user]);
 
     useEffect(() => {
         if (modalContent === 'Followers') {
@@ -91,44 +50,26 @@ const User2 = () => {
         }
     }, [followers, following, modalContent]);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     useEffect(() => {
         if (User && user && User._id === user._id) {
             navigate('/profile');
         }
     }, [User, user, navigate]);
 
-    if (loading) {
-        return (
-            <div className='loading-container'>
-                <Loading />
-            </div>
-        );
-    }
+    const handleModalOpen = (content) => {
+        if (content === 'Followers' && user) {
+            dispatch(Getfollowers(user._id));
+        }
+        if (content === 'Following' && user) {
+            dispatch(getFollowing(user._id));
+        }
+        setModalContent(content);
+        setModalVisible(true);
+    };
 
-    if (error) {
-        return (
-            <div className='error'>
-                <p>Error: {error}</p>
-            </div>
-        );
-    }
+    const handleModalClose = () => {
+        setModalVisible(false);
+    };
 
     const handlePostShow = () => {
         if (user) {
@@ -144,6 +85,24 @@ const User2 = () => {
         setShowPosts(prevShowPosts => !prevShowPosts);
         handlePostShow();
     };
+
+    const handleFollowToggle = () => {
+        if (User) {
+            dispatch(ConnectUser(user.userName));
+            setUserFollowing(prev => !prev); // Toggle local following state
+        } else {
+            alert.show("Kindly login to access this resource");
+        }
+    };
+
+    if (loading) {
+        return <Loading />;
+    }
+
+    if (error) {
+        return <div className='error'><p>Error: {error}</p></div>;
+    }
+
 
     return (
         <div className='user-profile'>
@@ -191,7 +150,8 @@ const User2 = () => {
                     )}
                     </div>
 
-                    <button className='follow-button'>Follow</button>
+                    <button className='follow-button' onClick={handleFollowToggle}> {User ? (userFollowing ? 'Following' : 'Follow') : 'Follow'}
+                    </button>
                     
                     <div className='toggle-posts'>
                         <h3 onClick={togglePosts}>

@@ -129,6 +129,7 @@ const MentionInput = ({ onSelect }) => {
                             src={user.display_pic}
                             alt={user.userName}
                             className="user-image"
+                            style={{width: "2.8vmax", height: "2.8vmax" , border: "2px solid white"}}
                         />
                         <span className="user-name">{user.userName}</span>
                     </div>

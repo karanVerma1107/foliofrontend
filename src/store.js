@@ -11,6 +11,7 @@ import { AddcommReducer, addReplyReducer, commentLikeReducer, getcommentsReducer
 import { getUserByNameReducer } from './reducers/searchingReducer.js';
 import { userPostReducer } from './reducers/userpostReducer.js';
 import { userFollowReducer } from './reducers/followReducers.js';
+import { connectReducer } from './reducers/ConnectReducer.js';
 
 
 
@@ -35,7 +36,8 @@ getReply: getrepliesReducer,
 Likecom:commentLikeReducer,
 getUserByName: getUserByNameReducer,
 userPost : userPostReducer,
-getconnection: userFollowReducer
+getconnection: userFollowReducer,
+Connect: connectReducer
 });
 
 
