@@ -45,7 +45,7 @@ const navigate = useNavigate();
     <a href='#' className={activeindex === 1 ? 'active' : ''} onClick={()=>handleclick(1)}><FaSearch/></a>
   </li>
   <li>
-    <a href='#03' className={activeindex === 2 ? 'active' : ''} onClick={()=>handleclick(2 )}><AiFillNotification/></a>
+    <a href='/notifications' className={activeindex === 2 ? 'active' : ''} onClick={()=>handleclick(2 )}><AiFillNotification/></a>
   </li>
   <li>
     <a href='#)#' className={activeindex === 3 ? 'active' : ''} onClick={()=>handleclick(3 )}><SiGooglemessages/></a>

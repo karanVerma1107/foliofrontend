@@ -1,0 +1,65 @@
+.notification-container {
+    margin: 2vmax auto; /* Using vmax for responsiveness */
+    max-width: 600px;
+    padding: 2vmax; /* Increased padding for mobile */
+    border: 1px solid #ff4500; /* Orangered border */
+    border-radius: 8px;
+    background-color: #fff; /* Changed background for better contrast */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.notification-list {
+    list-style: none;
+    padding: 0;
+}
+
+.notification-item {
+    padding: 2vmax; /* Increased padding for better touch targets */
+    border-bottom: 1px solid #eaeaea;
+    display: flex;
+    flex-direction: column;
+}
+
+.notification-item:last-child {
+    border-bottom: none; /* Remove the border from the last item */
+}
+
+.notification-message {
+    font-size: 1.2rem; /* Slightly larger font size */
+    margin: 0;
+    color: #ff4500; /* Orangered text */
+}
+
+.notification-expiry {
+    font-size: 1.3vmax;
+    color: #888;
+}
+
+.unread {
+    background-color: #ffebee; /* Light red for unread notifications */
+}
+
+.read {
+    background-color: #fff; /* White for read notifications */
+}
+
+.error {
+    color: red;
+    font-weight: bold;
+}
+
+/* Responsive Styles */
+@media (max-width: 600px) {
+    .notification-container {
+        margin: 5vmax; /* More margin for smaller screens */
+        padding: 4vmax; /* Increased padding for touch */
+    }
+
+    .notification-item {
+        padding: 1.8vmax; /* More padding on mobile */
+    }
+
+    .notification-message {
+        font-size: 1.4vmax; /* Adjusted font size for smaller screens */
+    }
+}

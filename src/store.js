@@ -12,6 +12,7 @@ import { getUserByNameReducer } from './reducers/searchingReducer.js';
 import { userPostReducer } from './reducers/userpostReducer.js';
 import { userFollowReducer } from './reducers/followReducers.js';
 import { connectReducer } from './reducers/ConnectReducer.js';
+import { notificationReducer } from './reducers/NotificationReducer.js';
 
 
 
@@ -37,7 +38,8 @@ Likecom:commentLikeReducer,
 getUserByName: getUserByNameReducer,
 userPost : userPostReducer,
 getconnection: userFollowReducer,
-Connect: connectReducer
+Connect: connectReducer,
+showNoti: notificationReducer
 });
 
 
