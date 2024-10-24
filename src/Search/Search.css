@@ -1,0 +1,81 @@
+* {
+    box-sizing: border-box;
+  }
+  
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+  }
+  
+  .search-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2vmax;
+    background-color: white;
+  }
+  
+  .button-group {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2vmax;
+  }
+  
+  .search-button {
+    background-color: orangered;
+    color: white;
+    border: none;
+    padding: 1vmax 2vmax;
+    margin: 0 1vmax;
+    border-radius: 0.5vmax; /* Adjusted for consistent sizing */
+    cursor: pointer;
+    font-size: 1.1vmax; /* Default font size */
+    transition: background-color 0.3s;
+  }
+  
+  .search-button:hover {
+    background-color: darkorange;
+  }
+  
+  .search-input {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 1vmax;
+  }
+  
+  input {
+    padding: 1vmax;
+    border: 1px solid orangered;
+    border-radius: 0.5vmax; /* Adjusted for consistent sizing */
+    font-size: 1.7vmax; /* Default font size */
+    margin-right: 1vmax;
+  }
+  
+  .submit-button {
+    background-color: orangered;
+    color: white;
+    border: none;
+    padding: 1vmax 2vmax;
+    border-radius: 0.5vmax; /* Adjusted for consistent sizing */
+    cursor: pointer;
+    font-size: 1.1vmax; /* Default font size */
+  }
+  
+  .submit-button:hover {
+    background-color: darkorange;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 600px) {
+    .search-button,
+    .submit-button {
+      padding: 0.8vmax 1.5vmax;
+      font-size: 1.2vmax; /* Adjusted font size for mobile */
+    }
+  
+    input {
+      font-size: 1.2vmax; /* Adjusted font size for mobile */
+    }
+  }
+  

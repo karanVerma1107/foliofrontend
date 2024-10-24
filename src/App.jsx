@@ -15,6 +15,7 @@ import User from './OtherUser/User.jsx'
 import Notification from './Notifications/Notification.jsx'
 import Editprofile from '../profile/Editprofile.jsx'
 import User2 from './OtherUser/user2.jsx'
+import Search from './Search/Search.jsx'
 
 function App() {
   
@@ -41,7 +42,8 @@ function App() {
       <Route exact path='/edit-profile' element={<Editprofile/>}/> 
       <Route exact path='/Create-Post' element={<Addpost/>}/> 
       <Route exact path='/:username' element={<User2/>}/> 
-      <Route exact path='/notifications' element={<Notification/>}/> 
+      <Route exact path='/notifications' element={<Notification/>}/>
+      <Route exact path='/search' element={<Search/>}/> 
 
 
 

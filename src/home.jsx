@@ -39,22 +39,22 @@ const navigate = useNavigate();
    <div className='sidebar'>
 <ul>
   <li>
-    <a href='/' className={activeindex === 0 ? 'active' : ''} onClick={(e)=>handleclick(0, '/', e)}><FaScroll/></a>
+    <a href='/' className={activeindex === 0 ? '' : ''} onClick={(e)=>handleclick(0, '/', e)}><FaScroll/></a>
   </li>
   <li>
-    <a href='#' className={activeindex === 1 ? 'active' : ''} onClick={()=>handleclick(1)}><FaSearch/></a>
+    <a href='/search' className={activeindex === 1 ? '' : ''} onClick={()=>handleclick(1)}><FaSearch/></a>
   </li>
   <li>
-    <a href='/notifications' className={activeindex === 2 ? 'active' : ''} onClick={()=>handleclick(2 )}><AiFillNotification/></a>
+    <a href='/notifications' className={activeindex === 2 ? '' : ''} onClick={()=>handleclick(2 )}><AiFillNotification/></a>
   </li>
   <li>
-    <a href='#)#' className={activeindex === 3 ? 'active' : ''} onClick={()=>handleclick(3 )}><SiGooglemessages/></a>
+    <a href='#)#' className={activeindex === 3 ? '' : ''} onClick={()=>handleclick(3 )}><SiGooglemessages/></a>
   </li>
   <li>
-    <a href='/Create-Post' className={activeindex === 4 ? 'active' : ''} onClick={()=>handleclick(4)}><MdPostAdd/></a>
+    <a href='/Create-Post' className={activeindex === 4 ? '' : ''} onClick={()=>handleclick(4)}><MdPostAdd/></a>
   </li>
   <li>
-    <a href='/signup'  onClick={(e)=>handleclick(5, '/signup', e)}  className={activeindex === 5 ? 'active' : ''} rel='noreferrer' target="_blank"><FaUserAlt/></a>
+    <a href='/signup'  onClick={(e)=>handleclick(5, '/signup', e)}  className={activeindex === 5 ? '' : ''} rel='noreferrer' target="_blank"><FaUserAlt/></a>
   </li>
 
 </ul>

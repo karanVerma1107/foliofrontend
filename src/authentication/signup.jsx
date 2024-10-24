@@ -13,7 +13,7 @@ const Signup = () => {
     const dispatch = useDispatch();
   
     const navigate = useNavigate();
-    const {Isauth} = useSelector((state)=> state.displayprofile);
+    const {Isauth, User} = useSelector((state)=> state.displayprofile);
     const [login, setlogin] = useState(false);
     const[lotptog, setlotptog] = useState(false);
     
@@ -23,7 +23,6 @@ const [Name, setName] = useState('');
     }
     
     
-
 
     const [email, setemail] = useState('');
     const[loginotp,setloginotp] = useState('')
@@ -97,6 +96,7 @@ formData.append('email', email)
       } 
       if(suuS){
         alert.success(Meess)
+        navigate("/username")
       }else if (errR) {
           alert.error(errR);
       }
@@ -104,10 +104,12 @@ formData.append('email', email)
 
   }, [message, error, success, dispatch, Meess, errR, suuS, Meessage, errorr, suucess, Message, Success, Error]);
    
-
+    
       if(Isauth){
         navigate('/profile')
       }
+
+
 
   
 
