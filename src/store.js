@@ -13,6 +13,7 @@ import { userPostReducer } from './reducers/userpostReducer.js';
 import { userFollowReducer } from './reducers/followReducers.js';
 import { connectReducer } from './reducers/ConnectReducer.js';
 import { notificationReducer } from './reducers/NotificationReducer.js';
+import { skilleduserReducer } from './reducers/skillSearchReducer.js';
 
 
 
@@ -39,7 +40,8 @@ getUserByName: getUserByNameReducer,
 userPost : userPostReducer,
 getconnection: userFollowReducer,
 Connect: connectReducer,
-showNoti: notificationReducer
+showNoti: notificationReducer,
+getSkilledUser: skilleduserReducer
 });
 
 

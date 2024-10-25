@@ -223,7 +223,7 @@ if (loading || !User) {
                             <h3>Followers</h3>
                         </div>
                         <div className='profile-picture'>
-                            <img className='user-image' src={User.display_pic || 'default-pic.png'} alt='User profile' />
+                            <img className='user-image' src={User.display_pic || 'default-pic.png'} alt='User profile' style={{ width: '9vmax', height: '9vmax' , borderRadius: "50%" , border: "1px solid white"}} />
                             <h2 className='username'>{User.userName}</h2>
                         </div>
                         <div className='following-info'   onClick={() => handleModalOpen('Following')}  style={{cursor: "pointer"}}>
@@ -245,7 +245,7 @@ if (loading || !User) {
                                     <ul>
                                         {modalData.length > 0 ? modalData.map((user) => (
                                             <li key={user._id}>
-                                                <img src={user.display_pic} alt={user.userName} style={{ width: '50px', height: '50px' }} />
+                                                <img src={user.display_pic} alt={user.userName} style={{ width: '3vmax', height: '3vmax' , borderRadius: "50%" }} />
                                                 <span><a href={`/${user.userName}`} style={{fontSize: "1.1vmax", textDecoration:"none", color: "black"}}>{user.userName}</a></span>
                                             </li>
                                         )) : (

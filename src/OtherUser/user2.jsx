@@ -114,7 +114,7 @@ const User2 = () => {
                             <h3>Followers</h3>
                         </div>
                         <div className='profile-picture'>
-                            <img className='user-image' src={user.display_pic || 'default-pic.png'} alt='User profile' />
+                            <img className='user-image' src={user.display_pic || 'default-pic.png'} alt='User profile' style={{ width: '9vmax', height: '9vmax' , borderRadius: "50%" , border: "1px solid white"}}/>
                             <h2 className='username'>{user.userName}</h2>
                         </div>
                         <div className='following-info'  onClick={() => handleModalOpen('Following')}  style={{cursor: "pointer"}}>
