@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -19,13 +20,14 @@ const User2 = () => {
     
     const { users = [], loading, error } = useSelector(state => state.getUserByName);
     const { posts = [] } = useSelector(state => state.userPost);
-    const { User } = useSelector(state => state.displayprofile);
+    const { User, Isauth } = useSelector(state => state.displayprofile);
     const { followers, following, loadingFollowers, loadingFollowing } = useSelector(state => state.getconnection);
 
     const user = users.length > 0 ? users[0] : null;
 
     const [activePostId, setActivePostId] = useState(null);
     const [showPosts, setShowPosts] = useState(false);
+    const [currentCategory, setCurrentCategory] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
     const [modalContent, setModalContent] = useState('');
     const [modalData, setModalData] = useState([]);
@@ -71,19 +73,23 @@ const User2 = () => {
         setModalVisible(false);
     };
 
-    const handlePostShow = () => {
+    const handlePostShow = (category) => {
         if (user) {
-            dispatch(getUserPost(user._id));
+            if (currentCategory === category) {
+                // If the same category is clicked, hide posts
+                setShowPosts(false);
+                setCurrentCategory('');
+            } else {
+                // Show posts for the new category
+                dispatch(getUserPost(user._id, category));
+                setShowPosts(true);
+                setCurrentCategory(category);
+            }
         }
     };
 
     const handlePostClick = (postId) => {
         setActivePostId(prevPostId => (prevPostId === postId ? null : postId));
-    };
-
-    const togglePosts = () => {
-        setShowPosts(prevShowPosts => !prevShowPosts);
-        handlePostShow();
     };
 
     const handleFollowToggle = () => {
@@ -103,59 +109,63 @@ const User2 = () => {
         return <div className='error'><p>Error: {error}</p></div>;
     }
 
-
     return (
         <div className='user-profile'>
             {user ? (
                 <>
                     <div className='profile-header'>
-                        <div className='followers-info'  onClick={() => handleModalOpen('Followers')}    style={{cursor: "pointer"}}>
+                        <div className='followers-info' onClick={() => handleModalOpen('Followers')} style={{ cursor: "pointer" }}>
                             <h2>{user.followers.length}</h2>
                             <h3>Followers</h3>
                         </div>
                         <div className='profile-picture'>
-                            <img className='user-image' src={user.display_pic || 'default-pic.png'} alt='User profile' style={{ width: '9vmax', height: '9vmax' , borderRadius: "50%" , border: "1px solid white"}}/>
+                            <img className='user-image' src={user.display_pic || 'default-pic.png'} alt='User profile' style={{ width: '9vmax', height: '9vmax', borderRadius: "50%", border: "1px solid white" }} />
                             <h2 className='username'>{user.userName}</h2>
                         </div>
-                        <div className='following-info'  onClick={() => handleModalOpen('Following')}  style={{cursor: "pointer"}}>
+                        <div className='following-info' onClick={() => handleModalOpen('Following')} style={{ cursor: "pointer" }}>
                             <h2>{user.following.length}</h2>
                             <h3>Following</h3>
                         </div>
 
-
-                        
                         {modalVisible && (
-                        <div className="modal" onClick={handleModalClose}>
-                            <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-                                <button className="close-button" onClick={handleModalClose}>×</button>
-                                <h2>{modalContent}</h2>
-                                {modalContent === 'Followers' && loadingFollowers ? (
-                                    <p>Loading followers...</p>
-                                ) : modalContent === 'Following' && loadingFollowing ? (
-                                    <p>Loading following...</p>
-                                ) : (
-                                    <ul>
-                                        {modalData.length > 0 ? modalData.map((user) => (
-                                            <li key={user._id}>
-                                                <img src={user.display_pic} alt={user.userName} style={{ width: '50px', height: '50px' }} />
-                                                <span><a href={`/${user.userName}`} style={{fontSize: "1.1vmax", textDecoration:"none", color: "black"}}>{user.userName}</a></span>
-                                            </li>
-                                        )) : (
-                                            <li>No {modalContent.toLowerCase()} found.</li>
-                                        )}
-                                    </ul>
-                                )}
+                            <div className="modal" onClick={handleModalClose}>
+                                <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+                                    <button className="close-button" onClick={handleModalClose}>×</button>
+                                    <h2>{modalContent}</h2>
+                                    {modalContent === 'Followers' && loadingFollowers ? (
+                                        <p>Loading followers...</p>
+                                    ) : modalContent === 'Following' && loadingFollowing ? (
+                                        <p>Loading following...</p>
+                                    ) : (
+                                        <ul>
+                                            {modalData.length > 0 ? modalData.map((user) => (
+                                                <li key={user._id}>
+                                                    <img src={user.display_pic} alt={user.userName} style={{ width: '50px', height: '50px' }} />
+                                                    <span><a href={`/${user.userName}`} style={{ fontSize: "1.1vmax", textDecoration: "none", color: "black" }}>{user.userName}</a></span>
+                                                </li>
+                                            )) : (
+                                                <li>No {modalContent.toLowerCase()} found.</li>
+                                            )}
+                                        </ul>
+                                    )}
+                                </div>
                             </div>
-                        </div>
-                    )}
+                        )}
                     </div>
 
-                    <button className='follow-button' onClick={handleFollowToggle}> {User ? (userFollowing ? 'Following' : 'Follow') : 'Follow'}
+                    <button className='follow-button' onClick={handleFollowToggle}>
+                        {User ? (userFollowing ? 'Following' : 'Follow') : 'Follow'}
                     </button>
                     
-                    <div className='toggle-posts'>
-                        <h3 onClick={togglePosts}>
-                            {showPosts ? 'Hide Posts' : 'Show Posts'}
+                    <div className='toggle-posts' style={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
+                        <h3 onClick={() => handlePostShow('Blog')} style={{ cursor: 'pointer', margin: "1vmax 2vmax" }}>
+                            Blogs
+                        </h3>
+                        <h3 onClick={() => handlePostShow('Project')} style={{ cursor: 'pointer', margin: "1vmax 2vmax" }}>
+                            Projects
+                        </h3>
+                        <h3 onClick={() => handlePostShow('Research')} style={{ cursor: 'pointer', margin: "1vmax 2vmax" }}>
+                            Research
                         </h3>
                     </div>
 

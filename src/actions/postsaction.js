@@ -105,16 +105,16 @@ export const addApostAction = (postdata, files) => async (dispatch) => {
 
 
 
-//to get user post 
-export const getUserPost = (id) => async (dispatch) => {
+// To get user posts with category
+export const getUserPost = (id, category) => async (dispatch) => {
     try {
         dispatch({ type: GET_USER_POST_REQUEST });
-        console.log("ID is", id);
+        console.log("ID is", id, "Category is", category);
         
         const config = { headers: { 'Content-Type': 'application/json' } };
 
         // Changed to POST request
-        const response = await axios.post('/api/v1/getUserPost', { id }, config);
+        const response = await axios.post('/api/v1/getUserPost', { id, category }, config);
         console.log('Response is', response);
         
         const posts = response.data.posts;
