@@ -78,6 +78,7 @@ formData.append('email', email)
       
     }
 
+    {/*
     useEffect(() => {
       dispatch(profileloader());
 
@@ -103,6 +104,52 @@ formData.append('email', email)
 
 
   }, [message, error, success, dispatch, Meess, errR, suuS, Meessage, errorr, suucess, Message, Success, Error]);
+  */}
+
+
+  useEffect(() => {
+    dispatch(profileloader());
+
+    // Handle login OTP success
+    if (success) {
+        alert.success(message);
+        setlotptog(true);
+    }
+
+    // Handle login OTP error
+    if (error) {
+        alert.error(error);
+    }
+
+    // Handle signup OTP success
+    if (Success) {
+        alert.success(Message);
+    }
+
+    // Handle signup OTP error
+    if (Error) {
+        alert.error(Error);
+    }
+
+    // Handle signup success
+    if (suucess) {
+        alert.success(Meessage);
+        setlotptog(true);
+    }
+
+    // Handle signup error
+    if (errR) {
+        alert.error(errR);
+        setlotptog(false); // Resetting if there's an error
+    }
+
+    // Navigate to username page if signup is successful
+    if (suuS) {
+        alert.success(Meess);
+        navigate("/username");
+    }
+
+}, [success, error, Message, Success, Error, suucess, Meessage, errR, suuS, dispatch, alert]);
    
     
       if(Isauth){

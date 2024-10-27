@@ -58,10 +58,10 @@ const Search = () => {
       {searchType === 'name' && users.length > 0 && (
         <div className="user-suggestions-container">
           {users.map(user => (
-            <div key={user.id} className="user-suggestion">
+            <div key={user._id} className="user-suggestion">
               <img src={user.display_pic} alt={user.userName} className="user-image" style={{ border: "1px solid white", width: "2.99vmax", height: "2.99vmax" }} />
               <div className="user-name">
-                <a href={`/users/${user.userName}`}>{user.userName}</a>
+                <a href={`/${user.userName}`}>{user.userName}</a>
               </div>
             </div>
           ))}
@@ -72,10 +72,10 @@ const Search = () => {
    {searchType === 'skills' && skillusers.length > 0 && (
         <div className="user-suggestions-container">
           {skillusers.map(user => (
-            <div key={user.id} className="user-suggestion">
+            <div key={user._id} className="user-suggestion">
               <img src={user.display_pic} alt={user.userName} className="user-image" style={{ border: "1px solid white", width: "2.99vmax", height: "2.99vmax" }} />
               <div className="user-name">
-                <a href={`/users/${user.userName}`}>{user.userName}</a>
+                <a href={`/${user.userName}`}>{user.userName}</a>
               </div>
             </div>
           ))}

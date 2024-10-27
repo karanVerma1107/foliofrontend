@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getUserByUsername } from '../actions/searchingAction';
 import './User2.css';
+
 import Post from '../postsshow/post';
 import Loading from '../loading';
 import { getUserPost } from '../actions/postsaction';
@@ -11,6 +12,7 @@ import { profileloader } from '../actions/loadprofileAction';
 import { Getfollowers, getFollowing } from '../actions/folllowAction';
 import { useAlert } from 'react-alert';
 import { ConnectUser } from '../actions/setprofileAction';
+import pic from './pictemp.png'
 
 const User2 = () => {
     const { username } = useParams();
@@ -119,7 +121,7 @@ const User2 = () => {
                             <h3>Followers</h3>
                         </div>
                         <div className='profile-picture'>
-                            <img className='user-image' src={user.display_pic || 'default-pic.png'} alt='User profile' style={{ width: '9vmax', height: '9vmax', borderRadius: "50%", border: "1px solid white" }} />
+                            <img className='user-image' src={user.display_pic ? user.display_pic : pic} alt='User profile' style={{ width: '9vmax', height: '9vmax', borderRadius: "50%", border: "1px solid white" }} />
                             <h2 className='username'>{user.userName}</h2>
                         </div>
                         <div className='following-info' onClick={() => handleModalOpen('Following')} style={{ cursor: "pointer" }}>

@@ -544,7 +544,7 @@ const Userprofile = () => {
                         <h3>Followers</h3>
                     </div>
                     <div className='profile-picture'>
-                        <img className='user-image' src={User.display_pic || 'default-pic.png'} alt='User profile' style={{ width: '9vmax', height: '9vmax', borderRadius: "50%", border: "1px solid white" }} />
+                        <img className='user-image' src={User.display_pic ? `${User.display_pic}` : pic} alt='User profile' style={{ width: '9vmax', height: '9vmax', borderRadius: "50%", border: "1px solid white" }} />
                         <h2 className='username'>{User.userName}</h2>
                     </div>
                     <div className='following-info' onClick={() => handleModalOpen('Following')} style={{ cursor: "pointer" }}>

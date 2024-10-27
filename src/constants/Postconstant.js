@@ -14,3 +14,8 @@ export const CREATE_POST_FAILURE = 'CREATE_POST_FAILURE';
 export const GET_USER_POST_REQUEST = 'GET_USER_POST_REQUEST';
 export const GET_USER_POST_SUCCESS = 'GET_USER_POST_SUCCESS';
 export const GET_USER_POST_FAILURE = 'GET_USER_POST_FAILURE';
+
+
+export const DELETE_POST_REQ = 'Delete post request';
+export const DELETE_POST_SUCCESS = 'Post deleted successfully';
+export const DELETE_POST_FAIL = 'Failed to delete post';

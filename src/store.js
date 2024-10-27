@@ -1,7 +1,7 @@
 import {legacy_createStore as createStore, combineReducers, applyMiddleware} from 'redux'
 import { thunk }  from 'redux-thunk';
 import {composeWithDevTools}from 'redux-devtools-extension'
-import { getallpostsreducer, likeReducer } from './reducers/postsReducer.js';
+import { deletePostReducer, getallpostsreducer, likeReducer } from './reducers/postsReducer.js';
 import { getuserdetails, loginotp, signup, signupotp, surflogin } from './reducers/authReducer.js';
 import { isAvialablereducer, setuserreducer } from './reducers/setProfilereducer.js';
 import { changeDPreducer, loadselfReducer } from './reducers/loadprofileReducer.js';
@@ -41,7 +41,8 @@ userPost : userPostReducer,
 getconnection: userFollowReducer,
 Connect: connectReducer,
 showNoti: notificationReducer,
-getSkilledUser: skilleduserReducer
+getSkilledUser: skilleduserReducer,
+deletePost: deletePostReducer
 });
 
 

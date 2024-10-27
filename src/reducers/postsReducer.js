@@ -1,4 +1,4 @@
-import { GET_ALL_POST_REQUEST, GET_ALL_POST_SUCCESS, GET_ALL_POSTS_FAILURE, GIVE_POST_LIKE_REQUEST, GIVE_POST_LIKE_SUCCESS, GIVE_POST_LIKE_FAILURE } from "../constants/Postconstant.js";
+import { GET_ALL_POST_REQUEST, GET_ALL_POST_SUCCESS, GET_ALL_POSTS_FAILURE, GIVE_POST_LIKE_REQUEST, GIVE_POST_LIKE_SUCCESS, GIVE_POST_LIKE_FAILURE, DELETE_POST_REQ, DELETE_POST_SUCCESS,DELETE_POST_FAIL } from "../constants/Postconstant.js";
 
 export const getallpostsreducer = (state={posts:[]},action)=>{
     switch (action.type) {
@@ -69,3 +69,51 @@ export const likeReducer = (state = initialstatelike, action)=>{
             return state
     }
 }
+
+
+// reducer.js
+
+
+
+const defaultState = {
+    loading: false,
+    notification: '',
+    mistake: '',
+    goal: false
+};
+
+export const deletePostReducer = (state = defaultState, action) => {
+    switch (action.type) {
+        case DELETE_POST_REQ:
+            return {
+                ...state,
+                loading: true,
+                notification: '',
+                mistake: '',
+                goal: false
+            };
+        case DELETE_POST_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                notification: action.payload,
+                mistake: '',
+                goal: true
+            };
+        case DELETE_POST_FAIL:
+            return {
+                ...state,
+                loading: false,
+                notification: '',
+                mistake: action.payload,
+                goal: false
+            };
+        default:
+            return state;
+    }
+};
+
+
+
+
+

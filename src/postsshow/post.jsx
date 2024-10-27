@@ -4,7 +4,7 @@ import './postsss.css'
 import Carousel from 'react-material-ui-carousel';
 import { FaStar } from "react-icons/fa6";
 import { useAlert } from 'react-alert';
-import { likedislike } from '../actions/postsaction';
+import { likedislike, deletePost  } from '../actions/postsaction';
 import { useDispatch, useSelector } from 'react-redux';
 import Comment from './comment.jsx';
 import MentionInput from '../../mentionLogic/mentionInput.jsx';
@@ -26,6 +26,7 @@ const Post = React.memo(({ post, Isauth, User,  showComments, onPostClick  }) =>
 
 const {message , error, success} = useSelector(state=> state.Addcomm);
     //const [showComments, setShowComments] = useState(false);
+    const {notification, mistake, goal } = useSelector(state =>state.deletePost)
 
     
 
@@ -92,7 +93,17 @@ const {message , error, success} = useSelector(state=> state.Addcomm);
           if(error){
             alert.error(error)
           }
-        },[success, message, error, post._id, dispatch, alert ]);
+
+
+          if(goal){
+            alert.success(notification)
+          }
+
+          if(mistake){
+            alert.error(mistake)
+          }
+
+        },[success, message, error, post._id, dispatch, alert, goal, mistake ]);
 
 
 
@@ -231,6 +242,12 @@ const {message , error, success} = useSelector(state=> state.Addcomm);
                     hour12: false
                 })}</p>
             </div>
+            {User &&    User._id === post.user_name._id && (
+    <p style={{ color: 'red', fontSize: '1.3vmax', cursor: 'pointer' }} onClick={() => dispatch(deletePost(post._id))}>
+        Delete
+    </p>
+)}
+        
         </div>
     );
 });

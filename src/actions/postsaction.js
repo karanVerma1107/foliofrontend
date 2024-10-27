@@ -7,7 +7,10 @@ import { CREATE_POST_REQUEST,
       GET_ALL_POST_SUCCESS,
        GIVE_POST_LIKE_REQUEST,
         GIVE_POST_LIKE_FAILURE,
-         GIVE_POST_LIKE_SUCCESS } from '../constants/Postconstant.js'
+         GIVE_POST_LIKE_SUCCESS, 
+        DELETE_POST_REQ,
+    DELETE_POST_SUCCESS,
+DELETE_POST_FAIL } from '../constants/Postconstant.js'
 
 
 import { GET_USER_POST_REQUEST,
@@ -136,3 +139,35 @@ export const getUserPost = (id, category) => async (dispatch) => {
         dispatch({ type: GET_USER_POST_FAILURE, payload: errormess });
     }
 };
+
+
+
+
+
+
+
+
+
+
+
+export const deletePost = (postId) => async (dispatch) => {
+   
+    try {
+
+        dispatch({ type: DELETE_POST_REQ });
+
+        const response = await axios.delete(`/api/v1/deletepost/${postId}`);
+
+        dispatch({
+            type: DELETE_POST_SUCCESS,
+            payload: response.data.message, // Success message from the backend
+        });
+    } catch (error) {
+        dispatch({
+            type: DELETE_POST_FAIL,
+            payload: error.response?.data?.error || 'Failed to delete post', // Error message from the backend
+        });
+    }
+};
+
+
