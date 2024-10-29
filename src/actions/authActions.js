@@ -14,7 +14,7 @@ import { SEND_LOGIN_OTP_REQUEST,
          GET_FRESH_SIGNUP_FAILURE
         } from "../constants/authConstants";
 
-
+import axiosInstance from "../../axiosInstance";
         
 import axios from 'axios';
 
@@ -26,7 +26,7 @@ export const sendloginotp = (Email)=>async(dispatch)=>{
 
         const config = {headers: {'Content-Type' : 'application/json'}}
         console.log("email isisis :", Email);
-        const response = await axios.post('/api/v1/loginOtp', {Email}, config);
+        const response = await axiosInstance.post('/api/v1/loginOtp', {Email}, config);
 
         dispatch({type: SEND_LOGIN_OTP_SUCCESS,
             payload:{
@@ -56,7 +56,7 @@ export const logined = (Email, otp)=>async(dispatch)=>{
         dispatch({type: GET_LOGIN_REQUEST});
         const config = {headers: {'Content-Type' : 'application/json'}};
 
-        const response = await axios.post('/api/v1//login', {Email, otp}, config);
+        const response = await axiosInstance.post('/api/v1//login', {Email, otp}, config);
 
 
         dispatch({type: GET_LOGIN_SUCCESS,
@@ -87,7 +87,7 @@ export const userdetailsfetch = ()=>async(dispatch)=>{
     try {
         dispatch({type: GET_USERSELF_REQUEST});
 
-        const response = await axios.get('/api/v1/me');
+        const response = await axiosInstance.get('/api/v1/me');
 
         dispatch({type: GET_USERSELF_SUCCESS,
             payload:{
@@ -118,7 +118,7 @@ export const getsignupotp = ( usedata )=>async(dispatch)=>{
         dispatch({type: GET_FRESH_SIGNUP_OTP_REQUEST});
         const config = {headers: {'Content-Type' : 'application/json'}};
 
-        const response = await axios.post('/api/v1/sendOTP',usedata, config);
+        const response = await axiosInstance.post('/api/v1/sendOTP',usedata, config);
 
         dispatch({type: GET_FRESH_SIGNUP_OTP_SUCCESS,
             payload:{
@@ -147,7 +147,7 @@ export const freshsignup = (Email, otp)=>async(dispatch)=>{
 try {
     dispatch({type: GET_FRESH_SIGNUP_REQUEST});
     const config = {headers: {'Content-Type' : 'application/json'}};
-    const response = await axios.post("/api/v1/verifysignUpOtp", {Email,otp}, config);
+    const response = await axiosInstance.post("/api/v1/verifysignUpOtp", {Email,otp}, config);
 
     dispatch({type: GET_FRESH_SIGNUP_SUCCESS,
         payload:{

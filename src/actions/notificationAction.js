@@ -4,6 +4,9 @@ import { GET_NOTIFICATION_REQUEST,
  } from "../constants/NotificationConstant";
  import axios from "axios";
 
+
+ import axiosInstance from "../../axiosInstance";
+
 export const Getnotification = (userid)=>async (dispatch)=>{
     try {
         dispatch({type: GET_NOTIFICATION_REQUEST})
@@ -12,7 +15,7 @@ export const Getnotification = (userid)=>async (dispatch)=>{
 
         const url = `/api/v1/notification/${userid}`;
         console.log("Fetching notifications from:", url);
-        const response = await axios.get(url);
+        const response = await axiosInstance.get(url);
         
 
         const notifications = response.data.notifications

@@ -6,6 +6,8 @@ import { GET_USER_FOLLOWERS_REQUEST,
     GET_USER_FOLLOWING_FAILURE,
  } from "../constants/userprofile";
 
+
+ import axiosInstance from "../../axiosInstance";
 import axios from "axios"; 
 
 export const Getfollowers = (id)=> async(dispatch)=>{
@@ -19,7 +21,7 @@ export const Getfollowers = (id)=> async(dispatch)=>{
                 'Content-Type': 'application/json',
             },
         };
-        const response = await axios.post('/api/v1/getfollowers',{userid: id}, config)
+        const response = await axiosInstance.post('/api/v1/getfollowers',{userid: id}, config)
 
         const followers = response.data.followers;
         console.log("followers is:", followers)
@@ -56,7 +58,7 @@ export const getFollowing = (id) => async (dispatch) => {
         };
 
         // Use POST instead of GET
-        const response = await axios.post('/api/v1/getfollowing', { userid: id }, config);
+        const response = await axiosInstance.post('/api/v1/getfollowing', { userid: id }, config);
 
         const followings = response.data.followings;
 

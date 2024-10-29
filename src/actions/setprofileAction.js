@@ -11,6 +11,7 @@ import { USER_CONNECT_REQ,
     USER_CONNECT_FAIL
  } from "../constants/connect.js";
 
+ import axiosInstance from "../../axiosInstance.js";
 
 import axios from "axios";
 
@@ -20,7 +21,7 @@ export const isusernamedoit = (username)=>async(dispatch)=>{
         dispatch({type: IS_USERNAME_AVIALABLE_REQUEST});
         const config = {headers: {'Content-Type' : 'application/json'}}
 
-        const respone = await axios.post('/api/v1/useravia', { username }, config);
+        const respone = await axiosInstance.post('/api/v1/useravia', { username }, config);
 
         dispatch({type: IS_USERNAME_AVIALABLE_SUCCESS,
             payload:{
@@ -50,7 +51,7 @@ export const setusername = (username)=>async(dispatch)=>{
         dispatch({type: IS_USERNAME_DONE_REQUEST});
         const config = {headers: {'Content-Type' : 'application/json'}}
 
-        const respone = await axios.post('/api/v1/setUserName', { username }, config);
+        const respone = await axiosInstance.post('/api/v1/setUserName', { username }, config);
 
         dispatch({type: IS_USERNAME_DONE_SUCCESS,
             payload:{
@@ -79,7 +80,7 @@ export const ConnectUser = (username) => async (dispatch) => {
 
     try {
     
-        const response = await axios.put(`/api/v1/connect/${username}`); // Adjust the URL as necessary
+        const response = await axiosInstance.put(`/api/v1/connect/${username}`); // Adjust the URL as necessary
         const message = response.data.message; // Destructure the data from the response
 
         dispatch({ type: USER_CONNECT_SUCCESS, payload: message});

@@ -7,14 +7,15 @@ import { GET_USER_BY_NAME_REQUEST,
  } from "../constants/searchingConstant";
 
  import axios from "axios";
+ import axiosInstance from "../../axiosInstance";
 
 
  export const getUserByUsername = (username) => async (dispatch) => {
     dispatch({ type: GET_USER_BY_NAME_REQUEST });
 
     try {
-        const response = await axios.get(`/api/v1/${username}`); // Replace with your actual API endpoint
-        console.log("response.data is,", response.data)
+        const response = await axiosInstance.get(`/api/v1/${username}`); // Replace with your actual API endpoint
+      //  console.log("response.data is,", response.data)
         dispatch({
             type: GET_USER_BY_NAME_SUCCESS,
             payload: response.data.usersFound, // Directly use the full response data
@@ -36,7 +37,7 @@ export const getUserBySkill = (skill) => async (dispatch) => {
 
         dispatch({ type: GET_SKILLED_USER_REQUEST });
         // Use GET request and include skill as a query parameter
-        const response = await axios.post(`/api/v1/getuserbyskill?skill=${skill}`);
+        const response = await axiosInstance.post(`/api/v1/getuserbyskill?skill=${skill}`);
         
         console.log("response.data is,", response.data);
         dispatch({

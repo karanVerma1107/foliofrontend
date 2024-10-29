@@ -18,13 +18,13 @@ import { GET_USER_POST_REQUEST,
     GET_USER_POST_FAILURE
  } from '../constants/Postconstant.js'         
 
-
+import axiosInstance from '../../axiosInstance.js'
 //get all posts
 export const allpostsaction =  ()=>async(dispatch)=>{
     try {
         dispatch({type:GET_ALL_POST_REQUEST})
 
-        const response = await axios.post('/api/v1/getAllPost');
+        const response = await axiosInstance.post('/api/v1/getAllPost');
         const posts = response.data.posts
         
         dispatch({type: GET_ALL_POST_SUCCESS, payload: posts});
@@ -40,7 +40,7 @@ export const likedislike = (postId)=>{
     return async (dispatch)=>{
         dispatch({type: GIVE_POST_LIKE_REQUEST});
         try {
-            const response = await axios.post(`/api/v1/likepost/${postId}`);
+            const response = await axiosInstance.post(`/api/v1/likepost/${postId}`);
 
             
 
@@ -87,7 +87,7 @@ export const addApostAction = (postdata, files) => async (dispatch) => {
         files.forEach(file => completeFormData.append('Files', file));
 
         const config = { headers: { 'Content-Type': 'multipart/form-data' } };
-        const response = await axios.post('api/v1/addPost', completeFormData, config);
+        const response = await axiosInstance.post('api/v1/addPost', completeFormData, config);
 
         const message = response.data.message;
 
@@ -117,7 +117,7 @@ export const getUserPost = (id, category) => async (dispatch) => {
         const config = { headers: { 'Content-Type': 'application/json' } };
 
         // Changed to POST request
-        const response = await axios.post('/api/v1/getUserPost', { id, category }, config);
+        const response = await axiosInstance.post('/api/v1/getUserPost', { id, category }, config);
         console.log('Response is', response);
         
         const posts = response.data.posts;
@@ -156,7 +156,7 @@ export const deletePost = (postId) => async (dispatch) => {
 
         dispatch({ type: DELETE_POST_REQ });
 
-        const response = await axios.delete(`/api/v1/deletepost/${postId}`);
+        const response = await axiosInstance.delete(`/api/v1/deletepost/${postId}`);
 
         dispatch({
             type: DELETE_POST_SUCCESS,

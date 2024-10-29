@@ -12,6 +12,7 @@ import { ADD_COMMENT_REQUEST,
     LIKE_COMMENT_FAILURE
  } from "../constants/commentAndreply";
 
+ import axiosInstance from "../../axiosInstance";
 
 import axios from "axios";
 
@@ -22,7 +23,7 @@ export const ADDcommAction = (Content, id)=> async(dispatch)=>{
 
         const config = {headers: {'Content-Type' : 'application/json'}}
 
-        const response = await axios.post(`/api/v1/makeComment/${id}`,{ Content }, config);
+        const response = await axiosInstance.post(`/api/v1/makeComment/${id}`,{ Content }, config);
 
         const message = response.data.message;
         const comment = response.data.Comment;
@@ -57,7 +58,7 @@ export const ADDcommAction = (Content, id)=> async(dispatch)=>{
            dispatch({ type: GET_POST_COMMENT_REQUEST });
        
            try {
-               const { data } = await axios.get(`/api/v1/getcomments/${postId}`);
+               const { data } = await axiosInstance.get(`/api/v1/getcomments/${postId}`);
                dispatch({
                    type: GET_POST_COMMENT_SUCCESS,
                    payload: data.comments || [], // Directly use comments from response
@@ -76,7 +77,7 @@ export const ADDcommAction = (Content, id)=> async(dispatch)=>{
   
           dispatch({type: GET_REPLY_REQUEST});
   
-          const response = await axios.get(`/api/v1/getreplies/${commentId}`);
+          const response = await axiosInstance.get(`/api/v1/getreplies/${commentId}`);
   
           const replies = response.data.replies;
   
@@ -91,7 +92,7 @@ export const ADDcommAction = (Content, id)=> async(dispatch)=>{
         return async (dispatch) => {
             dispatch({ type: LIKE_COMMENT_REQUEST });
             try {
-                const response = await axios.put(`/api/v1/likeComment/${commentId}`); // Adjust the endpoint if needed
+                const response = await axiosInstance.put(`/api/v1/likeComment/${commentId}`); // Adjust the endpoint if needed
     
                 dispatch({
                     type: LIKE_COMMENT_SUCCESS,
@@ -120,7 +121,7 @@ export const ADDcommAction = (Content, id)=> async(dispatch)=>{
         return async (dispatch) => {
             dispatch({ type: 'LIKE_REPLY_REQUEST' });
             try {
-                const response = await axios.post(`/api/v1/like/${replyId}`); // Updated endpoint for replies
+                const response = await axiosInstance.post(`/api/v1/like/${replyId}`); // Updated endpoint for replies
         
                 dispatch({
                     type: 'LIKE_REPLY_SUCCESS',
@@ -170,7 +171,7 @@ export const replyToComment = (id, content,) => async (dispatch) => {
 
         const config = { headers: { 'Content-Type': 'application/json' } };
 
-        const response = await axios.post(`/api/v1/replyComment/${id}`, { id, content}, config);
+        const response = await axiosInstance.post(`/api/v1/replyComment/${id}`, { id, content}, config);
 
         const message = response.data.message;
         const reply = response.data.newReply;

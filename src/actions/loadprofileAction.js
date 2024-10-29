@@ -17,13 +17,13 @@ import { OBJECT_EDIT_REQUEST,
     STACK_EDIT_FAILURE
  } from "../constants/editprofile";
 
-
+import axiosInstance from "../../axiosInstance";
  //load the user 
  export const profileloader = ()=>async(dispatch)=>{
     try {
         dispatch({type: LOAD_USER_PROFILE_REQUEST});
 
-        const response = await axios.get('/api/v1/me');
+        const response = await axiosInstance.get('/api/v1/me');
         
 
         console.log('response is: ', response);
@@ -54,7 +54,7 @@ import { OBJECT_EDIT_REQUEST,
         dispatch({type: EDIT_DP_REQUEST})
 
         const config = {headers: {'Content-Type' : 'multipart/form-data'}}
-        const response = await axios.post('/api/v1/setProfile', file , config);
+        const response = await axiosInstance.post('/api/v1/setProfile', file , config);
 
         const message = response.data.message;
 
@@ -87,7 +87,7 @@ export  const editstkaction =  (profileData)=> async(dispatch)=>{
         dispatch({type: STACK_EDIT_REQUEST})
         const config =  { headers:{ 'Content-Type' : 'application/json'}}
 
-        const response = await axios.patch('api/v1/updateProfile', profileData, config);
+        const response = await axiosInstance.patch('api/v1/updateProfile', profileData, config);
 
         const message = response.data.message;
 
@@ -120,7 +120,7 @@ export  const editstkaction =  (profileData)=> async(dispatch)=>{
             dispatch({type: OBJECT_EDIT_REQUEST})
             const config =  { headers:{ 'Content-Type' : 'application/json'}}
     
-            const response = await axios.patch('api/v1/editbj', profileData, config);
+            const response = await axiosInstance.patch('api/v1/editbj', profileData, config);
     
             const message = response.data.message;
     
@@ -148,7 +148,7 @@ export  const editstkaction =  (profileData)=> async(dispatch)=>{
             try {
 
                 const config =  { headers:{ 'Content-Type' : 'application/json'}}
-                const response = await axios.delete('/api/v1/clearData', { data : {field}}, config );
+                const response = await axiosInstance.delete('/api/v1/clearData', { data : {field}}, config );
                 return response.data; // Return the response data
             } catch (error) {
                 throw error.response.data; // Handle errors appropriately
@@ -158,6 +158,6 @@ export  const editstkaction =  (profileData)=> async(dispatch)=>{
 
 
         export const logout = async()=>{
-            const response = await axios.post('/api/v1/logout');
+            const response = await axiosInstance.post('/api/v1/logout');
             console.log(response.data);
         }
