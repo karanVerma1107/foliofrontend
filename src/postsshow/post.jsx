@@ -165,19 +165,30 @@ const {message , error, success} = useSelector(state=> state.Addcomm);
             </div>
 
             {post.image.length > 0 && (
-                <div className='product-img'>
-                    <Carousel className='carousel'>
-                        {post.image.map((item) => (
-                            <img
-                                className='carousel-image'
-                                key={item}
-                                src={item}
-                                alt='post image'
-                            />
-                        ))}
-                    </Carousel>
-                </div>
-            )}
+    <div className='product-img'>
+        <Carousel className='carousel'>
+            {post.image.map((item) => {
+                // Check if the URL is a video
+                const isVideo = item.endsWith('.mp4') || item.endsWith('.webm'); // Adjust extensions as needed
+
+                return isVideo ? (
+                    <video key={item} className='carousel-image' controls>
+                        <source src={item} type="video/mp4" />
+                        Your browser does not support the video tag.
+                    </video>
+                ) : (
+                    <img
+                        className='carousel-image'
+                        key={item}
+                        src={item}
+                        alt='post media'
+                    />
+                );
+            })}
+        </Carousel>
+    </div>
+)}
+
 
             <div className='like-comm'>
                 <div className='like'>`
