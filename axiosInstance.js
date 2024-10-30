@@ -5,4 +5,14 @@ const axiosInstance = axios.create({
     withCredentials: true,
   });
   
+// Optionally, add an interceptor for error handling
+axiosInstance.interceptors.response.use(
+  response => response,
+  error => {
+      console.error('API error:', error);
+      return Promise.reject(error);
+  }
+);
+
+
   export default axiosInstance;
